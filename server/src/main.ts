@@ -8,12 +8,6 @@ async function bootstrap() {
     AppModule,
     new FastifyAdapter(),
   );
-  app.enableCors({
-    origin: process.env.CORS_ORIGIN_URL ?? 'http://localhost:3001',
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-    allowedHeaders: ['*', 'x-custom-lang', 'x-i18next-current-language', 'i18next'],
-    credentials: true
-  });
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
