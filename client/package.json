@@ -12,7 +12,7 @@
     "@next/env": "15.5.2",
     "accept-language": "^3.0.20",
     "cross-env": "^10.0.0",
-    "i18next": "^25.4.2",
+    "i18next": "^25.5.1",
     "i18next-browser-languagedetector": "^8.2.0",
     "i18next-resources-to-backend": "^1.2.1",
     "next": "15.5.2",
@@ -23,13 +23,13 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
-    "@tailwindcss/postcss": "^4.1.12",
-    "@types/node": "^22.18.0",
+    "@tailwindcss/postcss": "^4.1.13",
+    "@types/node": "^22.18.1",
     "@types/react": "^19.1.12",
     "@types/react-dom": "^19.1.9",
     "eslint": "^9.34.0",
     "eslint-config-next": "15.5.2",
-    "tailwindcss": "^4.1.12",
+    "tailwindcss": "^4.1.13",
     "typescript": "^5.9.2"
   }
 }
