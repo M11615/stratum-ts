@@ -15,6 +15,10 @@ services:
       - nextjs-network
     restart: no
 
+  nextjs-node:
+    image: node:22-alpine
+    profiles: [build-deps]
+
   nextjs-server:
     build:
       context: .
