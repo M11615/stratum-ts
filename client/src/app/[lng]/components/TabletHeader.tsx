@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { usePathname } from "next/navigation";
+// import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { i18n, TFunction } from "i18next";
 
@@ -21,7 +21,7 @@ interface NavLink {
 export default function TabletHeader({
   t, i18n, handleSearchOpen
 }: TabletHeaderProps): React.ReactNode {
-  const pathname: string = usePathname();
+  // const pathname: string = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const navLinks: NavLink[] = [
     { id: 1, href: `/${i18n.language}`, label: t("header.learn"), isExternal: false },
