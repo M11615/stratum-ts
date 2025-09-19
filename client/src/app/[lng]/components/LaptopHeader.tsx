@@ -38,16 +38,24 @@ export default function LaptopHeader({
             key={id}
             href={href}
             // className={`transition duration-200 ease-in-out ${pathname === href ? "text-[var(--theme-primary)] font-medium" : "text-[var(--theme-text-muted)] hover:text-[var(--theme-fg-base)]"}`}
-            className="transition duration-200 ease-in-out text-[var(--theme-text-muted)] hover:text-[var(--theme-fg-base)]"
+            className="relative transition duration-200 ease-in-out text-[var(--theme-text-muted)] hover:text-[var(--theme-fg-base)]"
           >
             {label}
             {isExternal && (
               <svg
-                xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 28 28" fill="none" stroke="var(--theme-text-muted)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"
-                className="inline relative -top-[6px]"
+                xmlns="http://www.w3.org/2000/svg"
+                width="10"
+                height="10"
+                viewBox="0 0 22 22"
+                fill="none"
+                stroke="var(--theme-text-muted)"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="inline absolute top-[-2px] opacity-65"
               >
-                <path d="M10 22 L22 10" />
-                <path d="M10 10 H22 V22" />
+                <path d="M10 18 L18 10" />
+                <path d="M10 10 H18 V18" />
               </svg>
             )}
           </Link>
@@ -56,11 +64,11 @@ export default function LaptopHeader({
 
       <div className="flex space-x-3 ml-auto">
         <button
-          className="cursor-pointer border border-[var(--theme-bg-muted)] bg-[var(--theme-bg-muted)] text-[14px] text-[var(--theme-text-muted)] px-[10px] pl-[8px] pr-[5px] rounded-lg hover:bg-[var(--theme-bg-muted-hover)] hover:border-[var(--theme-bg-muted-hover)] focus:outline-none transition duration-200 ease-in-out"
+          className="cursor-pointer border border-[var(--theme-bg-muted)] bg-[var(--theme-bg-muted)] text-[14px] text-[var(--theme-text-caption)] font-extralight px-[10px] pl-[8px] pr-[5px] rounded-lg hover:bg-[var(--theme-bg-muted-hover)] hover:border-[var(--theme-bg-muted-hover)] focus:outline-none transition duration-200 ease-in-out"
           onClick={handleSearchOpen}
         >
           {t("header.search.button")}
-          <span className="border border-[var(--theme-text-subtle)] bg-[var(--theme-bg-base)] text-[12px] text-[var(--theme-fg-base)] font-medium px-[5px] py-[3px] rounded-lg ml-10">
+          <span className="border border-[var(--theme-text-subtle)] bg-[var(--theme-bg-base)] text-[12px] text-[var(--theme-fg-base)] font-medium px-[5px] py-[3px] rounded-lg ml-[45px]">
             CtrlK
           </span>
         </button>

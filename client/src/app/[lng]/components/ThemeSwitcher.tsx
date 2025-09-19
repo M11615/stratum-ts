@@ -65,7 +65,7 @@ export default function ThemeSwitcher({
           <button
             key={value}
             onClick={(): void => handleChangeTheme(value)}
-            className={`w-8 h-8 flex items-center justify-center rounded-full transition duration-200 ease-in-out ${localTheme === value ? "bg-[var(--theme-border-base)] text-[var(--theme-fg-base)]" : "text-[var(--theme-text-muted)] hover:text-[var(--theme-fg-base)]"}`}
+            className={`cursor-pointer w-8 h-8 flex items-center justify-center rounded-full transition duration-200 ease-in-out ${localTheme === value ? "bg-[var(--theme-border-base)] text-[var(--theme-fg-base)]" : "text-[var(--theme-text-muted)] hover:text-[var(--theme-fg-base)]"}`}
           >
             {icon}
           </button>

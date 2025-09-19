@@ -66,7 +66,7 @@ export default function SearchModal({
                 <input
                   type="text"
                   placeholder={t("header.search.input")}
-                  className={`w-full ${isMobileScreen ? "text-[16px]" : "text-[18px]"} outline-none placeholder-[var(--theme-text-muted)] pl-1`}
+                  className={`w-full ${isMobileScreen ? "text-[16px]" : "text-[18px]"} outline-none placeholder-[var(--theme-text-caption)] pl-1`}
                 />
                 {!isMobileScreen && (
                   <span
