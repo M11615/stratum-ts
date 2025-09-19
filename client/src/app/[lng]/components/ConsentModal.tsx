@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useT } from "@/app/i18n/client";
-import { OptionalI18n, COOKIE_KEYS, COOKIE_CATEGORIES, FALLBACK_COOKIE_CONSENT } from "@/app/lib/constants";
+import { RequiredI18n, StateSetter, COOKIE_KEYS, COOKIE_CATEGORIES, FALLBACK_COOKIE_CONSENT } from "@/app/lib/constants";
 import { parseConsent, setCookie } from "@/app/lib/cookies";
 
 interface ConsentModalProps {
@@ -41,10 +41,10 @@ export const handleAcceptAll = (): void => {
 export default function ConsentModal({
   isConsentOpen, handleConsentClose
 }: ConsentModalProps): React.ReactNode {
-  const { t, i18n }: OptionalI18n = useT("app", {});
-  const [cookieConsent, setCookieConsent] = useState<Record<string, boolean>>(FALLBACK_COOKIE_CONSENT);
-  const [expandedIds, setExpandedIds] = useState<string[]>([]);
-  const [renderKey, setRenderKey] = useState<number>(0);
+  const { t, i18n }: RequiredI18n = useT("app", {});
+  const [cookieConsent, setCookieConsent]: StateSetter<Record<string, boolean>> = useState<Record<string, boolean>>(FALLBACK_COOKIE_CONSENT);
+  const [expandedIds, setExpandedIds]: StateSetter<string[]> = useState<string[]>([]);
+  const [renderKey, setRenderKey]: StateSetter<number> = useState<number>(0);
   const categories: Category[] = [
     {
       id: COOKIE_CATEGORIES.ESSENTIAL,

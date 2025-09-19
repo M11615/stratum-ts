@@ -4,6 +4,7 @@ import { useState } from "react";
 // import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { i18n, TFunction } from "i18next";
+import { StateSetter } from "@/app/lib/constants";
 
 interface TabletHeaderProps {
   t: TFunction;
@@ -22,7 +23,7 @@ export default function TabletHeader({
   t, i18n, handleSearchOpen
 }: TabletHeaderProps): React.ReactNode {
   // const pathname: string = usePathname();
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const [isMenuOpen, setIsMenuOpen]: StateSetter<boolean> = useState<boolean>(false);
   const navLinks: NavLink[] = [
     { id: 1, href: `/${i18n.language}`, label: t("header.learn"), isExternal: false },
     { id: 2, href: `/${i18n.language}`, label: t("header.deploy"), isExternal: false },

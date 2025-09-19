@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FALLBACK_LAPTOP_SCREEN_WIDTH, FALLBACK_TABLET_SCREEN_WIDTH } from "@/app/lib/constants";
+import { StateSetter, FALLBACK_LAPTOP_SCREEN_WIDTH, FALLBACK_TABLET_SCREEN_WIDTH } from "@/app/lib/constants";
 
 export interface ResponsiveState {
   width: number;
@@ -8,7 +8,7 @@ export interface ResponsiveState {
 }
 
 export const useResponsive = (): ResponsiveState => {
-  const [state, setState] = useState<ResponsiveState>({
+  const [state, setState]: StateSetter<ResponsiveState> = useState<ResponsiveState>({
     width: FALLBACK_LAPTOP_SCREEN_WIDTH,
     isTabletScreen: false,
     isMobileScreen: false

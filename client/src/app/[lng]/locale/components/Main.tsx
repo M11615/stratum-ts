@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { languages } from "@/app/i18n/settings";
 import { useT } from "@/app/i18n/client";
-import { OptionalI18n, FALLBACK_MOBILE_M_SCREEN_WIDTH } from "@/app/lib/constants";
+import { OptionalI18n, StateSetter, FALLBACK_MOBILE_M_SCREEN_WIDTH } from "@/app/lib/constants";
 import { ResponsiveContextValue, useResponsiveContext } from "@/app/[lng]/components/ResponsiveContext";
 
 const languageMap: Record<string, { label: string; region: string }> = {
@@ -19,7 +19,7 @@ const languageMap: Record<string, { label: string; region: string }> = {
 
 export default function Main() {
   const { t }: OptionalI18n = useT("locale", {});
-  const [hydrated, setHydrated] = useState<boolean>(false);
+  const [hydrated, setHydrated]: StateSetter<boolean> = useState<boolean>(false);
   const { width, isTabletScreen, isMobileScreen }: ResponsiveContextValue = useResponsiveContext();
 
   useEffect((): void => {

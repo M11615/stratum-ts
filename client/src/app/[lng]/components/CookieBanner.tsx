@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useT } from "@/app/i18n/client";
-import { OptionalI18n, COOKIE_KEYS, FALLBACK_MOBILE_L_SCREEN_WIDTH } from "@/app/lib/constants";
+import { OptionalI18n, StateSetter, COOKIE_KEYS, FALLBACK_MOBILE_L_SCREEN_WIDTH } from "@/app/lib/constants";
 import { getCookie } from "@/app/lib/cookies";
 import { ResponsiveContextValue, useResponsiveContext } from "./ResponsiveContext";
 import ConsentModal, { handleDeny, handleAcceptAll } from "./ConsentModal";
@@ -10,8 +10,8 @@ import ConsentModal, { handleDeny, handleAcceptAll } from "./ConsentModal";
 export default function CookieBanner(): React.ReactNode {
   const { t }: OptionalI18n = useT("app", {});
   const { width }: ResponsiveContextValue = useResponsiveContext();
-  const [visible, setVisible] = useState<boolean>(false);
-  const [isConsentOpen, setIsConsentOpen] = useState<boolean>(false);
+  const [visible, setVisible]: StateSetter<boolean> = useState<boolean>(false);
+  const [isConsentOpen, setIsConsentOpen]: StateSetter<boolean> = useState<boolean>(false);
 
   useEffect((): void => {
     setVisible(!getCookie(COOKIE_KEYS.CONSENT));

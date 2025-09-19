@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { COOKIE_KEYS, THEME_KEYS } from "@/app/lib/constants";
+import { StateSetter, COOKIE_KEYS, THEME_KEYS } from "@/app/lib/constants";
 import { setCookie } from "@/app/lib/cookies";
 
 interface ThemeSwitcherProps {
@@ -16,7 +16,7 @@ interface Option {
 export default function ThemeSwitcher({
   theme
 }: ThemeSwitcherProps): React.ReactNode {
-  const [localTheme, setLocalTheme] = useState<string>(theme);
+  const [localTheme, setLocalTheme]: StateSetter<string> = useState<string>(theme);
   const options: Option[] = [
     {
       value: THEME_KEYS.LIGHT,

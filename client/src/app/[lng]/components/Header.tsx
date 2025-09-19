@@ -4,18 +4,18 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useT } from "@/app/i18n/client";
-import { OptionalI18n } from "@/app/lib/constants";
+import { RequiredI18n, StateSetter } from "@/app/lib/constants";
 import { ResponsiveContextValue, useResponsiveContext } from "./ResponsiveContext";
 import LaptopHeader from "./LaptopHeader";
 import TabletHeader from "./TabletHeader";
 import SearchModal from "./SearchModal";
 
 export default function Header(): React.ReactNode {
-  const { t, i18n }: OptionalI18n = useT("app", {});
-  const [hydrated, setHydrated] = useState<boolean>(false);
+  const { t, i18n }: RequiredI18n = useT("app", {});
+  const [hydrated, setHydrated]: StateSetter<boolean> = useState<boolean>(false);
   const { isTabletScreen, isMobileScreen }: ResponsiveContextValue = useResponsiveContext();
-  const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
-  const [isSearchClosing, setIsSearchClosing] = useState<boolean>(false);
+  const [isSearchOpen, setIsSearchOpen]: StateSetter<boolean> = useState<boolean>(false);
+  const [isSearchClosing, setIsSearchClosing]: StateSetter<boolean> = useState<boolean>(false);
 
   useEffect((): () => void => {
     const handleKeyDown = (e: KeyboardEvent): void => {

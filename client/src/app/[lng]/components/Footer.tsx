@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useT } from "@/app/i18n/client";
-import { OptionalI18n, COOKIE_KEYS, FALLBACK_THEME, FALLBACK_MOBILE_M_SCREEN_WIDTH } from "@/app/lib/constants";
+import { RequiredI18n, StateSetter, COOKIE_KEYS, FALLBACK_THEME, FALLBACK_MOBILE_M_SCREEN_WIDTH } from "@/app/lib/constants";
 import { getCookie } from "@/app/lib/cookies";
 import { createSubscription } from "@/app/services/v1/subscription";
 import { ResponsiveContextValue, useResponsiveContext } from "./ResponsiveContext";
@@ -18,13 +18,15 @@ interface NavLink {
 }
 
 export default function Footer(): React.ReactNode {
-  const { t, i18n }: OptionalI18n = useT("app", {});
-  const [hydrated, setHydrated] = useState<boolean>(false);
+  const { t, i18n }: RequiredI18n = useT("app", {});
+  const [hydrated, setHydrated]: StateSetter<boolean> = useState<boolean>(false);
   const { width, isTabletScreen, isMobileScreen }: ResponsiveContextValue = useResponsiveContext();
-  const [isConsentOpen, setIsConsentOpen] = useState<boolean>(false);
-  const [theme, setTheme] = useState<string>(FALLBACK_THEME);
-  const [submitted, setSubmitted] = useState<boolean>(false);
-  const [subscriptionEmail, setSubscriptionEmail] = useState<string>("");
+  const [isConsentOpen, setIsConsentOpen]: StateSetter<boolean> = useState<boolean>(false);
+  const [theme, setTheme]: StateSetter<string> = useState<string>(FALLBACK_THEME);
+  const [isSubmitting, setIsSubmitting]: StateSetter<boolean> = useState<boolean>(false);
+  const [submitted, setSubmitted]: StateSetter<boolean> = useState<boolean>(false);
+  const [subscriptionEmail, setSubscriptionEmail]: StateSetter<string> = useState<string>("");
+  const [renderKey, setRenderKey]: StateSetter<number> = useState<number>(0);
   const resourcesLinks: NavLink[] = [
     { id: 1, href: `/${i18n.language}`, label: t("footer.docs") },
     { id: 2, href: `/${i18n.language}`, label: t("footer.supportPolicy") },
@@ -119,6 +121,8 @@ export default function Footer(): React.ReactNode {
       form.reportValidity();
       return;
     }
+    setIsSubmitting(true);
+    setRenderKey(renderKey < 10 ? renderKey + 1 : 0);
     const response: Response = await createSubscription({
       email: subscriptionEmail.trim().toLowerCase()
     });
@@ -245,17 +249,20 @@ export default function Footer(): React.ReactNode {
                   ) : (
                     <form noValidate onSubmit={handleSubscriptionEmailSubmit}>
                       <input
-                        className="w-full border border-[var(--theme-bg-muted)] bg-[var(--theme-bg-muted)] text-[14px] text-[var(--theme-fg-base)] placeholder-[var(--theme-text-muted)] px-[10px] py-[5px] rounded-lg focus:outline-none focus:ring-2 ring-offset-2 focus:ring-[var(--theme-primary-light)] ring-offset-[var(--theme-bg-base)]"
+                        key={renderKey}
+                        className="w-full border border-[var(--theme-bg-muted)] bg-[var(--theme-bg-muted)] text-[14px] text-[var(--theme-fg-base)] placeholder-[var(--theme-text-muted)] px-[10px] py-[5px] rounded-lg focus:outline-none focus:ring-2 ring-offset-2 focus:ring-[var(--theme-primary-light)] ring-offset-[var(--theme-bg-base)] disabled:opacity-50"
                         type="email"
                         name="subscriptionEmail"
                         value={subscriptionEmail}
                         onChange={handleSubscriptionEmailChange}
                         placeholder="you@domain.com"
                         required
+                        disabled={isSubmitting}
                       />
                       <button
                         className="absolute top-1/2 right-[6px] -translate-y-1/2 transition duration-200 ease-in-out cursor-pointer border border-[var(--theme-text-subtle)] bg-[var(--theme-bg-dark)] text-[12px] text-[var(--theme-text-muted)] hover:text-[var(--theme-fg-base)] font-medium px-[6px] py-[3px] rounded-[3px] ml-10"
                         type="submit"
+                        disabled={isSubmitting}
                       >
                         {t("footer.subscribeButton")}
                       </button>

@@ -1,17 +1,17 @@
-import i18next from "i18next";
+import i18next, { BackendModule } from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import resourcesToBackend from "i18next-resources-to-backend";
 // import LocizeBackend from "i18next-locize-backend";
 import { initReactI18next } from "react-i18next/initReactI18next";
 import { fallbackLng, languages, defaultNS } from "./settings";
 
-const runsOnServerSide = typeof window === "undefined";
+const runsOnServerSide: boolean = typeof window === "undefined";
 
 i18next
   .use(initReactI18next)
   .use(LanguageDetector)
-  .use(resourcesToBackend((language: string, namespace: string) => import(`./locales/${language}/${namespace}.json`)))
-  // .use(runsOnServerSide ? LocizeBackend : resourcesToBackend((language, namespace) => import(`./locales/${language}/${namespace}.json`))) // locize backend could be used, but prefer to keep it in sync with server side
+  .use(resourcesToBackend((language: string, namespace: string): Promise<BackendModule> => import(`./locales/${language}/${namespace}.json`)))
+  // .use(runsOnServerSide ? LocizeBackend : resourcesToBackend((language, namespace): Promise<BackendModule> => import(`./locales/${language}/${namespace}.json`))) // locize backend could be used, but prefer to keep it in sync with server side
   .init({
     // debug: true,
     supportedLngs: languages,

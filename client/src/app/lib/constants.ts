@@ -1,9 +1,16 @@
 import { i18n, TFunction } from "i18next";
 
+export type RequiredI18n = {
+  t: TFunction;
+  i18n: i18n;
+};
+
 export type OptionalI18n = {
   t?: TFunction;
   i18n?: i18n;
 };
+
+export type StateSetter<T> = [T, React.Dispatch<React.SetStateAction<T>>];
 
 export const COOKIE_KEYS: Record<string, string> = {
   CONSENT: "fides_consent",

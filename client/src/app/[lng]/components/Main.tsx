@@ -3,15 +3,15 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useT } from "@/app/i18n/client";
-import { OptionalI18n, FALLBACK_MOBILE_M_SCREEN_WIDTH } from "@/app/lib/constants";
+import { RequiredI18n, StateSetter, FALLBACK_MOBILE_M_SCREEN_WIDTH } from "@/app/lib/constants";
 import { ResponsiveContextValue, useResponsiveContext } from "./ResponsiveContext";
 
 export default function Main(): React.ReactNode {
-  const { t, i18n }: OptionalI18n = useT("app", {});
-  const [hydrated, setHydrated] = useState<boolean>(false);
+  const { t, i18n }: RequiredI18n = useT("app", {});
+  const [hydrated, setHydrated]: StateSetter<boolean> = useState<boolean>(false);
   const { width, isTabletScreen, isMobileScreen }: ResponsiveContextValue = useResponsiveContext();
-  const [hovered, setHovered] = useState<boolean>(false);
-  const [copied, setCopied] = useState<boolean>(false);
+  const [hovered, setHovered]: StateSetter<boolean> = useState<boolean>(false);
+  const [copied, setCopied]: StateSetter<boolean> = useState<boolean>(false);
   const command: string = "npx create-next-app@latest";
 
   useEffect((): void => {
