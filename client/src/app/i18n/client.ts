@@ -29,10 +29,10 @@ export function useT(ns: string | string[], options: Options): RequiredI18n {
   useEffect(() => {
     if (activeLng === i18next.resolvedLanguage) return;
     setActiveLng(i18next.resolvedLanguage);
-  }, [activeLng, i18next.resolvedLanguage]);
+  }, [activeLng]);
   useEffect(() => {
     if (!lng || i18next.resolvedLanguage === lng) return;
     i18next.changeLanguage(lng);
-  }, [lng, i18next]);
+  }, [lng]);
   return useTranslation(ns, options);
 }
