@@ -6,8 +6,11 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
-    new FastifyAdapter(),
+    new FastifyAdapter()
   );
+  app.enableVersioning({
+    type: VersioningType.URI
+  });
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
@@ -18,9 +21,6 @@ async function bootstrap() {
       }
     })
   );
-  app.enableVersioning({
-    type: VersioningType.URI
-  });
   await app.listen(process.env.PORT ?? 3000, '0.0.0.0');
 }
 bootstrap();
