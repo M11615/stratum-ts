@@ -9,7 +9,7 @@ import { UseTranslationOptions } from "react-i18next";
 import i18next from "./i18next";
 import { RequiredI18n, StateSetter } from "@/app/lib/constants";
 
-const runsOnServerSide = typeof window === "undefined";
+const runsOnServerSide: boolean = typeof window === "undefined";
 
 type $Tuple<T> = readonly [T?, ...T[]];
 
