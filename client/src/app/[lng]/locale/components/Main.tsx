@@ -23,7 +23,7 @@ export default function Main() {
         <h1 className="text-[var(--theme-fg-base)] text-2xl font-semibold mb-8">
           {t("main.title")}
         </h1>
-        <nav className={`grid ${isTabletScreen ? `${isMobileScreen ? `${width < FALLBACK_MOBILE_M_SCREEN_WIDTH ? "grid-cols-[1fr]" : "grid-cols-[1fr_1fr]"}` : "grid-cols-[1fr_1fr_1fr_1fr]"}` : "grid-cols-[1fr_1fr_1fr_1fr]"} flex flex-wrap justify-start gap-x-[5vw] gap-y-[20px]`}>
+        <nav className={`grid gap-x-[5vw] gap-y-[20px] ${isTabletScreen ? `${isMobileScreen ? `${width < FALLBACK_MOBILE_M_SCREEN_WIDTH ? "grid-cols-[1fr]" : "grid-cols-[1fr_1fr]"}` : "grid-cols-[1fr_1fr_1fr_1fr]"}` : "grid-cols-[1fr_1fr_1fr_1fr]"} justify-start`}>
           {languages.map((lang) => {
             const item = LANGUAGE_MAP[lang];
             if (!item) return null;

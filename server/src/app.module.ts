@@ -16,7 +16,7 @@ import { SubscriptionController } from './subscription/subscription.controller';
       isGlobal: true
     }),
     I18nModule.forRoot({
-      fallbackLanguage: 'en-GB',
+      fallbackLanguage: 'en-US',
       loaderOptions: {
         path: path.join(__dirname, '/i18n'),
         includeSubfolders: true
