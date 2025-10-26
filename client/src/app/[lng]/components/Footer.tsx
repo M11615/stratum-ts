@@ -36,7 +36,8 @@ export default function Footer(): React.ReactNode {
     { id: 6, href: `/${i18n.language}`, label: t("footer.team") },
     { id: 7, href: `/${i18n.language}`, label: t("footer.analytics") },
     { id: 8, href: `/${i18n.language}`, label: t("footer.nextjsConf") },
-    { id: 9, href: `/${i18n.language}`, label: t("footer.previews") }
+    { id: 9, href: `/${i18n.language}`, label: t("footer.previews") },
+    { id: 10, href: `/${i18n.language}`, label: t("footer.evals") }
   ];
   const moreLinks: NavLink[] = [
     { id: 1, href: `/${i18n.language}`, label: t("footer.nextjsCommerce") },
