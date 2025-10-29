@@ -1,21 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { languages } from "@/app/i18n/settings";
 import { useT } from "@/app/i18n/client";
-import { OptionalI18n, StateSetter, LANGUAGE_MAP, FALLBACK_MOBILE_M_SCREEN_WIDTH } from "@/app/lib/constants";
+import { OptionalI18n, LANGUAGE_MAP, FALLBACK_MOBILE_M_SCREEN_WIDTH } from "@/app/lib/constants";
 import { ResponsiveContextValue, useResponsiveContext } from "@/app/[lng]/components/ResponsiveContext";
 
 export default function Main() {
   const { t }: OptionalI18n = useT("locale", {});
-  const [hydrated, setHydrated]: StateSetter<boolean> = useState<boolean>(false);
   const { width, isTabletScreen, isMobileScreen }: ResponsiveContextValue = useResponsiveContext();
-
-  useEffect((): void => {
-    setHydrated(true);
-  }, []);
-
-  if (!hydrated) return null;
 
   return (
     <main className="w-full pb-[130px] bg-[var(--theme-bg-base)]">

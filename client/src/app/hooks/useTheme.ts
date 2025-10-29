@@ -8,8 +8,8 @@ export interface ThemeState {
 
 export const useTheme = (): ThemeState => {
   const [state, setState]: StateSetter<ThemeState> = useState<ThemeState>({
-    actualTheme: THEME_KEYS.LIGHT,
-    userPreferenceTheme: THEME_KEYS.SYSTEM
+    actualTheme: "",
+    userPreferenceTheme: ""
   });
   useEffect((): () => void => {
     const handleThemeChange = (e: CustomEvent): void => {

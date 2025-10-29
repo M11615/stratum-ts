@@ -6,6 +6,7 @@ import { setCookie } from "@/app/lib/cookies";
 
 interface ThemeSwitcherProps {
   theme: string;
+  emitThemeChange: (mode: string) => void;
 }
 
 interface Option {
@@ -14,7 +15,7 @@ interface Option {
 }
 
 export default function ThemeSwitcher({
-  theme
+  theme, emitThemeChange
 }: ThemeSwitcherProps): React.ReactNode {
   const [localTheme, setLocalTheme]: StateSetter<string> = useState<string>(theme);
   const options: Option[] = [
@@ -57,16 +58,6 @@ export default function ThemeSwitcher({
     setCookie(COOKIE_KEYS.THEME, mode);
     document.documentElement.className = mode;
     emitThemeChange(mode);
-  };
-
-  const emitThemeChange = (mode: string): void => {
-    const mediaQuery: MediaQueryList = window.matchMedia("(prefers-color-scheme: dark)");
-    window.dispatchEvent(new CustomEvent("theme-change", {
-      detail: {
-        actualTheme: mode === THEME_KEYS.SYSTEM ? (mediaQuery.matches ? THEME_KEYS.DARK : THEME_KEYS.LIGHT) : mode,
-        userPreferenceTheme: mode
-      }
-    }));
   };
 
   return (

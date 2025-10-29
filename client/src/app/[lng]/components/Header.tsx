@@ -12,7 +12,6 @@ import SearchModal from "./SearchModal";
 
 export default function Header(): React.ReactNode {
   const { t, i18n }: RequiredI18n = useT("app", {});
-  const [hydrated, setHydrated]: StateSetter<boolean> = useState<boolean>(false);
   const responsiveContext: ResponsiveContextValue = useResponsiveContext();
   const [isSearchOpen, setIsSearchOpen]: StateSetter<boolean> = useState<boolean>(false);
   const [isSearchClosing, setIsSearchClosing]: StateSetter<boolean> = useState<boolean>(false);
@@ -32,10 +31,6 @@ export default function Header(): React.ReactNode {
     return (): void => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  useEffect((): void => {
-    setHydrated(true);
-  }, []);
-
   const handleSearchOpen = (): void => {
     setIsSearchOpen(true);
   };
@@ -47,8 +42,6 @@ export default function Header(): React.ReactNode {
       setIsSearchClosing(false);
     }, 200);
   };
-
-  if (!hydrated) return null;
 
   return (
     <>

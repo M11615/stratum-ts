@@ -9,7 +9,7 @@ export interface ResponsiveState {
 
 export const useResponsive = (): ResponsiveState => {
   const [state, setState]: StateSetter<ResponsiveState> = useState<ResponsiveState>({
-    width: FALLBACK_LAPTOP_SCREEN_WIDTH,
+    width: 0,
     isTabletScreen: false,
     isMobileScreen: false
   });

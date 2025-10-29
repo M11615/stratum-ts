@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useT } from "@/app/i18n/client";
-import { RequiredI18n, StateSetter, COOKIE_KEYS, FALLBACK_THEME, FALLBACK_MOBILE_M_SCREEN_WIDTH } from "@/app/lib/constants";
+import { RequiredI18n, StateSetter, COOKIE_KEYS, THEME_KEYS, FALLBACK_THEME, FALLBACK_MOBILE_M_SCREEN_WIDTH } from "@/app/lib/constants";
 import { getCookie } from "@/app/lib/cookies";
 import { createSubscription } from "@/app/services/v1/subscription";
 import { ResponsiveContextValue, useResponsiveContext } from "./ResponsiveContext";
@@ -19,10 +19,9 @@ interface NavLink {
 
 export default function Footer(): React.ReactNode {
   const { t, i18n }: RequiredI18n = useT("app", {});
-  const [hydrated, setHydrated]: StateSetter<boolean> = useState<boolean>(false);
   const { width, isTabletScreen, isMobileScreen }: ResponsiveContextValue = useResponsiveContext();
   const [isConsentOpen, setIsConsentOpen]: StateSetter<boolean> = useState<boolean>(false);
-  const [theme, setTheme]: StateSetter<string> = useState<string>(FALLBACK_THEME);
+  const [theme, setTheme]: StateSetter<string> = useState<string>("");
   const [isSubmitting, setIsSubmitting]: StateSetter<boolean> = useState<boolean>(false);
   const [submitted, setSubmitted]: StateSetter<boolean> = useState<boolean>(false);
   const [subscriptionEmail, setSubscriptionEmail]: StateSetter<string> = useState<string>("");
@@ -98,8 +97,9 @@ export default function Footer(): React.ReactNode {
   );
 
   useEffect((): void => {
-    setTheme(getCookie(COOKIE_KEYS.THEME) || FALLBACK_THEME);
-    setHydrated(true);
+    const mode: string = getCookie(COOKIE_KEYS.THEME) || FALLBACK_THEME;
+    setTheme(mode);
+    emitThemeChange(mode);
   }, []);
 
   const handleConsentOpen = (): void => {
@@ -132,7 +132,15 @@ export default function Footer(): React.ReactNode {
     }
   };
 
-  if (!hydrated) return null;
+  const emitThemeChange = (mode: string): void => {
+    const mediaQuery: MediaQueryList = window.matchMedia("(prefers-color-scheme: dark)");
+    window.dispatchEvent(new CustomEvent("theme-change", {
+      detail: {
+        actualTheme: mode === THEME_KEYS.SYSTEM ? (mediaQuery.matches ? THEME_KEYS.DARK : THEME_KEYS.LIGHT) : mode,
+        userPreferenceTheme: mode
+      }
+    }));
+  };
 
   return (
     <>
@@ -277,7 +285,7 @@ export default function Footer(): React.ReactNode {
               {!isMobileScreen && SocialLinks}
             </div>
             <div className="flex items-center gap-2">
-              <ThemeSwitcher theme={theme} />
+              {theme && <ThemeSwitcher theme={theme} emitThemeChange={emitThemeChange} />}
             </div>
           </div>
         </div>

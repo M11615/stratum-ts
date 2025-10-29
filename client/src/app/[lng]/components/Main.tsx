@@ -1,42 +1,35 @@
 "use client";
 
-import { RefObject, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useT } from "@/app/i18n/client";
-import { RequiredI18n, StateSetter, FALLBACK_MOBILE_L_SCREEN_WIDTH, FALLBACK_MOBILE_M_SCREEN_WIDTH, FALLBACK_MOBILE_S_SCREEN_WIDTH } from "@/app/lib/constants";
+import { RequiredI18n, StateSetter, THEME_KEYS, FALLBACK_MOBILE_L_SCREEN_WIDTH, FALLBACK_MOBILE_M_SCREEN_WIDTH, FALLBACK_MOBILE_S_SCREEN_WIDTH } from "@/app/lib/constants";
 import { ResponsiveContextValue, useResponsiveContext } from "./ResponsiveContext";
 
 export default function Main(): React.ReactNode {
   const { t, i18n }: RequiredI18n = useT("app", {});
-  const [hydrated, setHydrated]: StateSetter<boolean> = useState<boolean>(false);
   const { width, isTabletScreen, isMobileScreen, actualTheme }: ResponsiveContextValue = useResponsiveContext();
   const [showVideo, setShowVideo]: StateSetter<boolean> = useState<boolean>(false);
   const [hovered, setHovered]: StateSetter<boolean> = useState<boolean>(false);
   const [copied, setCopied]: StateSetter<boolean> = useState<boolean>(false);
   const [elementsInfo, setElementsInfo]: StateSetter<Record<string, HTMLElement | null>> = useState<Record<string, HTMLElement | null>>({});
-  const titleRef: RefObject<HTMLHeadingElement | null> = useRef<HTMLHeadingElement>(null);
-  const descriptionRef: RefObject<HTMLParagraphElement | null> = useRef<HTMLParagraphElement>(null);
-  const linkRef: RefObject<HTMLDivElement | null> = useRef<HTMLDivElement>(null);
-  const commandRef: RefObject<HTMLDivElement | null> = useRef<HTMLDivElement>(null);
+  const titleRef: React.RefObject<HTMLHeadingElement | null> = useRef<HTMLHeadingElement>(null);
+  const descriptionRef: React.RefObject<HTMLParagraphElement | null> = useRef<HTMLParagraphElement>(null);
+  const linkRef: React.RefObject<HTMLDivElement | null> = useRef<HTMLDivElement>(null);
+  const commandRef: React.RefObject<HTMLDivElement | null> = useRef<HTMLDivElement>(null);
   const horizontalOffset: number = isMobileScreen ? 64 : 128;
   const verticalOffset: number = 128;
   const command: string = "npx create-next-app@latest";
 
   useEffect((): void => {
-    setHydrated(true);
+    setElementsInfo({
+      title: titleRef.current,
+      description: descriptionRef.current,
+      link: linkRef.current,
+      command: commandRef.current,
+    });
   }, []);
-
-  useEffect((): void => {
-    if (hydrated) {
-      setElementsInfo({
-        title: titleRef.current,
-        description: descriptionRef.current,
-        link: linkRef.current,
-        command: commandRef.current,
-      });
-    }
-  }, [hydrated]);
 
   const handleMouseEnter = (): void => {
     setHovered(true);
@@ -58,8 +51,6 @@ export default function Main(): React.ReactNode {
         .catch((): void => { });
     } catch { }
   };
-
-  if (!hydrated) return null;
 
   return (
     <>
@@ -103,21 +94,23 @@ export default function Main(): React.ReactNode {
             className={`group absolute left-1/2 -translate-x-1/2 flex flex-col items-center justify-center w-full max-w-[1024px] mt-[40px] ${width > FALLBACK_MOBILE_L_SCREEN_WIDTH ? "px-0" : "px-[7.5%]"}`}
           >
             {!showVideo ? (
-              <>
-                <Image
-                  src={`/assets/livestream-poster-conf-2025-${actualTheme}.png`}
-                  alt="Next.js Conf 25 Livestream"
-                  width={1024}
-                  height={576}
-                  priority
-                  className="cursor-pointer w-full h-full"
-                />
-                <div className={`${isMobileScreen ? "scale-100" : "scale-135"} absolute flex items-center justify-center w-[72px] h-[72px] cursor-pointer border border-[var(--theme-border-base)] bg-transparent text-[var(--theme-fg-base)] rounded-full pl-[3px] group-hover:bg-[var(--theme-bg-muted)] group-hover:border-[var(--theme-text-subtle)] transition duration-200 ease-in-out`}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" strokeLinejoin="round" className="scale-145">
-                    <path fillRule="evenodd" clipRule="evenodd" d="M14.5528 7.77638C14.737 7.86851 14.737 8.13147 14.5528 8.2236L1.3618 14.8191C1.19558 14.9022 1 14.7813 1 14.5955L1 1.4045C1 1.21865 1.19558 1.09778 1.3618 1.18089L14.5528 7.77638Z" />
-                  </svg>
-                </div>
-              </>
+              actualTheme === THEME_KEYS.LIGHT || actualTheme === THEME_KEYS.DARK ? (
+                <>
+                  <Image
+                    src={`/assets/livestream-poster-conf-2025-${actualTheme}.png`}
+                    alt="Next.js Conf 25 Livestream"
+                    width={1024}
+                    height={576}
+                    priority
+                    className="cursor-pointer"
+                  />
+                  <div className={`${isMobileScreen ? "scale-100" : "scale-135"} absolute flex items-center justify-center w-[72px] h-[72px] cursor-pointer border border-[var(--theme-border-base)] bg-transparent text-[var(--theme-fg-base)] rounded-full pl-[3px] group-hover:bg-[var(--theme-bg-muted)] group-hover:border-[var(--theme-text-subtle)] transition duration-200 ease-in-out`}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" strokeLinejoin="round" className="scale-145">
+                      <path fillRule="evenodd" clipRule="evenodd" d="M14.5528 7.77638C14.737 7.86851 14.737 8.13147 14.5528 8.2236L1.3618 14.8191C1.19558 14.9022 1 14.7813 1 14.5955L1 1.4045C1 1.21865 1.19558 1.09778 1.3618 1.18089L14.5528 7.77638Z" />
+                    </svg>
+                  </div>
+                </>
+              ) : null
             ) : (
               <div className="aspect-video w-full bg-[var(--theme-bg-muted)]">
                 <video
