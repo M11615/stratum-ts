@@ -30,6 +30,10 @@
     }
   },
   "main": {
+    "new": "Novo",
+    "confAnnouncement": "Veja o que apresentámos na Next.js Conf 25",
+    "findOutMore": "Saiba mais",
+    "watchRecap": "Assista ao resumo",
     "title": "O Framework React para a Web",
     "descriptionStart": "Usado por algumas das maiores empresas do mundo, o Next.js permite criar",
     "descriptionHighlight": "aplicações web de alta qualidade",

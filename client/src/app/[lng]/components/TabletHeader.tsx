@@ -74,7 +74,7 @@ export default function TabletHeader({
       </div>
 
       {isMenuOpen && (
-        <div className="fixed top-[65px] left-0 w-full h-[calc(100vh+120px)] bg-[var(--theme-bg-base)] z-40 flex flex-col pl-[25px] pt-[15px] shadow font-[family-name:var(--font-geist-sans)]">
+        <div className="fixed top-[65px] left-0 w-full h-[100vh] bg-[var(--theme-bg-base)] z-40 flex flex-col pl-[25px] pt-[15px] shadow font-[family-name:var(--font-geist-sans)]">
           {navLinks.map(({ id, href, label }): React.ReactNode => (
             <Link
               key={id}

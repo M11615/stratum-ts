@@ -30,6 +30,10 @@
     }
   },
   "main": {
+    "new": "新內容",
+    "confAnnouncement": "查看我們在 Next.js Conf 25 上發布的內容",
+    "findOutMore": "了解更多",
+    "watchRecap": "觀看回顧",
     "title": "Web 的 React 框架",
     "descriptionStart": "Next.js 被世界上最大的公司使用，使你能夠創建",
     "descriptionHighlight": "高品質的網頁應用程式",

@@ -30,6 +30,10 @@
     }
   },
   "main": {
+    "new": "Uusi",
+    "confAnnouncement": "Katso, mitä esittelimme Next.js Conf 25:ssä",
+    "findOutMore": "Lue lisää",
+    "watchRecap": "Katso yhteenveto",
     "title": "React-kehys verkkoa varten",
     "descriptionStart": "Joidenkin maailman suurimpien yritysten käyttämä Next.js mahdollistaa",
     "descriptionHighlight": "korkealaatuisten verkkosovellusten luomisen",

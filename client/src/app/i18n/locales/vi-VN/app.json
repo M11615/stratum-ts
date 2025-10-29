@@ -30,6 +30,10 @@
     }
   },
   "main": {
+    "new": "Mới",
+    "confAnnouncement": "Xem những gì chúng tôi đã ra mắt tại Next.js Conf 25",
+    "findOutMore": "Tìm hiểu thêm",
+    "watchRecap": "Xem tóm tắt",
     "title": "Framework React cho web",
     "descriptionStart": "Được sử dụng bởi một số công ty lớn nhất thế giới, Next.js giúp bạn tạo",
     "descriptionHighlight": "ứng dụng web chất lượng cao",

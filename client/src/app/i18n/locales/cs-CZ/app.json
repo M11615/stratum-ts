@@ -30,6 +30,10 @@
     }
   },
   "main": {
+    "new": "Nové",
+    "confAnnouncement": "Podívejte se, co jsme představili na Next.js Conf 25",
+    "findOutMore": "Zjistit více",
+    "watchRecap": "Podívat se na rekapitulaci",
     "title": "React Framework pro web",
     "descriptionStart": "Používán některými z největších světových společností, Next.js umožňuje vytvářet",
     "descriptionHighlight": "webové aplikace vysoké kvality",

@@ -30,6 +30,10 @@
     }
   },
   "main": {
+    "new": "Ново",
+    "confAnnouncement": "Вижте какво представихме на конференцията Next.js 25",
+    "findOutMore": "Научете повече",
+    "watchRecap": "Гледайте обобщението",
     "title": "React Framework за уеб",
     "descriptionStart": "Използван от някои от най-големите компании в света, Next.js ви позволява да създавате",
     "descriptionHighlight": "уеб приложения с високо качество",

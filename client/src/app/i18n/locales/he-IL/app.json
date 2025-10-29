@@ -30,6 +30,10 @@
     }
   },
   "main": {
+    "new": "חדש",
+    "confAnnouncement": "גלה מה הצגנו ב-Next.js Conf 25",
+    "findOutMore": "למד עוד",
+    "watchRecap": "צפה בסיכום",
     "title": "מסגרת React לאינטרנט",
     "descriptionStart": "משמשת על ידי כמה מהחברות הגדולות בעולם, Next.js מאפשרת ליצור",
     "descriptionHighlight": "יישומי אינטרנט איכותיים",

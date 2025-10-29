@@ -30,6 +30,10 @@
     }
   },
   "main": {
+    "new": "Naujas",
+    "confAnnouncement": "Žiūrėkite, ką pristatėme Next.js Conf 25",
+    "findOutMore": "Sužinokite daugiau",
+    "watchRecap": "Žiūrėti apžvalgą",
     "title": "React karkasas žiniatinkliui",
     "descriptionStart": "Kai kurios didžiausios pasaulio įmonės naudoja Next.js, kad galėtų kurti",
     "descriptionHighlight": "aukštos kokybės žiniatinklio programas",

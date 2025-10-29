@@ -30,6 +30,10 @@
     }
   },
   "main": {
+    "new": "Novo",
+    "confAnnouncement": "Pogledajte što smo predstavili na Next.js Conf 25",
+    "findOutMore": "Saznaj više",
+    "watchRecap": "Pogledaj sažetak",
     "title": "React Framework za web",
     "descriptionStart": "Koriste ga neke od najvećih svjetskih tvrtki, Next.js omogućuje vam kreiranje",
     "descriptionHighlight": "visokokvalitetnih web aplikacija",

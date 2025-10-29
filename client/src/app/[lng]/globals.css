@@ -7,6 +7,7 @@
   --theme-bg-base: #FFFFFF;
   --theme-bg-dark: #FFFFFF;
   --theme-bg-muted: #F2F2F2;
+  --theme-bg-base-hover: #383838;
   --theme-bg-muted-hover: #EBEBEB;
   --theme-bg-muted-dark: #FFFFFF;
   --theme-bg-muted-dark-hover: #FFFFFF;
@@ -36,6 +37,7 @@
     --theme-bg-base: #000000;
     --theme-bg-dark: #0A0A0A;
     --theme-bg-muted: #1A1A1A;
+    --theme-bg-base-hover: #CCCCCC;
     --theme-bg-muted-hover: #1F1F1F;
     --theme-bg-muted-dark: #1F1F1F;
     --theme-bg-muted-dark-hover: #1A1A1A;
@@ -65,6 +67,7 @@ html.light {
   --theme-bg-base: #FFFFFF;
   --theme-bg-dark: #FFFFFF;
   --theme-bg-muted: #F2F2F2;
+  --theme-bg-base-hover: #383838;
   --theme-bg-muted-hover: #EBEBEB;
   --theme-bg-muted-dark: #FFFFFF;
   --theme-bg-muted-dark-hover: #FFFFFF;
@@ -93,6 +96,7 @@ html.dark {
   --theme-bg-base: #000000;
   --theme-bg-dark: #0A0A0A;
   --theme-bg-muted: #1A1A1A;
+  --theme-bg-base-hover: #CCCCCC;
   --theme-bg-muted-hover: #1F1F1F;
   --theme-bg-muted-dark: #1F1F1F;
   --theme-bg-muted-dark-hover: #1A1A1A;

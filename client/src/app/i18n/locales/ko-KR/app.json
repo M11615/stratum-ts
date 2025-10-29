@@ -30,6 +30,10 @@
     }
   },
   "main": {
+    "new": "새로운",
+    "confAnnouncement": "Next.js Conf 25에서 발표한 내용을 확인하세요",
+    "findOutMore": "자세히 알아보기",
+    "watchRecap": "요약 보기",
     "title": "웹을 위한 React 프레임워크",
     "descriptionStart": "Next.js는 세계 유수의 기업들이 사용하며,",
     "descriptionHighlight": "고품질 웹 애플리케이션",

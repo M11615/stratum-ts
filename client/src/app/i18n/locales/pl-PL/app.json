@@ -30,6 +30,10 @@
     }
   },
   "main": {
+    "new": "Nowe",
+    "confAnnouncement": "Zobacz, co zaprezentowaliśmy na Next.js Conf 25",
+    "findOutMore": "Dowiedz się więcej",
+    "watchRecap": "Zobacz podsumowanie",
     "title": "Framework React dla sieci",
     "descriptionStart": "Używany przez niektóre z największych firm na świecie, Next.js pozwala tworzyć",
     "descriptionHighlight": "wysokiej jakości aplikacje internetowe",

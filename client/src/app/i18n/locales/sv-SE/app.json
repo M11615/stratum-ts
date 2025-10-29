@@ -30,6 +30,10 @@
     }
   },
   "main": {
+    "new": "Ny",
+    "confAnnouncement": "Se vad vi presenterade på Next.js Conf 25",
+    "findOutMore": "Läs mer",
+    "watchRecap": "Titta på sammanfattningen",
     "title": "React-ramverket för webben",
     "descriptionStart": "Används av några av världens största företag, Next.js låter dig skapa",
     "descriptionHighlight": "högkvalitativa webbapplikationer",

@@ -30,6 +30,10 @@
     }
   },
   "main": {
+    "new": "Baru",
+    "confAnnouncement": "Lihat apa yang kami rilis di Next.js Conf 25",
+    "findOutMore": "Cari tahu lebih lanjut",
+    "watchRecap": "Tonton ringkasannya",
     "title": "Framework React untuk Web",
     "descriptionStart": "Digunakan oleh beberapa perusahaan terbesar di dunia, Next.js memungkinkan Anda membuat",
     "descriptionHighlight": "aplikasi web berkualitas tinggi",

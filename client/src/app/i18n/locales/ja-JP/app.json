@@ -30,6 +30,10 @@
     }
   },
   "main": {
+    "new": "新しい",
+    "confAnnouncement": "Next.js Conf 25で発表した内容を確認する",
+    "findOutMore": "詳細を見る",
+    "watchRecap": "まとめを見る",
     "title": "Web のための React フレームワーク",
     "descriptionStart": "Next.js は世界中の大手企業に採用され、",
     "descriptionHighlight": "高品質な Web アプリケーション",

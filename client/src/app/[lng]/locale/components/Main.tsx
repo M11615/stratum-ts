@@ -18,8 +18,8 @@ export default function Main() {
   if (!hydrated) return null;
 
   return (
-    <main className={`${isMobileScreen ? "w-[100vw]" : "w-full"} pb-[130px] bg-[var(--theme-bg-base)]`}>
-      <div className={`w-full max-w-screen-xl mx-auto ${isTabletScreen ? "px-[25px]" : "px-[60px]"}`}>
+    <main className="w-full pb-[130px] bg-[var(--theme-bg-base)]">
+      <div className="w-full max-w-screen-xl mx-auto px-[25px]">
         <h1 className="text-[var(--theme-fg-base)] text-2xl font-semibold mb-8">
           {t("main.title")}
         </h1>

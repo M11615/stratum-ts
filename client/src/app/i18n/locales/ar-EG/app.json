@@ -30,6 +30,10 @@
     }
   },
   "main": {
+    "new": "جديد",
+    "confAnnouncement": "شوف اللي أطلقناه في مؤتمر Next.js 25",
+    "findOutMore": "اعرف المزيد",
+    "watchRecap": "اتفرج على الملخص",
     "title": "إطار عمل React للويب",
     "descriptionStart": "يستخدم من قبل بعض أكبر الشركات في العالم، يتيح لك Next.js إنشاء",
     "descriptionHighlight": "تطبيقات ويب عالية الجودة",

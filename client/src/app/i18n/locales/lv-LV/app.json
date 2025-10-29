@@ -30,6 +30,10 @@
     }
   },
   "main": {
+    "new": "Jauns",
+    "confAnnouncement": "Skatiet, ko mēs prezentējām Next.js Conf 25",
+    "findOutMore": "Uzzināt vairāk",
+    "watchRecap": "Skatīt kopsavilkumu",
     "title": "React ietvars tīmeklim",
     "descriptionStart": "To izmanto daži no pasaules lielākajiem uzņēmumiem, Next.js ļauj izveidot",
     "descriptionHighlight": "augstas kvalitātes tīmekļa lietotnes",

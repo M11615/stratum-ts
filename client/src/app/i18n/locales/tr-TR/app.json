@@ -30,6 +30,10 @@
     }
   },
   "main": {
+    "new": "Yeni",
+    "confAnnouncement": "Next.js Conf 25'te neler sunduğumuzu görün",
+    "findOutMore": "Daha fazla bilgi edin",
+    "watchRecap": "Özeti izle",
     "title": "Web için React Çerçevesi",
     "descriptionStart": "Dünyanın en büyük şirketlerinden bazıları tarafından kullanılan Next.js ile",
     "descriptionHighlight": "yüksek kaliteli web uygulamaları",

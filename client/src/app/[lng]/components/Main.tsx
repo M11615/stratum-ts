@@ -1,22 +1,42 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { RefObject, useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useT } from "@/app/i18n/client";
-import { RequiredI18n, StateSetter, FALLBACK_MOBILE_M_SCREEN_WIDTH } from "@/app/lib/constants";
+import { RequiredI18n, StateSetter, FALLBACK_MOBILE_L_SCREEN_WIDTH, FALLBACK_MOBILE_M_SCREEN_WIDTH, FALLBACK_MOBILE_S_SCREEN_WIDTH } from "@/app/lib/constants";
 import { ResponsiveContextValue, useResponsiveContext } from "./ResponsiveContext";
 
 export default function Main(): React.ReactNode {
   const { t, i18n }: RequiredI18n = useT("app", {});
   const [hydrated, setHydrated]: StateSetter<boolean> = useState<boolean>(false);
-  const { width, isTabletScreen, isMobileScreen }: ResponsiveContextValue = useResponsiveContext();
+  const { width, isTabletScreen, isMobileScreen, actualTheme }: ResponsiveContextValue = useResponsiveContext();
+  const [showVideo, setShowVideo]: StateSetter<boolean> = useState<boolean>(false);
   const [hovered, setHovered]: StateSetter<boolean> = useState<boolean>(false);
   const [copied, setCopied]: StateSetter<boolean> = useState<boolean>(false);
+  const [elementsInfo, setElementsInfo]: StateSetter<Record<string, HTMLElement | null>> = useState<Record<string, HTMLElement | null>>({});
+  const titleRef: RefObject<HTMLHeadingElement | null> = useRef<HTMLHeadingElement>(null);
+  const descriptionRef: RefObject<HTMLParagraphElement | null> = useRef<HTMLParagraphElement>(null);
+  const linkRef: RefObject<HTMLDivElement | null> = useRef<HTMLDivElement>(null);
+  const commandRef: RefObject<HTMLDivElement | null> = useRef<HTMLDivElement>(null);
+  const horizontalOffset: number = isMobileScreen ? 64 : 128;
+  const verticalOffset: number = 128;
   const command: string = "npx create-next-app@latest";
 
   useEffect((): void => {
     setHydrated(true);
   }, []);
+
+  useEffect((): void => {
+    if (hydrated) {
+      setElementsInfo({
+        title: titleRef.current,
+        description: descriptionRef.current,
+        link: linkRef.current,
+        command: commandRef.current,
+      });
+    }
+  }, [hydrated]);
 
   const handleMouseEnter = (): void => {
     setHovered(true);
@@ -43,70 +63,173 @@ export default function Main(): React.ReactNode {
 
   return (
     <>
-      <main className={`relative flex flex-col ${isMobileScreen ? "w-[100vw]" : "w-full"} items-center pt-[60px] pb-[130px] bg-[var(--theme-bg-base)]`}>
-        <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-full max-w-screen-xl z-0">
+      <main className="relative flex flex-col w-full items-center pb-[130px] bg-[var(--theme-bg-base)]">
+        <div
+          className={`${width > FALLBACK_MOBILE_L_SCREEN_WIDTH ? "px-0 w-[60%]" : "px-[5%]"}`}
+          style={{
+            paddingBottom: `${isTabletScreen ? `${width * (576 / 1024) + 130}px` : "730px"}`
+          }}
+        >
+          <div className="flex flex-wrap tracking-[-0.03em] items-center text-center justify-center gap-2">
+            <span className="text-[var(--theme-primary-light)] bg-[var(--theme-accent-blue-bg)] px-[12px] py-[2px] rounded-full font-medium text-[14px]">
+              {t("main.new")}
+            </span>
+            <span className="text-[var(--theme-fg-base)] text-[20px] font-semibold">
+              {t("main.confAnnouncement")}
+            </span>
+          </div>
+          <div className="flex justify-center gap-2 mt-[12px]">
+            <Link
+              href={`/${i18n.language}`}
+              className={`inline-flex items-center gap-2 whitespace-nowrap cursor-pointer border border-[var(--theme-fg-base)] bg-[var(--theme-fg-base)] whitespace-nowrap overflow-hidden text-ellipsis text-[14px] text-[var(--theme-border-base)] font-medium pl-3 pr-[7px] py-[5px] rounded-full hover:bg-[var(--theme-bg-base-hover)] hover:border-[var(--theme-bg-base-hover)] transition duration-200 ease-in-out`}
+            >
+              {t("main.findOutMore")}
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" strokeLinejoin="round">
+                <path fillRule="evenodd" clipRule="evenodd" d="M6.74999 3.93933L7.28032 4.46966L10.1035 7.29288C10.4941 7.68341 10.4941 8.31657 10.1035 8.7071L7.28032 11.5303L6.74999 12.0607L5.68933 11L6.21966 10.4697L8.68933 7.99999L6.21966 5.53032L5.68933 4.99999L6.74999 3.93933Z" />
+              </svg>
+            </Link>
+            <Link
+              href={`/${i18n.language}`}
+              className={`inline-flex items-center gap-2 whitespace-nowrap cursor-pointer border border-[var(--theme-border-base)] bg-[var(--theme-bg-base)] whitespace-nowrap overflow-hidden text-ellipsis text-[14px] text-[var(--theme-fg-base)] font-medium pl-3 pr-[7px] py-[5px] rounded-full hover:bg-[var(--theme-bg-muted)] hover:border-[var(--theme-text-subtle)] transition duration-200 ease-in-out`}
+            >
+              {t("main.watchRecap")}
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" strokeLinejoin="round">
+                <path fillRule="evenodd" clipRule="evenodd" d="M6.74999 3.93933L7.28032 4.46966L10.1035 7.29288C10.4941 7.68341 10.4941 8.31657 10.1035 8.7071L7.28032 11.5303L6.74999 12.0607L5.68933 11L6.21966 10.4697L8.68933 7.99999L6.21966 5.53032L5.68933 4.99999L6.74999 3.93933Z" />
+              </svg>
+            </Link>
+          </div>
           <div
-            className={`absolute ${isTabletScreen ? `${isMobileScreen ? "top-[-1%] left-[-2%] w-[104%] main-width-104-top" : "top-[15%] left-[2%] w-[96%] main-width-96"}` : "top-[14%] left-[-2%] w-[104%] main-width-104-top"} h-px border-t border-dashed border-[#666666] opacity-0`}
+            onClick={(): void => setShowVideo(true)}
+            className={`group absolute left-1/2 -translate-x-1/2 flex flex-col items-center justify-center w-full max-w-[1024px] mt-[40px] ${width > FALLBACK_MOBILE_L_SCREEN_WIDTH ? "px-0" : "px-[7.5%]"}`}
+          >
+            {!showVideo ? (
+              <>
+                <Image
+                  src={`/assets/livestream-poster-conf-2025-${actualTheme}.png`}
+                  alt="Next.js Conf 25 Livestream"
+                  width={1024}
+                  height={576}
+                  priority
+                  className="cursor-pointer w-full h-full"
+                />
+                <div className={`${isMobileScreen ? "scale-100" : "scale-135"} absolute flex items-center justify-center w-[72px] h-[72px] cursor-pointer border border-[var(--theme-border-base)] bg-transparent text-[var(--theme-fg-base)] rounded-full pl-[3px] group-hover:bg-[var(--theme-bg-muted)] group-hover:border-[var(--theme-text-subtle)] transition duration-200 ease-in-out`}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" strokeLinejoin="round" className="scale-145">
+                    <path fillRule="evenodd" clipRule="evenodd" d="M14.5528 7.77638C14.737 7.86851 14.737 8.13147 14.5528 8.2236L1.3618 14.8191C1.19558 14.9022 1 14.7813 1 14.5955L1 1.4045C1 1.21865 1.19558 1.09778 1.3618 1.18089L14.5528 7.77638Z" />
+                  </svg>
+                </div>
+              </>
+            ) : (
+              <div className="aspect-video w-full bg-[var(--theme-bg-muted)]">
+                <video
+                  controls
+                  autoPlay
+                  className="w-full h-full"
+                />
+              </div>
+            )}
+          </div>
+        </div>
+        <div className={`w-full relative z-10 text-center ${isMobileScreen ? `${width < FALLBACK_MOBILE_S_SCREEN_WIDTH ? "px-[15px]" : "px-[30px]"}` : `${isTabletScreen ? "px-[80px]" : ""}`}`}>
+          <div
+            className="absolute main-width-top h-px border-t border-dashed border-[#666666] opacity-0"
             style={{
+              top: `${elementsInfo.title?.offsetTop}px`,
+              left: `${(elementsInfo.title?.offsetLeft ?? 0) - horizontalOffset / 2}px`,
+              width: `${(elementsInfo.title?.offsetWidth ?? 0) + horizontalOffset}px`,
               WebkitMaskImage: "linear-gradient(to right, transparent 0%, #666666 5%, #666666 95%, transparent 100%)",
               maskImage: "linear-gradient(to right, transparent 0%, #666666 5%, #666666 95%, transparent 100%)"
             }}
           />
           <div
-            className={`absolute ${isTabletScreen ? `${isMobileScreen ? "top-[30%] left-[-2%] w-[104%] main-width-104-top" : "top-[31.5%] left-[2%] w-[96%] main-width-96"}` : "top-[34%] left-[-2%] w-[104%] main-width-104-top"} h-px border-t border-dashed border-[#666666] opacity-0`}
+            className="absolute main-width-top h-px border-t border-dashed border-[#666666] opacity-0"
             style={{
+              top: `${(elementsInfo.title?.offsetTop ?? 0) + (elementsInfo.title?.offsetHeight ?? 0)}px`,
+              left: `${(elementsInfo.title?.offsetLeft ?? 0) - horizontalOffset / 2}px`,
+              width: `${(elementsInfo.title?.offsetWidth ?? 0) + horizontalOffset}px`,
               WebkitMaskImage: "linear-gradient(to right, transparent 0%, #666666 5%, #666666 95%, transparent 100%)",
               maskImage: "linear-gradient(to right, transparent 0%, #666666 5%, #666666 95%, transparent 100%)"
             }}
           />
           <div
-            className={`absolute ${isTabletScreen ? `${isMobileScreen ? "bottom-[45.5%] left-[-2%] w-[104%] main-width-104-bottom" : "bottom-[43%] left-[2%] w-[96%] main-width-96"}` : "bottom-[41%] left-[-2%] w-[104%] main-width-104-bottom"} h-px border-t border-dashed border-[#666666] opacity-0`}
+            className="absolute main-width-bottom h-px border-t border-dashed border-[#666666] opacity-0"
             style={{
+              top: `${(elementsInfo.description?.offsetTop ?? 0) + (elementsInfo.description?.offsetHeight ?? 0)}px`,
+              left: `${(elementsInfo.title?.offsetLeft ?? 0) - horizontalOffset / 2}px`,
+              width: `${(elementsInfo.title?.offsetWidth ?? 0) + horizontalOffset}px`,
               WebkitMaskImage: "linear-gradient(to right, transparent 0%, #666666 5%, #666666 95%, transparent 100%)",
               maskImage: "linear-gradient(to right, transparent 0%, #666666 5%, #666666 95%, transparent 100%)"
             }}
           />
           <div
-            className={`absolute ${isTabletScreen ? `${isMobileScreen ? "bottom-[25%] left-[-2%] w-[104%] main-width-104-bottom" : "bottom-[14.4%] left-[2%] w-[96%] main-width-96"}` : "bottom-[13.4%] left-[-2%] w-[104%] main-width-104-bottom"} h-px border-t border-dashed border-[#666666] opacity-0`}
+            className="absolute main-width-bottom h-px border-t border-dashed border-[#666666] opacity-0"
             style={{
+              top: `${(elementsInfo.command?.offsetTop ?? 0) + (elementsInfo.command?.offsetHeight ?? 0)}px`,
+              left: `${(elementsInfo.title?.offsetLeft ?? 0) - horizontalOffset / 2}px`,
+              width: `${(elementsInfo.title?.offsetWidth ?? 0) + horizontalOffset}px`,
               WebkitMaskImage: "linear-gradient(to right, transparent 0%, #666666 5%, #666666 95%, transparent 100%)",
               maskImage: "linear-gradient(to right, transparent 0%, #666666 5%, #666666 95%, transparent 100%)"
             }}
           />
-          <div className={`absolute ${isMobileScreen ? "top-[-8%]" : "top-[3%]"} ${isTabletScreen ? "left-[7.5%]" : "left-[2.5%] border-[1.5px]"} h-[96%] w-px border-l border-dashed border-[#666666] main-height-96 opacity-0`} />
+          <div
+            className="absolute w-px border-l border-dashed border-[#666666] main-height-long opacity-0"
+            style={{
+              top: `${(elementsInfo.title?.offsetTop ?? 0) - verticalOffset / 2}px`,
+              left: `${elementsInfo.title?.offsetLeft}px`,
+              height: `${(elementsInfo.title?.offsetHeight ?? 0) + (elementsInfo.description?.offsetHeight ?? 0) + (elementsInfo.link?.offsetHeight ?? 0) + (elementsInfo.command?.offsetHeight ?? 0) + verticalOffset}px`
+            }}
+          />
           {!isMobileScreen && (
             <>
               <div
-                className={`absolute ${isTabletScreen ? "top-[6%] left-[32.2%]" : "top-[5%] left-[36.8%]"} h-[9%] w-px border-l border-dashed border-[#666666] main-height-9 opacity-0`}
+                className="absolute w-px border-l border-dashed border-[#666666] main-height-short opacity-0"
                 style={{
+                  top: `${(elementsInfo.title?.offsetTop ?? 0) - verticalOffset / 2}px`,
+                  left: `${elementsInfo.link?.offsetLeft}px`,
+                  height: `${verticalOffset / 2}px`,
                   WebkitMaskImage: "linear-gradient(to top, #666666 0%, #666666 5%, #666666 95%, transparent 100%)",
                   maskImage: "linear-gradient(to top, #666666 0%, #666666 5%, #666666 95%, transparent 100%)"
                 }}
               />
               <div
-                className={`absolute ${isTabletScreen ? "top-[57%] left-[31%]" : "top-[59%] left-[36%]"} h-[40%] w-px border-l border-[1.5px] border-dashed border-[#666666] main-height-40 opacity-0`}
+                className="absolute w-px border-l border-dashed border-[#666666] main-height-medium opacity-0"
                 style={{
+                  top: `${(elementsInfo.description?.offsetTop ?? 0) + (elementsInfo.description?.offsetHeight ?? 0)}px`,
+                  left: `${elementsInfo.link?.offsetLeft}px`,
+                  height: `${(elementsInfo.link?.offsetHeight ?? 0) + (elementsInfo.command?.offsetHeight ?? 0) + verticalOffset / 2}px`,
                   WebkitMaskImage: "linear-gradient(to bottom, #666666 0%, #666666 5%, #666666 95%, transparent 100%)",
                   maskImage: "linear-gradient(to bottom, #666666 0%, #666666 5%, #666666 95%, transparent 100%)"
                 }}
               />
               <div
-                className={`absolute ${isTabletScreen ? "top-[6%] right-[32.2%]" : "top-[5%] right-[36.8%]"} h-[9%] w-px border-l border-dashed border-[#666666] main-height-9 opacity-0`}
+                className="absolute w-px border-l border-dashed border-[#666666] main-height-short opacity-0"
                 style={{
+                  top: `${(elementsInfo.title?.offsetTop ?? 0) - verticalOffset / 2}px`,
+                  left: `${(elementsInfo.link?.offsetLeft ?? 0) + (elementsInfo.link?.offsetWidth ?? 0)}px`,
+                  height: `${verticalOffset / 2}px`,
                   WebkitMaskImage: "linear-gradient(to top, #666666 0%, #666666 5%, #666666 95%, transparent 100%)",
                   maskImage: "linear-gradient(to top, #666666 0%, #666666 5%, #666666 95%, transparent 100%)"
                 }}
               />
               <div
-                className={`absolute ${isTabletScreen ? "top-[57%] right-[31%]" : "top-[59%] right-[36%]"} h-[40%] w-px border-l border-[1.5px] border-dashed border-[#666666] main-height-40 opacity-0`}
+                className="absolute w-px border-l border-dashed border-[#666666] main-height-medium opacity-0"
                 style={{
+                  top: `${(elementsInfo.description?.offsetTop ?? 0) + (elementsInfo.description?.offsetHeight ?? 0)}px`,
+                  left: `${(elementsInfo.link?.offsetLeft ?? 0) + (elementsInfo.link?.offsetWidth ?? 0)}px`,
+                  height: `${(elementsInfo.link?.offsetHeight ?? 0) + (elementsInfo.command?.offsetHeight ?? 0) + verticalOffset / 2}px`,
                   WebkitMaskImage: "linear-gradient(to bottom, #666666 0%, #666666 5%, #666666 95%, transparent 100%)",
                   maskImage: "linear-gradient(to bottom, #666666 0%, #666666 5%, #666666 95%, transparent 100%)"
                 }}
               />
             </>
           )}
-          <div className={`absolute ${isMobileScreen ? "top-[-8%]" : "top-[3%]"} ${isTabletScreen ? "right-[7.5%]" : "right-[2.5%] border-[1.5px]"} h-[96%] w-px border-l border-dashed border-[#666666] main-height-96 opacity-0`} />
+          <div
+            className="absolute w-px border-l border-dashed border-[#666666] main-height-long opacity-0"
+            style={{
+              top: `${(elementsInfo.title?.offsetTop ?? 0) - verticalOffset / 2}px`,
+              left: `${(elementsInfo.title?.offsetLeft ?? 0) + (elementsInfo.title?.offsetWidth ?? 0)}px`,
+              height: `${(elementsInfo.title?.offsetHeight ?? 0) + (elementsInfo.description?.offsetHeight ?? 0) + (elementsInfo.link?.offsetHeight ?? 0) + (elementsInfo.command?.offsetHeight ?? 0) + verticalOffset}px`
+            }}
+          />
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="75"
@@ -115,7 +238,11 @@ export default function Main(): React.ReactNode {
             fill="none"
             stroke="#666666"
             strokeDasharray="2 2"
-            className={`absolute ${isTabletScreen ? `${isMobileScreen ? "top-[calc(-1%-37.5px)] left-[calc(7.5%-37.5px)]" : "top-[calc(15%-37.5px)] left-[calc(7.5%-37.5px)]"}` : "top-[calc(14%-37.5px)] left-[calc(2.5%-37.5px)]"} main-opacity-in opacity-0`}
+            className="absolute main-opacity-in opacity-0"
+            style={{
+              top: `calc(${elementsInfo.title?.offsetTop}px - 37.5px)`,
+              left: `calc(${elementsInfo.title?.offsetLeft}px - 37.5px)`
+            }}
             transform={`${isMobileScreen ? "scale(0.33)" : "scale(1)"}`}
           >
             <path d="M74 37.5C74 30.281 71.8593 23.2241 67.8486 17.2217C63.838 11.2193 58.1375 6.541 51.4679 3.7784C44.7984 1.0158 37.4595 0.292977 30.3792 1.70134C23.2989 3.1097 16.7952 6.58599 11.6906 11.6906C6.58599 16.7952 3.1097 23.2989 1.70134 30.3792C0.292977 37.4595 1.0158 44.7984 3.7784 51.4679C6.541 58.1375 11.2193 63.838 17.2217 67.8486C23.2241 71.8593 30.281 74 37.5 74" />
@@ -136,7 +263,11 @@ export default function Main(): React.ReactNode {
               fill="none"
               stroke="#666666"
               strokeDasharray="2 2"
-              className={`absolute ${isTabletScreen ? "bottom-[calc(14.4%-37.5px)] right-[calc(31%-37.5px)]" : "bottom-[calc(13.4%-37.5px)] right-[calc(36%-37.5px)]"} rotate-180 main-opacity-in opacity-0`}
+              className="absolute rotate-180 main-opacity-in opacity-0"
+              style={{
+                top: `calc(${(elementsInfo.command?.offsetTop ?? 0) + (elementsInfo.command?.offsetHeight ?? 0)}px - 37.5px)`,
+                left: `calc(${(elementsInfo.link?.offsetLeft ?? 0) + (elementsInfo.link?.offsetWidth ?? 0)}px - 37.5px)`
+              }}
               transform={`${isMobileScreen ? "scale(0.33)" : "scale(1)"}`}
             >
               <path d="M74 37.5C74 30.281 71.8593 23.2241 67.8486 17.2217C63.838 11.2193 58.1375 6.541 51.4679 3.7784C44.7984 1.0158 37.4595 0.292977 30.3792 1.70134C23.2989 3.1097 16.7952 6.58599 11.6906 11.6906C6.58599 16.7952 3.1097 23.2989 1.70134 30.3792C0.292977 37.4595 1.0158 44.7984 3.7784 51.4679C6.541 58.1375 11.2193 63.838 17.2217 67.8486C23.2241 71.8593 30.281 74 37.5 74" />
@@ -149,45 +280,36 @@ export default function Main(): React.ReactNode {
               </defs>
             </svg>
           )}
-        </div>
-        <div className={`w-full max-w-screen-xl relative ${isMobileScreen ? "bottom-[65px]" : ""} z-10 text-center ${isTabletScreen ? `space-y-7 ${isMobileScreen ? "pt-5" : "pt-4"}` : "space-y-3"}`}>
-          <div
-            style={isMobileScreen ? {
-              paddingLeft: `${width < FALLBACK_MOBILE_M_SCREEN_WIDTH ? width * 0.06 : width * 0.14}px`,
-              paddingRight: `${width < FALLBACK_MOBILE_M_SCREEN_WIDTH ? width * 0.06 : width * 0.14}px`
-            } : undefined}
-          >
-            <h1 className={`font-extrabold bg-gradient-to-b from-[var(--theme-fg-light)]/95 to-[var(--theme-fg-dark)] bg-clip-text text-transparent ${isTabletScreen ? `${isMobileScreen ? "text-[48px] tracking-[-0.04em] leading-[1.1] pb-6" : "text-[50px] tracking-[-0.06em] leading-[2.4] pb-2"}` : "text-[76px] tracking-[-0.05em] leading-[2.4]"}`}>
-              {t("main.title")}
-            </h1>
-            <p className={`text-[var(--theme-text-muted)] max-w-3xl mx-auto ${isTabletScreen ? `${isMobileScreen ? "text-[16px] tracking-[-0.02em] leading-[1.6] pt-6" : "text-[20px] tracking-[-0.02em] leading-[1.8] pt-5"}` : "text-xl tracking-[-0.01em] leading-[1.8] pt-2"}`}>
-              {t("main.descriptionStart")}{" "}
-              <span className="text-[var(--theme-fg-base)] font-medium">{t("main.descriptionHighlight")}</span>{" "}
-              {t("main.descriptionEnd")}
-            </p>
-          </div>
-          <div className={`flex justify-center gap-4 ${isMobileScreen ? "mt-14" : "mt-20"} mb-4`}>
+          <h1 ref={titleRef} className={`font-extrabold bg-gradient-to-b from-[var(--theme-fg-light)]/95 to-[var(--theme-fg-dark)] bg-clip-text text-transparent max-w-[1215px] mx-auto py-[5px] ${isTabletScreen ? `${isMobileScreen ? `text-[48px] tracking-[-0.04em] leading-[1.1] ${width > FALLBACK_MOBILE_L_SCREEN_WIDTH ? "px-[80px]" : `${width < FALLBACK_MOBILE_S_SCREEN_WIDTH ? "px-[5px]" : "px-[20px]"}`} py-[20px]` : "text-[50px] tracking-[-0.06em]"}` : "text-[76px] tracking-[-0.05em]"}`}>
+            {t("main.title")}
+          </h1>
+          <p ref={descriptionRef} className={`text-[var(--theme-text-muted)] max-w-3xl mx-auto py-[30px] ${isTabletScreen ? `${isMobileScreen ? `text-[16px] tracking-[-0.02em] leading-[1.6] ${width < FALLBACK_MOBILE_S_SCREEN_WIDTH ? "px-[5px]" : "px-[30px]"}` : "text-[20px] tracking-[-0.02em] leading-[1.8]"}` : "text-xl tracking-[-0.01em] leading-[1.8]"}`}>
+            {t("main.descriptionStart")}{" "}
+            <span className="text-[var(--theme-fg-base)] font-medium">{t("main.descriptionHighlight")}</span>{" "}
+            {t("main.descriptionEnd")}
+          </p>
+          <div ref={linkRef} className={`inline-flex justify-center gap-4 ${isMobileScreen ? "" : "px-[35px]"} ${width > FALLBACK_MOBILE_M_SCREEN_WIDTH ? "pt-[45px]" : "pt-[25px]"}`}>
             <Link
               href={`/${i18n.language}`}
-              className={`cursor-pointer border border-[var(--theme-fg-base)] bg-[var(--theme-fg-base)] text-base text-[var(--theme-border-base)] font-medium px-5 py-3 rounded-lg hover:bg-[var(--theme-text-muted)] hover:border-[var(--theme-text-muted)] transition duration-200 ease-in-out`}
+              className={`whitespace-nowrap overflow-hidden text-ellipsis cursor-pointer border border-[var(--theme-fg-base)] bg-[var(--theme-fg-base)] text-base text-[var(--theme-border-base)] font-medium px-5 py-3 rounded-lg hover:bg-[var(--theme-bg-base-hover)] hover:border-[var(--theme-bg-base-hover)] transition duration-200 ease-in-out`}
             >
               {t("main.started")}
             </Link>
             <Link
               href={`/${i18n.language}`}
-              className={`cursor-pointer border border-[var(--theme-border-base)] bg-[var(--theme-bg-base)] text-base text-[var(--theme-fg-base)] font-medium px-5 py-3 rounded-lg hover:bg-[var(--theme-bg-muted)] hover:border-[var(--theme-text-subtle)] transition duration-200 ease-in-out`}
+              className={`whitespace-nowrap overflow-hidden text-ellipsis cursor-pointer border border-[var(--theme-border-base)] bg-[var(--theme-bg-base)] text-base text-[var(--theme-fg-base)] font-medium px-5 py-3 rounded-lg hover:bg-[var(--theme-bg-muted)] hover:border-[var(--theme-text-subtle)] transition duration-200 ease-in-out`}
             >
               {t("main.learn")}
             </Link>
           </div>
-          <div className="flex justify-center gap-2">
+          <div ref={commandRef} className={`flex justify-center gap-2 pt-[20px] ${width > FALLBACK_MOBILE_M_SCREEN_WIDTH ? "pb-[45px]" : "pb-[25px]"}`}>
             <div
               className="relative pl-[15px] pr-[15px] cursor-copy text-[var(--theme-text-muted)]"
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
               onClick={handleCopy}
             >
-              <p className="font-[family-name:var(--font-geist-mono)] text-sm tracking-tighter">
+              <p className="font-[family-name:var(--font-geist-mono)] whitespace-nowrap overflow-hidden text-ellipsis text-sm tracking-tighter">
                 <span>▲{" "}</span>
                 <span>~{" "}{command}</span>
                 <span className={`absolute top-[2px] pl-[15px] transition duration-200 ease-in-out ${hovered ? "opacity-100" : "opacity-0"}`}>
@@ -222,48 +344,48 @@ export default function Main(): React.ReactNode {
 
       <style>
         {`
-          .main-width-96 {
-            animation-name: main-width-96;
+          .main-width {
+            animation-name: main-width;
             animation-duration: 1.08s;
             animation-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
             animation-fill-mode: forwards;
             animation-delay: 0.15s;
           }
 
-          .main-width-104-top {
-            animation-name:  main-width-104;
+          .main-width-top {
+            animation-name:  main-width;
             animation-duration: 1.08s;
             animation-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
             animation-fill-mode: forwards;
             animation-delay: 0.15s;
           }
 
-          .main-width-104-bottom {
-            animation-name:  main-width-104;
+          .main-width-bottom {
+            animation-name:  main-width;
             animation-duration: 1.08s;
             animation-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
             animation-fill-mode: forwards;
             animation-delay: calc(0.15s + 0.3s);
           }
 
-          .main-height-96 {
-            animation-name: main-height-96;
+          .main-height-long {
+            animation-name: main-height-long;
             animation-duration: 1.08s;
             animation-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
             animation-fill-mode: forwards;
             animation-delay: calc(0.15s + 0.1s);
           }
 
-          .main-height-9 {
-            animation-name: main-height-9;
+          .main-height-short {
+            animation-name: main-height-short;
             animation-duration: calc(1.08s / 2);
             animation-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
             animation-fill-mode: forwards;
             animation-delay: calc(0.15s + 0.1s);
           }
 
-          .main-height-40 {
-            animation-name: main-height-40;
+          .main-height-medium {
+            animation-name: main-height-medium;
             animation-duration: 1.08s;
             animation-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
             animation-fill-mode: forwards;
@@ -278,57 +400,46 @@ export default function Main(): React.ReactNode {
             animation-delay: calc(0.15s + 0.4s);
           }
 
-          @keyframes main-width-96 {
+          @keyframes main-width {
             from {
               width: 0;
               opacity: 1;
             }
             to {
-              width: 96%;
+              width: ${(elementsInfo.title?.offsetWidth ?? 0) + horizontalOffset}px;
               opacity: 0.3;
             }
           }
 
-          @keyframes main-width-104 {
-            from {
-              width: 0;
-              opacity: 1;
-            }
-            to {
-              width: 104%;
-              opacity: 0.3;
-            }
-          }
-
-          @keyframes main-height-96 {
+          @keyframes main-height-long {
             from {
               height: 0;
               opacity: 1;
             }
             to {
-              height: 96%;
+              height: ${(elementsInfo.title?.offsetHeight ?? 0) + (elementsInfo.description?.offsetHeight ?? 0) + (elementsInfo.link?.offsetHeight ?? 0) + (elementsInfo.command?.offsetHeight ?? 0) + verticalOffset};
               opacity: 0.3;
             }
           }
 
-          @keyframes main-height-9 {
+          @keyframes main-height-short {
             from {
               height: 0;
               opacity: 1;
             }
             to {
-              height: 9%;
+              height: ${verticalOffset / 2};
               opacity: 0.3;
             }
           }
 
-          @keyframes main-height-40 {
+          @keyframes main-height-medium {
             from {
               height: 0;
               opacity: 1;
             }
             to {
-              height: 40%;
+              height: ${(elementsInfo.link?.offsetHeight ?? 0) + (elementsInfo.command?.offsetHeight ?? 0) + verticalOffset / 2}px;
               opacity: 0.3;
             }
           }

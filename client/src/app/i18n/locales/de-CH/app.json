@@ -30,6 +30,10 @@
     }
   },
   "main": {
+    "new": "Neu",
+    "confAnnouncement": "Erfahre, was wir an der Next.js Conf 25 vorgestellt haben",
+    "findOutMore": "Erfahre mehr",
+    "watchRecap": "Schau dir die Zusammenfassung an",
     "title": "Das React-Framework für das Web",
     "descriptionStart": "Verwendet von einigen der größten Unternehmen der Welt, ermöglicht Next.js Ihnen,",
     "descriptionHighlight": "hochwertige Webanwendungen",

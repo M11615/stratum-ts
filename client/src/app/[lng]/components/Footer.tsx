@@ -145,7 +145,7 @@ export default function Footer(): React.ReactNode {
         <CookieBanner />
       )}
 
-      <footer className={`flex flex-wrap ${isMobileScreen ? "w-[100vw]" : "w-full"} py-[33px] items-center justify-center bg-[var(--theme-bg-base)] border-t border-[var(--theme-border-base)]`}>
+      <footer className="flex flex-wrap w-full py-[33px] items-center justify-center bg-[var(--theme-bg-base)]">
         <div className={`w-full max-w-screen-xl flex flex-col gap-[55px] ${isTabletScreen ? "px-[25px]" : "px-[40px]"}`}>
           <div className={`grid ${isTabletScreen ? `${isMobileScreen ? "grid-cols-[1fr]" : "grid-cols-[1fr_6.5fr]"}` : "grid-cols-[1fr_6fr]"}`}>
             <div className={`text-[var(--theme-fg-base)] ${isMobileScreen ? "pb-8" : ""}`}>
@@ -232,44 +232,42 @@ export default function Footer(): React.ReactNode {
                   </button>
                 </nav>
               </div>
-              <div className={`${isMobileScreen ? "col-span-full w-[330px]" : ""}`}>
+              <div className={`${isMobileScreen ? "col-span-full" : ""}`}>
                 <p className="text-[var(--theme-fg-base)] font-medium mb-4">{t("footer.subscribeTitle")}</p>
                 <p className="mb-3 mr-2 text-[14px] text-[var(--theme-text-muted)]">
                   {t("footer.subscribeDescription")}
                 </p>
-                <div className={`relative ${width < FALLBACK_MOBILE_M_SCREEN_WIDTH ? "w-[85vw]" : "w-full"}`}>
-                  {submitted ? (
-                    <div className="pt-1 flex items-center space-x-1">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="var(--theme-success)" strokeLinejoin="round">
-                        <path fillRule="evenodd" clipRule="evenodd" d="M14.5 8C14.5 11.5899 11.5899 14.5 8 14.5C4.41015 14.5 1.5 11.5899 1.5 8C1.5 4.41015 4.41015 1.5 8 1.5C11.5899 1.5 14.5 4.41015 14.5 8ZM16 8C16 12.4183 12.4183 16 8 16C3.58172 16 0 12.4183 0 8C0 3.58172 3.58172 0 8 0C12.4183 0 16 3.58172 16 8ZM11.5303 6.53033L12.0607 6L11 4.93934L10.4697 5.46967L6.5 9.43934L5.53033 8.46967L5 7.93934L3.93934 9L4.46967 9.53033L5.96967 11.0303C6.26256 11.3232 6.73744 11.3232 7.03033 11.0303L11.5303 6.53033Z" />
-                      </svg>
-                      <p className="text-[14px] text-[var(--theme-text-muted)]">
-                        {t("footer.subscribeSuccess")}
-                      </p>
-                    </div>
-                  ) : (
-                    <form noValidate onSubmit={handleSubscriptionEmailSubmit} className="relative">
-                      <input
-                        key={renderKey}
-                        className="w-full border border-[var(--theme-bg-muted)] bg-[var(--theme-bg-muted)] text-[14px] text-[var(--theme-fg-base)] placeholder-[var(--theme-text-muted)] px-[10px] pr-[90px] py-[5px] rounded-lg focus:outline-none focus:ring-2 ring-offset-2 focus:ring-[var(--theme-primary-light)] ring-offset-[var(--theme-bg-base)] disabled:opacity-50"
-                        type="email"
-                        name="subscriptionEmail"
-                        value={subscriptionEmail}
-                        onChange={handleSubscriptionEmailChange}
-                        placeholder="you@domain.com"
-                        required
-                        disabled={isSubmitting}
-                      />
-                      <button
-                        className="absolute top-1/2 right-[6px] -translate-y-1/2 transition duration-200 ease-in-out cursor-pointer border border-[var(--theme-text-subtle)] bg-[var(--theme-bg-dark)] text-[12px] text-[var(--theme-text-muted)] hover:text-[var(--theme-fg-base)] font-medium px-[6px] py-[3px] rounded-[3px] ml-10"
-                        type="submit"
-                        disabled={isSubmitting}
-                      >
-                        {t("footer.subscribeButton")}
-                      </button>
-                    </form>
-                  )}
-                </div>
+                {submitted ? (
+                  <div className="pt-1 flex items-center space-x-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="var(--theme-success)" strokeLinejoin="round">
+                      <path fillRule="evenodd" clipRule="evenodd" d="M14.5 8C14.5 11.5899 11.5899 14.5 8 14.5C4.41015 14.5 1.5 11.5899 1.5 8C1.5 4.41015 4.41015 1.5 8 1.5C11.5899 1.5 14.5 4.41015 14.5 8ZM16 8C16 12.4183 12.4183 16 8 16C3.58172 16 0 12.4183 0 8C0 3.58172 3.58172 0 8 0C12.4183 0 16 3.58172 16 8ZM11.5303 6.53033L12.0607 6L11 4.93934L10.4697 5.46967L6.5 9.43934L5.53033 8.46967L5 7.93934L3.93934 9L4.46967 9.53033L5.96967 11.0303C6.26256 11.3232 6.73744 11.3232 7.03033 11.0303L11.5303 6.53033Z" />
+                    </svg>
+                    <p className="text-[14px] text-[var(--theme-text-muted)]">
+                      {t("footer.subscribeSuccess")}
+                    </p>
+                  </div>
+                ) : (
+                  <form noValidate onSubmit={handleSubscriptionEmailSubmit} className="relative">
+                    <input
+                      key={renderKey}
+                      className="w-full border border-[var(--theme-bg-muted)] bg-[var(--theme-bg-muted)] text-[14px] text-[var(--theme-fg-base)] placeholder-[var(--theme-text-muted)] px-[10px] pr-[90px] py-[5px] rounded-lg focus:outline-none focus:ring-2 ring-offset-2 focus:ring-[var(--theme-primary-light)] ring-offset-[var(--theme-bg-base)] disabled:opacity-50"
+                      type="email"
+                      name="subscriptionEmail"
+                      value={subscriptionEmail}
+                      onChange={handleSubscriptionEmailChange}
+                      placeholder="you@domain.com"
+                      required
+                      disabled={isSubmitting}
+                    />
+                    <button
+                      className="absolute top-1/2 right-[6px] -translate-y-1/2 transition duration-200 ease-in-out cursor-pointer border border-[var(--theme-text-subtle)] bg-[var(--theme-bg-dark)] text-[12px] text-[var(--theme-text-muted)] hover:text-[var(--theme-fg-base)] font-medium px-[6px] py-[3px] rounded-[3px] ml-10"
+                      type="submit"
+                      disabled={isSubmitting}
+                    >
+                      {t("footer.subscribeButton")}
+                    </button>
+                  </form>
+                )}
               </div>
             </div>
           </div>

@@ -30,6 +30,10 @@
     }
   },
   "main": {
+    "new": "Ny",
+    "confAnnouncement": "Se, hvad vi lancerede på Next.js Conf 25",
+    "findOutMore": "Få mere at vide",
+    "watchRecap": "Se opsummeringen",
     "title": "React Framework til Web",
     "descriptionStart": "Brugt af nogle af verdens største virksomheder, Next.js giver dig mulighed for at skabe",
     "descriptionHighlight": "højkvalitets webapplikationer",

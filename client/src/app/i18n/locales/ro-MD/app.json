@@ -30,6 +30,10 @@
     }
   },
   "main": {
+    "new": "Nou",
+    "confAnnouncement": "Vezi ce am prezentat la Next.js Conf 25",
+    "findOutMore": "Află mai multe",
+    "watchRecap": "Vezi rezumatul",
     "title": "Framework-ul React pentru Web",
     "descriptionStart": "Folosind de unele dintre cele mai mari companii din lume, Next.js vă permite să creați",
     "descriptionHighlight": "aplicații web de înaltă calitate",

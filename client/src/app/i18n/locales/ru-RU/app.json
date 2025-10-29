@@ -30,6 +30,10 @@
     }
   },
   "main": {
+    "new": "Новое",
+    "confAnnouncement": "Посмотрите, что мы представили на Next.js Conf 25",
+    "findOutMore": "Узнать больше",
+    "watchRecap": "Смотреть обзор",
     "title": "React Framework для веба",
     "descriptionStart": "Используется некоторыми из крупнейших компаний мира, Next.js позволяет создавать",
     "descriptionHighlight": "высококачественные веб-приложения",

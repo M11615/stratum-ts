@@ -30,6 +30,10 @@
     }
   },
   "main": {
+    "new": "ใหม่",
+    "confAnnouncement": "ดูว่าเรานำเสนออะไรใน Next.js Conf 25",
+    "findOutMore": "เรียนรู้เพิ่มเติม",
+    "watchRecap": "ดูสรุป",
     "title": "เฟรมเวิร์ก React สำหรับเว็บ",
     "descriptionStart": "ใช้โดยบริษัทชั้นนำของโลก Next.js ช่วยให้คุณสร้าง",
     "descriptionHighlight": "เว็บแอปพลิเคชันคุณภาพสูง",

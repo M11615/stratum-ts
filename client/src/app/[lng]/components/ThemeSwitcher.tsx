@@ -56,6 +56,17 @@ export default function ThemeSwitcher({
     setLocalTheme(mode);
     setCookie(COOKIE_KEYS.THEME, mode);
     document.documentElement.className = mode;
+    emitThemeChange(mode);
+  };
+
+  const emitThemeChange = (mode: string): void => {
+    const mediaQuery: MediaQueryList = window.matchMedia("(prefers-color-scheme: dark)");
+    window.dispatchEvent(new CustomEvent("theme-change", {
+      detail: {
+        actualTheme: mode === THEME_KEYS.SYSTEM ? (mediaQuery.matches ? THEME_KEYS.DARK : THEME_KEYS.LIGHT) : mode,
+        userPreferenceTheme: mode
+      }
+    }));
   };
 
   return (

@@ -30,6 +30,10 @@
     }
   },
   "main": {
+    "new": "Nieuw",
+    "confAnnouncement": "Bekijk wat we hebben gepresenteerd op Next.js Conf 25",
+    "findOutMore": "Meer informatie",
+    "watchRecap": "Bekijk de samenvatting",
     "title": "Het React-framework voor het web",
     "descriptionStart": "Gebruikt door enkele van de grootste bedrijven ter wereld, stelt Next.js u in staat",
     "descriptionHighlight": "hoogwaardige webapplicaties",

@@ -30,6 +30,10 @@
     }
   },
   "main": {
+    "new": "Ny",
+    "confAnnouncement": "Se hva vi lanserte på Next.js Conf 25",
+    "findOutMore": "Finn ut mer",
+    "watchRecap": "Se sammendraget",
     "title": "React-rammeverket for Web",
     "descriptionStart": "Brukt av noen av verdens største selskaper, lar Next.js deg lage",
     "descriptionHighlight": "høy-kvalitets nettapplikasjoner",

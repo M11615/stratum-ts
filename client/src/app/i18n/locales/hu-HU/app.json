@@ -30,6 +30,10 @@
     }
   },
   "main": {
+    "new": "Új",
+    "confAnnouncement": "Nézd meg, mit mutattunk be a Next.js Conf 25-ön",
+    "findOutMore": "Tudj meg többet",
+    "watchRecap": "Nézd meg az összefoglalót",
     "title": "A React keretrendszer a webhez",
     "descriptionStart": "A világ legnagyobb cégei által is használt Next.js lehetővé teszi, hogy",
     "descriptionHighlight": "magas minőségű webalkalmazásokat",

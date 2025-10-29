@@ -30,6 +30,10 @@
     }
   },
   "main": {
+    "new": "New",
+    "confAnnouncement": "Check out what we released at Next.js Conf 25",
+    "findOutMore": "Find out more",
+    "watchRecap": "Watch the recap",
     "title": "The React Framework for the Web",
     "descriptionStart": "Used by some of the world's largest companies, Next.js enables you to create",
     "descriptionHighlight": "high-quality web applications",

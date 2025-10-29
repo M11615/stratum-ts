@@ -30,6 +30,10 @@
     }
   },
   "main": {
+    "new": "Novo",
+    "confAnnouncement": "Oglejte si, kaj smo predstavili na Next.js Conf 25",
+    "findOutMore": "Izvedite več",
+    "watchRecap": "Oglejte si povzetek",
     "title": "React okvir za splet",
     "descriptionStart": "Uporabljajo ga nekatere največje svetovne podjetja, Next.js vam omogoča ustvarjanje",
     "descriptionHighlight": "visokokakovostnih spletnih aplikacij",

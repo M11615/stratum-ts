@@ -1,19 +1,24 @@
 "use client";
 
 import { createContext, useContext } from "react";
-import { useResponsive, ResponsiveState } from "@/app/hooks/useResponsive";
-import { FALLBACK_LAPTOP_SCREEN_WIDTH } from "@/app/lib/constants";
+import { ResponsiveState, useResponsive } from "@/app/hooks/useResponsive";
+import { ThemeState, useTheme } from "@/app/hooks/useTheme";
+import { THEME_KEYS, FALLBACK_LAPTOP_SCREEN_WIDTH } from "@/app/lib/constants";
 
 export interface ResponsiveContextValue {
   width: number;
   isTabletScreen: boolean;
   isMobileScreen: boolean;
+  actualTheme: string;
+  userPreferenceTheme: string
 }
 
 const defaultValue: ResponsiveContextValue = {
   width: FALLBACK_LAPTOP_SCREEN_WIDTH,
   isTabletScreen: false,
-  isMobileScreen: false
+  isMobileScreen: false,
+  actualTheme: THEME_KEYS.LIGHT,
+  userPreferenceTheme: THEME_KEYS.SYSTEM
 };
 
 const ResponsiveContext: React.Context<ResponsiveContextValue> = createContext<ResponsiveContextValue>(defaultValue);
@@ -26,9 +31,15 @@ export default function ResponsiveProvider({
   children: React.ReactNode
 }): React.ReactNode {
   const { width, isTabletScreen, isMobileScreen }: ResponsiveState = useResponsive();
+  const { actualTheme, userPreferenceTheme }: ThemeState = useTheme();
 
   return (
-    <ResponsiveContext.Provider value={{ width, isTabletScreen, isMobileScreen }}>
+    <ResponsiveContext.Provider
+      value={{
+        width, isTabletScreen, isMobileScreen,
+        actualTheme, userPreferenceTheme
+      }}
+    >
       {children}
     </ResponsiveContext.Provider>
   );

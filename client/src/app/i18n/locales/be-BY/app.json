@@ -30,6 +30,10 @@
     }
   },
   "main": {
+    "new": "Новае",
+    "confAnnouncement": "Даведайцеся, што мы прадставілі на канферэнцыі Next.js 25",
+    "findOutMore": "Даведацца больш",
+    "watchRecap": "Глядзець агляд",
     "title": "React Framework для вэба",
     "descriptionStart": "Выкарыстоўваецца некаторымі з найбуйнейшых кампаній свету, Next.js дазваляе ствараць",
     "descriptionHighlight": "вэб-прыкладанні высокай якасці",

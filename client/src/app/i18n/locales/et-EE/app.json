@@ -30,6 +30,10 @@
     }
   },
   "main": {
+    "new": "Uus",
+    "confAnnouncement": "Vaata, mida me Next.js Conf 25-l tutvustasime",
+    "findOutMore": "Uuri lähemalt",
+    "watchRecap": "Vaata kokkuvõtet",
     "title": "Reacti raamistik veebilehtedele",
     "descriptionStart": "Mõnede maailma suurimate ettevõtete poolt kasutatav Next.js võimaldab luua",
     "descriptionHighlight": "kõrgekvaliteedilisi veebirakendusi",

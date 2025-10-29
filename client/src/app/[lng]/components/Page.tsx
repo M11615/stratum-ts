@@ -8,7 +8,7 @@ import Footer from "./Footer";
 
 export default function Page(): React.ReactNode {
   return (
-    <div className="pt-[120px] bg-[var(--theme-bg-base)] items-center font-[family-name:var(--font-geist-sans)]">
+    <div className="pt-[105px] bg-[var(--theme-bg-base)] items-center font-[family-name:var(--font-geist-sans)]">
       <SkipToContent />
       <Header />
       <Main />

@@ -30,6 +30,10 @@
     }
   },
   "main": {
+    "new": "Nýtt",
+    "confAnnouncement": "Sjáðu hvað við kynntum á Next.js Conf 25",
+    "findOutMore": "Fáðu meira að vita",
+    "watchRecap": "Skoða yfirlit",
     "title": "React rammaverk fyrir vefinn",
     "descriptionStart": "Notað af sumum af stærstu fyrirtækjum heims, gerir Next.js þér kleift að búa til",
     "descriptionHighlight": "vandaðar vefumsóknir",
