@@ -150,6 +150,10 @@ export const THEME_KEYS: Record<string, string> = {
 
 export const FALLBACK_THEME: string = `${THEME_KEYS.SYSTEM}` as const;
 
+export const FALLBACK_4K_SCREEN_WIDTH: number = 2560 + 8;
+
+export const FALLBACK_LAPTOP_L_SCREEN_WIDTH: number = 1440 + 8;
+
 export const FALLBACK_LAPTOP_SCREEN_WIDTH: number = 1024 + 8;
 
 export const FALLBACK_TABLET_SCREEN_WIDTH: number = 768 + 8;

@@ -3,7 +3,7 @@
 import { createContext, useContext } from "react";
 import { ResponsiveState, useResponsive } from "@/app/hooks/useResponsive";
 import { ThemeState, useTheme } from "@/app/hooks/useTheme";
-import { FALLBACK_LAPTOP_SCREEN_WIDTH } from "@/app/lib/constants";
+import { THEME_KEYS, FALLBACK_LAPTOP_SCREEN_WIDTH } from "@/app/lib/constants";
 
 export interface ResponsiveContextValue {
   width: number;
@@ -17,8 +17,8 @@ const defaultValue: ResponsiveContextValue = {
   width: FALLBACK_LAPTOP_SCREEN_WIDTH,
   isTabletScreen: false,
   isMobileScreen: false,
-  actualTheme: "",
-  userPreferenceTheme: ""
+  actualTheme: THEME_KEYS.LIGHT,
+  userPreferenceTheme: THEME_KEYS.SYSTEM
 };
 
 const ResponsiveContext: React.Context<ResponsiveContextValue> = createContext<ResponsiveContextValue>(defaultValue);

@@ -130,12 +130,12 @@ html.dark {
   color: var(--theme-bg-base);
 }
 
-body {
-  background-color: var(--theme-bg-base);
-}
-
 @layer base {
   * {
     @apply rounded-[2px];
   }
+}
+
+body {
+  background-color: var(--theme-bg-base);
 }

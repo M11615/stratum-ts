@@ -3,14 +3,14 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useT } from "@/app/i18n/client";
-import { RequiredI18n, StateSetter, COOKIE_KEYS, THEME_KEYS, FALLBACK_THEME, FALLBACK_MOBILE_M_SCREEN_WIDTH } from "@/app/lib/constants";
-import { getCookie } from "@/app/lib/cookies";
+import { RequiredI18n, StateSetter, FALLBACK_MOBILE_M_SCREEN_WIDTH } from "@/app/lib/constants";
 import { modalManager } from "@/app/lib/modalManager";
 import { createSubscription } from "@/app/services/v1/subscription";
 import { ResponsiveContextValue, useResponsiveContext } from "./ResponsiveContext";
 import ConsentModal from "./ConsentModal";
 import CookieBanner from "./CookieBanner";
 import ThemeSwitcher from "./ThemeSwitcher";
+
 interface NavLink {
   id: number;
   href: string;
@@ -21,7 +21,6 @@ export default function Footer(): React.ReactNode {
   const { t, i18n }: RequiredI18n = useT("app", {});
   const { width, isTabletScreen, isMobileScreen }: ResponsiveContextValue = useResponsiveContext();
   const [isConsentOpen, setIsConsentOpen]: StateSetter<boolean> = useState<boolean>(false);
-  const [theme, setTheme]: StateSetter<string> = useState<string>("");
   const [isSubmitting, setIsSubmitting]: StateSetter<boolean> = useState<boolean>(false);
   const [submitted, setSubmitted]: StateSetter<boolean> = useState<boolean>(false);
   const [subscriptionEmail, setSubscriptionEmail]: StateSetter<string> = useState<string>("");
@@ -98,9 +97,6 @@ export default function Footer(): React.ReactNode {
   const consentModalId: string = Footer.name.concat(ConsentModal.name);
 
   useEffect((): void => {
-    const mode: string = getCookie(COOKIE_KEYS.THEME) || FALLBACK_THEME;
-    setTheme(mode);
-    emitThemeChange(mode);
     modalManager.register(consentModalId, {
       open: handleConsentOpen,
       close: handleConsentClose
@@ -139,16 +135,6 @@ export default function Footer(): React.ReactNode {
     }
   };
 
-  const emitThemeChange = (mode: string): void => {
-    const mediaQuery: MediaQueryList = window.matchMedia("(prefers-color-scheme: dark)");
-    window.dispatchEvent(new CustomEvent("theme-change", {
-      detail: {
-        actualTheme: mode === THEME_KEYS.SYSTEM ? (mediaQuery.matches ? THEME_KEYS.DARK : THEME_KEYS.LIGHT) : mode,
-        userPreferenceTheme: mode
-      }
-    }));
-  };
-
   return (
     <>
       <ConsentModal
@@ -160,7 +146,7 @@ export default function Footer(): React.ReactNode {
         <CookieBanner />
       )}
 
-      <footer className="flex flex-wrap w-full py-[33px] items-center justify-center bg-[var(--theme-bg-base)]">
+      <footer className="flex flex-wrap w-full py-[33px] items-center justify-center bg-[var(--theme-bg-base)] border-t border-[var(--theme-border-base)]">
         <div className={`w-full max-w-screen-xl flex flex-col gap-[55px] ${isTabletScreen ? "px-[25px]" : "px-[40px]"}`}>
           <div className={`grid ${isTabletScreen ? `${isMobileScreen ? "grid-cols-[1fr]" : "grid-cols-[1fr_6.5fr]"}` : "grid-cols-[1fr_6fr]"}`}>
             <div className={`text-[var(--theme-fg-base)] ${isMobileScreen ? "pb-8" : ""}`}>
@@ -292,7 +278,7 @@ export default function Footer(): React.ReactNode {
               {!isMobileScreen && SocialLinks}
             </div>
             <div className="flex items-center gap-2">
-              {theme && <ThemeSwitcher theme={theme} emitThemeChange={emitThemeChange} />}
+              <ThemeSwitcher />
             </div>
           </div>
         </div>

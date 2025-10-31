@@ -1,23 +1,16 @@
 "use client";
 
-import { useState } from "react";
-import { StateSetter, COOKIE_KEYS, THEME_KEYS } from "@/app/lib/constants";
-import { setCookie } from "@/app/lib/cookies";
-
-interface ThemeSwitcherProps {
-  theme: string;
-  emitThemeChange: (mode: string) => void;
-}
+import { useEffect, useState } from "react";
+import { StateSetter, COOKIE_KEYS, THEME_KEYS, FALLBACK_THEME } from "@/app/lib/constants";
+import { setCookie, getCookie } from "@/app/lib/cookies";
 
 interface Option {
   value: string;
   icon: React.ReactNode;
 }
 
-export default function ThemeSwitcher({
-  theme, emitThemeChange
-}: ThemeSwitcherProps): React.ReactNode {
-  const [localTheme, setLocalTheme]: StateSetter<string> = useState<string>(theme);
+export default function ThemeSwitcher(): React.ReactNode {
+  const [theme, setTheme]: StateSetter<string> = useState<string>(FALLBACK_THEME);
   const options: Option[] = [
     {
       value: THEME_KEYS.LIGHT,
@@ -53,11 +46,22 @@ export default function ThemeSwitcher({
     }
   ];
 
+  useEffect((): void => {
+    const mode: string = getCookie(COOKIE_KEYS.THEME) || FALLBACK_THEME;
+    handleChangeTheme(mode);
+  }, []);
+
   const handleChangeTheme = (mode: string): void => {
-    setLocalTheme(mode);
+    setTheme(mode);
     setCookie(COOKIE_KEYS.THEME, mode);
     document.documentElement.className = mode;
-    emitThemeChange(mode);
+    const mediaQuery: MediaQueryList = window.matchMedia("(prefers-color-scheme: dark)");
+    window.dispatchEvent(new CustomEvent("theme-change", {
+      detail: {
+        actualTheme: mode === THEME_KEYS.SYSTEM ? (mediaQuery.matches ? THEME_KEYS.DARK : THEME_KEYS.LIGHT) : mode,
+        userPreferenceTheme: mode
+      }
+    }));
   };
 
   return (
@@ -67,7 +71,7 @@ export default function ThemeSwitcher({
           <button
             key={value}
             onClick={(): void => handleChangeTheme(value)}
-            className={`cursor-pointer w-8 h-8 flex items-center justify-center rounded-full transition duration-200 ease-in-out ${localTheme === value ? "bg-[var(--theme-border-base)] text-[var(--theme-fg-base)]" : "text-[var(--theme-text-muted)] hover:text-[var(--theme-fg-base)]"}`}
+            className={`cursor-pointer w-8 h-8 flex items-center justify-center rounded-full transition duration-200 ease-in-out ${theme === value ? "bg-[var(--theme-border-base)] text-[var(--theme-fg-base)]" : "text-[var(--theme-text-muted)] hover:text-[var(--theme-fg-base)]"}`}
           >
             {icon}
           </button>

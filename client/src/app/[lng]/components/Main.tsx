@@ -10,6 +10,7 @@ import { ResponsiveContextValue, useResponsiveContext } from "./ResponsiveContex
 export default function Main(): React.ReactNode {
   const { t, i18n }: RequiredI18n = useT("app", {});
   const { width, isTabletScreen, isMobileScreen, actualTheme }: ResponsiveContextValue = useResponsiveContext();
+  const [visibleMedia, setVisibleMedia]: StateSetter<boolean> = useState<boolean>(false);
   const [showVideo, setShowVideo]: StateSetter<boolean> = useState<boolean>(false);
   const [hovered, setHovered]: StateSetter<boolean> = useState<boolean>(false);
   const [copied, setCopied]: StateSetter<boolean> = useState<boolean>(false);
@@ -21,6 +22,14 @@ export default function Main(): React.ReactNode {
   const horizontalOffset: number = isMobileScreen ? 64 : 128;
   const verticalOffset: number = 128;
   const command: string = "npx create-next-app@latest";
+
+  useEffect((): () => void => {
+    const timer = setTimeout((): void => {
+      setVisibleMedia(true);
+    }, 500);
+
+    return (): void => clearTimeout(timer);
+  }, []);
 
   useEffect((): void => {
     setElementsInfo({
@@ -89,42 +98,44 @@ export default function Main(): React.ReactNode {
               </svg>
             </Link>
           </div>
-          <div
-            onClick={(): void => setShowVideo(true)}
-            className={`group absolute left-1/2 -translate-x-1/2 flex flex-col items-center justify-center w-full max-w-[1024px] mt-[40px] ${width > FALLBACK_MOBILE_L_SCREEN_WIDTH ? "px-0" : "px-[7.5%]"} select-none`}
-          >
-            {!showVideo ? (
-              actualTheme === THEME_KEYS.LIGHT || actualTheme === THEME_KEYS.DARK ? (
-                <>
-                  <Image
-                    src={`/assets/livestream-poster-conf-2025-${actualTheme}.png`}
-                    alt="Next.js Conf 25 Livestream"
-                    width={1024}
-                    height={576}
-                    priority
-                    className="cursor-pointer"
+          {visibleMedia && (
+            <div
+              onClick={(): void => setShowVideo(true)}
+              className={`group absolute left-1/2 -translate-x-1/2 flex flex-col items-center justify-center w-full max-w-[1024px] mt-[40px] ${width > FALLBACK_MOBILE_L_SCREEN_WIDTH ? "px-0" : "px-[7.5%]"} select-none`}
+            >
+              {!showVideo ? (
+                actualTheme === THEME_KEYS.LIGHT || actualTheme === THEME_KEYS.DARK ? (
+                  <>
+                    <Image
+                      src={`/assets/livestream-poster-conf-2025-${actualTheme}.png`}
+                      alt="Next.js Conf 25 Livestream"
+                      width={1024}
+                      height={576}
+                      priority
+                      className="cursor-pointer"
+                    />
+                    <div className={`${isMobileScreen ? "scale-100" : "scale-135"} absolute flex items-center justify-center w-[72px] h-[72px] cursor-pointer border border-[var(--theme-border-base)] bg-transparent text-[var(--theme-fg-base)] rounded-full pl-[3px] group-hover:bg-[var(--theme-bg-muted)] group-hover:border-[var(--theme-text-subtle)] transition duration-200 ease-in-out`}>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" strokeLinejoin="round" className="scale-145">
+                        <path fillRule="evenodd" clipRule="evenodd" d="M14.5528 7.77638C14.737 7.86851 14.737 8.13147 14.5528 8.2236L1.3618 14.8191C1.19558 14.9022 1 14.7813 1 14.5955L1 1.4045C1 1.21865 1.19558 1.09778 1.3618 1.18089L14.5528 7.77638Z" />
+                      </svg>
+                    </div>
+                  </>
+                ) : null
+              ) : (
+                <div className="aspect-video w-full bg-[var(--theme-bg-muted)]">
+                  <video
+                    controls
+                    autoPlay
+                    className="w-full h-full"
                   />
-                  <div className={`${isMobileScreen ? "scale-100" : "scale-135"} absolute flex items-center justify-center w-[72px] h-[72px] cursor-pointer border border-[var(--theme-border-base)] bg-transparent text-[var(--theme-fg-base)] rounded-full pl-[3px] group-hover:bg-[var(--theme-bg-muted)] group-hover:border-[var(--theme-text-subtle)] transition duration-200 ease-in-out`}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" strokeLinejoin="round" className="scale-145">
-                      <path fillRule="evenodd" clipRule="evenodd" d="M14.5528 7.77638C14.737 7.86851 14.737 8.13147 14.5528 8.2236L1.3618 14.8191C1.19558 14.9022 1 14.7813 1 14.5955L1 1.4045C1 1.21865 1.19558 1.09778 1.3618 1.18089L14.5528 7.77638Z" />
-                    </svg>
-                  </div>
-                </>
-              ) : null
-            ) : (
-              <div className="aspect-video w-full bg-[var(--theme-bg-muted)]">
-                <video
-                  controls
-                  autoPlay
-                  className="w-full h-full"
-                />
-              </div>
-            )}
-          </div>
+                </div>
+              )}
+            </div>
+          )}
         </div>
         <div className={`w-full relative z-10 text-center ${isMobileScreen ? `${width < FALLBACK_MOBILE_S_SCREEN_WIDTH ? "px-[15px]" : "px-[30px]"}` : `${isTabletScreen ? "px-[80px]" : ""}`}`}>
           <div
-            className="absolute main-width-top h-px border-t border-dashed border-[#666666] opacity-0"
+            className="absolute main-width-top h-2 border-t border-dashed border-[#666666] opacity-0"
             style={{
               top: `${elementsInfo.title?.offsetTop}px`,
               left: `${(elementsInfo.title?.offsetLeft ?? 0) - horizontalOffset / 2}px`,
@@ -134,7 +145,7 @@ export default function Main(): React.ReactNode {
             }}
           />
           <div
-            className="absolute main-width-top h-px border-t border-dashed border-[#666666] opacity-0"
+            className="absolute main-width-top h-2 border-t border-dashed border-[#666666] opacity-0"
             style={{
               top: `${(elementsInfo.title?.offsetTop ?? 0) + (elementsInfo.title?.offsetHeight ?? 0)}px`,
               left: `${(elementsInfo.title?.offsetLeft ?? 0) - horizontalOffset / 2}px`,
@@ -144,7 +155,7 @@ export default function Main(): React.ReactNode {
             }}
           />
           <div
-            className="absolute main-width-bottom h-px border-t border-dashed border-[#666666] opacity-0"
+            className="absolute main-width-bottom h-2 border-t border-dashed border-[#666666] opacity-0"
             style={{
               top: `${(elementsInfo.description?.offsetTop ?? 0) + (elementsInfo.description?.offsetHeight ?? 0)}px`,
               left: `${(elementsInfo.title?.offsetLeft ?? 0) - horizontalOffset / 2}px`,
@@ -154,7 +165,7 @@ export default function Main(): React.ReactNode {
             }}
           />
           <div
-            className="absolute main-width-bottom h-px border-t border-dashed border-[#666666] opacity-0"
+            className="absolute main-width-bottom h-2 border-t border-dashed border-[#666666] opacity-0"
             style={{
               top: `${(elementsInfo.command?.offsetTop ?? 0) + (elementsInfo.command?.offsetHeight ?? 0)}px`,
               left: `${(elementsInfo.title?.offsetLeft ?? 0) - horizontalOffset / 2}px`,
@@ -164,7 +175,7 @@ export default function Main(): React.ReactNode {
             }}
           />
           <div
-            className="absolute w-px border-l border-dashed border-[#666666] main-height-long opacity-0"
+            className="absolute w-2 border-l border-dashed border-[#666666] main-height-long opacity-0"
             style={{
               top: `${(elementsInfo.title?.offsetTop ?? 0) - verticalOffset / 2}px`,
               left: `${elementsInfo.title?.offsetLeft}px`,
@@ -174,7 +185,7 @@ export default function Main(): React.ReactNode {
           {!isMobileScreen && (
             <>
               <div
-                className="absolute w-px border-l border-dashed border-[#666666] main-height-short opacity-0"
+                className="absolute w-2 border-l border-dashed border-[#666666] main-height-short opacity-0"
                 style={{
                   top: `${(elementsInfo.title?.offsetTop ?? 0) - verticalOffset / 2}px`,
                   left: `${elementsInfo.link?.offsetLeft}px`,
@@ -184,7 +195,7 @@ export default function Main(): React.ReactNode {
                 }}
               />
               <div
-                className="absolute w-px border-l border-dashed border-[#666666] main-height-medium opacity-0"
+                className="absolute w-2 border-l border-dashed border-[#666666] main-height-medium opacity-0"
                 style={{
                   top: `${(elementsInfo.description?.offsetTop ?? 0) + (elementsInfo.description?.offsetHeight ?? 0)}px`,
                   left: `${elementsInfo.link?.offsetLeft}px`,
@@ -194,7 +205,7 @@ export default function Main(): React.ReactNode {
                 }}
               />
               <div
-                className="absolute w-px border-l border-dashed border-[#666666] main-height-short opacity-0"
+                className="absolute w-2 border-l border-dashed border-[#666666] main-height-short opacity-0"
                 style={{
                   top: `${(elementsInfo.title?.offsetTop ?? 0) - verticalOffset / 2}px`,
                   left: `${(elementsInfo.link?.offsetLeft ?? 0) + (elementsInfo.link?.offsetWidth ?? 0)}px`,
@@ -204,7 +215,7 @@ export default function Main(): React.ReactNode {
                 }}
               />
               <div
-                className="absolute w-px border-l border-dashed border-[#666666] main-height-medium opacity-0"
+                className="absolute w-2 border-l border-dashed border-[#666666] main-height-medium opacity-0"
                 style={{
                   top: `${(elementsInfo.description?.offsetTop ?? 0) + (elementsInfo.description?.offsetHeight ?? 0)}px`,
                   left: `${(elementsInfo.link?.offsetLeft ?? 0) + (elementsInfo.link?.offsetWidth ?? 0)}px`,
@@ -216,7 +227,7 @@ export default function Main(): React.ReactNode {
             </>
           )}
           <div
-            className="absolute w-px border-l border-dashed border-[#666666] main-height-long opacity-0"
+            className="absolute w-2 border-l border-dashed border-[#666666] main-height-long opacity-0"
             style={{
               top: `${(elementsInfo.title?.offsetTop ?? 0) - verticalOffset / 2}px`,
               left: `${(elementsInfo.title?.offsetLeft ?? 0) + (elementsInfo.title?.offsetWidth ?? 0)}px`,
