@@ -23,15 +23,8 @@ export default function Main(): React.ReactNode {
   const verticalOffset: number = 128;
   const command: string = "npx create-next-app@latest";
 
-  useEffect((): () => void => {
-    const timer = setTimeout((): void => {
-      setVisibleMedia(true);
-    }, 500);
-
-    return (): void => clearTimeout(timer);
-  }, []);
-
   useEffect((): void => {
+    setVisibleMedia(true);
     setElementsInfo({
       title: titleRef.current,
       description: descriptionRef.current,
