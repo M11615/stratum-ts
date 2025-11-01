@@ -139,3 +139,7 @@ html.dark {
 body {
   background-color: var(--theme-bg-base);
 }
+
+html {
+  scrollbar-gutter: stable;
+}

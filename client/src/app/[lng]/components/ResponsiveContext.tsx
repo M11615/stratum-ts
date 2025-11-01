@@ -3,7 +3,7 @@
 import { createContext, useContext } from "react";
 import { ResponsiveState, useResponsive } from "@/app/hooks/useResponsive";
 import { ThemeState, useTheme } from "@/app/hooks/useTheme";
-import { THEME_KEYS, FALLBACK_LAPTOP_SCREEN_WIDTH } from "@/app/lib/constants";
+import { THEME_KEYS, FALLBACK_4K_SCREEN_WIDTH } from "@/app/lib/constants";
 
 export interface ResponsiveContextValue {
   width: number;
@@ -14,7 +14,7 @@ export interface ResponsiveContextValue {
 }
 
 const defaultValue: ResponsiveContextValue = {
-  width: FALLBACK_LAPTOP_SCREEN_WIDTH,
+  width: FALLBACK_4K_SCREEN_WIDTH,
   isTabletScreen: false,
   isMobileScreen: false,
   actualTheme: THEME_KEYS.LIGHT,
