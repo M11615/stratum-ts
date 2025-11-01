@@ -12,6 +12,35 @@ export type OptionalI18n = {
 
 export type StateSetter<T> = [T, React.Dispatch<React.SetStateAction<T>>];
 
+export const COOKIE_KEYS: Record<string, string> = {
+  CONSENT: "fides_consent",
+  LANGUAGE: "i18next",
+  THEME: "theme"
+} as const;
+
+export const COOKIE_CATEGORIES: Record<string, string> = {
+  ESSENTIAL: "essential",
+  MARKETING: "marketing",
+  ANALYTICS: "analytics",
+  FUNCTIONAL: "functional"
+} as const;
+
+export const COOKIE_CATEGORY_MAP: Record<string, string[]> = {
+  [COOKIE_CATEGORIES.ESSENTIAL]: [COOKIE_KEYS.CONSENT, COOKIE_KEYS.LANGUAGE, COOKIE_KEYS.THEME],
+  [COOKIE_CATEGORIES.MARKETING]: [],
+  [COOKIE_CATEGORIES.ANALYTICS]: [],
+  [COOKIE_CATEGORIES.FUNCTIONAL]: []
+} as const;
+
+export const COOKIE_EXPIRATION_DAYS: number = 365 as const;
+
+export const FALLBACK_COOKIE_CONSENT: Record<string, boolean> = {
+  [COOKIE_CATEGORIES.ESSENTIAL]: true,
+  [COOKIE_CATEGORIES.MARKETING]: false,
+  [COOKIE_CATEGORIES.ANALYTICS]: false,
+  [COOKIE_CATEGORIES.FUNCTIONAL]: false
+} as const;
+
 export const LANGUAGE_MAP: Record<string, { label: string; region: string }> = {
   "fr-DZ": { label: "Français", region: "Algeria" },
   "es-AR": { label: "Español", region: "Argentina" },
@@ -114,33 +143,7 @@ export const LANGUAGE_MAP: Record<string, { label: string; region: string }> = {
   "zh-HK": { label: "繁體中文", region: "香港特別行政区" }
 } as const;
 
-export const COOKIE_KEYS: Record<string, string> = {
-  CONSENT: "fides_consent",
-  THEME: "theme"
-} as const;
-
-export const COOKIE_CATEGORIES: Record<string, string> = {
-  ESSENTIAL: "essential",
-  MARKETING: "marketing",
-  ANALYTICS: "analytics",
-  FUNCTIONAL: "functional"
-} as const;
-
-export const COOKIE_CATEGORY_MAP: Record<string, string[]> = {
-  [COOKIE_CATEGORIES.ESSENTIAL]: [COOKIE_KEYS.THEME],
-  [COOKIE_CATEGORIES.MARKETING]: [],
-  [COOKIE_CATEGORIES.ANALYTICS]: [],
-  [COOKIE_CATEGORIES.FUNCTIONAL]: []
-} as const;
-
-export const COOKIE_EXPIRATION_DAYS: number = 365 as const;
-
-export const FALLBACK_COOKIE_CONSENT: Record<string, boolean> = {
-  [COOKIE_CATEGORIES.ESSENTIAL]: true,
-  [COOKIE_CATEGORIES.MARKETING]: false,
-  [COOKIE_CATEGORIES.ANALYTICS]: false,
-  [COOKIE_CATEGORIES.FUNCTIONAL]: false
-} as const;
+export const FALLBACK_LANGUAGE: string = "en-US" as const;
 
 export const THEME_KEYS: Record<string, string> = {
   LIGHT: "light",

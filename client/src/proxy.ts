@@ -39,7 +39,7 @@ export function proxy(req: NextRequest): NextResponse {
     const refererUrl: URL = new URL(req.headers.get("referer") || "");
     const lngInReferer: string | undefined = languages.find((l) => refererUrl.pathname.startsWith(`/${l}`));
     const response: NextResponse = NextResponse.next({ headers });
-    if (lngInReferer) response.cookies.set(cookieName, lngInReferer);
+    if (lngInReferer && process.env.NODE_ENV === "production") response.cookies.set(cookieName, lngInReferer);
     return response;
   }
 

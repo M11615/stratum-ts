@@ -20,10 +20,10 @@ export const parseConsent = (): Record<string, boolean> | undefined => {
 export const setCookie = (name: CookieKey, value: string, days: number = COOKIE_EXPIRATION_DAYS): void => {
   const type: string | undefined = getCookieCategory(name);
   const consent: Record<string, boolean> | undefined = parseConsent() || {};
-  if (name === COOKIE_KEYS.CONSENT || type === COOKIE_CATEGORIES.ESSENTIAL || (type && consent[type])) {
+  if (type === COOKIE_CATEGORIES.ESSENTIAL || (type && consent[type])) {
     const date: Date = new Date();
     date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-    document.cookie = `${name}=${encodeURIComponent(value)}; expires=${date.toUTCString()}; path=/`;
+    document.cookie = `${name}=${encodeURIComponent(value)}; expires=${date.toUTCString()}; path=/;`;
   }
 };
 
@@ -40,5 +40,5 @@ export const getCookie = (name: CookieKey): string | undefined => {
 };
 
 export const deleteCookie = (name: CookieKey): void => {
-  document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
+  document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
 };

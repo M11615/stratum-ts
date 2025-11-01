@@ -48,10 +48,10 @@ export default function ThemeSwitcher(): React.ReactNode {
 
   useEffect((): void => {
     const mode: string = getCookie(COOKIE_KEYS.THEME) || FALLBACK_THEME;
-    handleChangeTheme(mode);
+    handleThemeChange(mode);
   }, []);
 
-  const handleChangeTheme = (mode: string): void => {
+  const handleThemeChange = (mode: string): void => {
     setTheme(mode);
     setCookie(COOKIE_KEYS.THEME, mode);
     document.documentElement.className = mode;
@@ -70,7 +70,7 @@ export default function ThemeSwitcher(): React.ReactNode {
         return (
           <button
             key={value}
-            onClick={(): void => handleChangeTheme(value)}
+            onClick={(): void => handleThemeChange(value)}
             className={`cursor-pointer w-8 h-8 flex items-center justify-center rounded-full transition duration-200 ease-in-out ${theme === value ? "bg-[var(--theme-border-base)] text-[var(--theme-fg-base)]" : "text-[var(--theme-text-muted)] hover:text-[var(--theme-fg-base)]"}`}
           >
             {icon}

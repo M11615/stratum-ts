@@ -1,13 +1,23 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import { cookieName } from "@/app/i18n/settings";
 import { languages } from "@/app/i18n/settings";
 import { useT } from "@/app/i18n/client";
 import { OptionalI18n, LANGUAGE_MAP, FALLBACK_MOBILE_M_SCREEN_WIDTH } from "@/app/lib/constants";
+import { setCookie } from "@/app/lib/cookies";
 import { ResponsiveContextValue, useResponsiveContext } from "@/app/[lng]/components/ResponsiveContext";
 
 export default function Main() {
+  const router: AppRouterInstance = useRouter();
   const { t }: OptionalI18n = useT("locale", {});
   const { width, isTabletScreen, isMobileScreen }: ResponsiveContextValue = useResponsiveContext();
+
+  const handleLanguageChange = (lang: string): void => {
+    setCookie(cookieName, lang);
+    router.push(`/${lang}`);
+  };
 
   return (
     <main className="w-full pb-[130px] bg-[var(--theme-bg-base)]">
@@ -21,13 +31,13 @@ export default function Main() {
             if (!item) return null;
 
             return (
-              <a
+              <button
                 key={lang}
-                href={`/${lang}`}
-                className="text-[var(--theme-primary-light)] underline"
+                onClick={() => handleLanguageChange(lang)}
+                className="cursor-pointer text-left text-[var(--theme-primary-light)] underline"
               >
                 {item.region} - {item.label}
-              </a>
+              </button>
             );
           })}
         </nav>
