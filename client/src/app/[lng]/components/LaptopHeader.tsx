@@ -81,12 +81,12 @@ export default function LaptopHeader({
           className="whitespace-nowrap overflow-hidden text-ellipsis select-none cursor-pointer border border-[var(--theme-border-base)] bg-[var(--theme-bg-base)] text-[14px] text-[var(--theme-fg-base)] font-medium px-3 py-[5px] rounded-lg hover:bg-[var(--theme-bg-muted)] hover:border-[var(--theme-text-subtle)] transition duration-200 ease-in-out"
         >
           <Image
-            className="inline"
+            className="inline relative bottom-[2px]"
             style={{ filter: "var(--theme-image-filter-light)" }}
             src="/assets/vercel.svg"
             alt="Vercel logo"
-            width={15}
-            height={13}
+            width={16}
+            height={14}
             priority
           />
           <span className="ml-[10px]">

@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import Link from "next/link";
 import { cookieName } from "@/app/i18n/settings";
 import { languages } from "@/app/i18n/settings";
 import { useT } from "@/app/i18n/client";
@@ -31,13 +32,17 @@ export default function Main() {
             if (!item) return null;
 
             return (
-              <button
+              <Link
                 key={lang}
-                onClick={() => handleLanguageChange(lang)}
-                className="cursor-pointer text-left text-[var(--theme-primary-light)] underline"
+                href={`/${lang}`}
+                onClick={(e: React.MouseEvent): void => {
+                  e.preventDefault();
+                  handleLanguageChange(lang);
+                }}
+                className="text-[var(--theme-primary-light)] underline"
               >
                 {item.region} - {item.label}
-              </button>
+              </Link>
             );
           })}
         </nav>
