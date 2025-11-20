@@ -1,9 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { useT } from "@/app/i18n/client";
-import { I18nInstance, StateSetter } from "@/app/lib/constants";
+import { I18nInstance, StateSetter, MAIN_CONTENT_ID } from "@/app/lib/constants";
 
 export default function SkipToContent(): React.ReactNode {
   const { t }: I18nInstance = useT("app", {});
@@ -16,12 +15,18 @@ export default function SkipToContent(): React.ReactNode {
   if (!hydrated) return null;
 
   return (
-    <Link
-      href="/"
-      onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void => e.currentTarget.blur()}
-      className="fixed left-[7px] top-[11px] select-none cursor-pointer flex items-center z-70 border-[var(--theme-bg-base)] bg-[var(--theme-bg-base)] text-[16px] text-[var(--theme-primary-light)] hover:text-[var(--theme-primary-light-hover)] transition duration-200 ease-in-out px-[13px] py-[6px] rounded-[6px] opacity-0 focus-visible:opacity-100"
+    <button
+      onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
+        e.currentTarget.blur();
+        const element: HTMLElement | null = document.getElementById(MAIN_CONTENT_ID);
+        if (element) {
+          element.focus();
+          element.scrollIntoView();
+        }
+      }}
+      className="sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:left-[7px] focus-visible:top-[11px] focus-visible:flex focus-visible:items-center focus-visible:px-[13px] focus-visible:py-[6px] rounded-[6px] select-none cursor-pointer z-70 border-[var(--theme-bg-base)] bg-[var(--theme-bg-base)] text-[16px] text-[var(--theme-primary-light)] hover:text-[var(--theme-primary-light-hover)] transition duration-200 ease-in-out"
     >
       {t("skipToContent")}
-    </Link>
+    </button>
   );
 }

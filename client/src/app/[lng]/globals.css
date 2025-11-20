@@ -120,6 +120,7 @@ html.dark {
 
 :focus-visible:not(.outline-none) {
   outline: none;
+  transition: none;
   box-shadow:
     0 0 0 2px var(--theme-bg-base),
     0 0 0 4px var(--theme-primary-light);

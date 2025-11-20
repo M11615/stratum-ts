@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useT } from "@/app/i18n/client";
-import { I18nInstance, StateSetter, THEME_KEYS, FALLBACK_MOBILE_L_SCREEN_WIDTH, FALLBACK_MOBILE_M_SCREEN_WIDTH, FALLBACK_MOBILE_S_SCREEN_WIDTH } from "@/app/lib/constants";
+import { I18nInstance, StateSetter, THEME_KEYS, FALLBACK_MOBILE_L_SCREEN_WIDTH, FALLBACK_MOBILE_M_SCREEN_WIDTH, FALLBACK_MOBILE_S_SCREEN_WIDTH, MAIN_CONTENT_ID } from "@/app/lib/constants";
 import { ResponsiveContextValue, useResponsiveContext } from "./ResponsiveContext";
 
 export default function Main(): React.ReactNode {
@@ -56,7 +56,10 @@ export default function Main(): React.ReactNode {
 
   return (
     <>
-      <main className={`relative flex flex-col w-full items-center ${isMobileScreen ? "pt-[115px]" : "pt-[130px]"} bg-[var(--theme-bg-base)]`}>
+      <main
+        id={MAIN_CONTENT_ID}
+        className={`relative flex flex-col w-full items-center ${isMobileScreen ? "pt-[115px]" : "pt-[130px]"} bg-[var(--theme-bg-base)]`}
+      >
         <div
           className={`${width > FALLBACK_MOBILE_L_SCREEN_WIDTH ? "w-[60%]" : "w-full"}`}
           style={{
@@ -325,7 +328,7 @@ export default function Main(): React.ReactNode {
               <p className="font-[family-name:var(--font-geist-mono)] whitespace-nowrap overflow-hidden text-ellipsis text-sm tracking-tighter">
                 <span>▲{" "}</span>
                 <span>~{" "}{command}</span>
-                <span className={`absolute top-[2px] pl-[15px] transition duration-200 ease-in-out ${hovered ? "opacity-100" : "opacity-0"}`}>
+                <span className={`absolute top-[2px] pl-[12px] transition duration-200 ease-in-out ${hovered ? "opacity-100" : "opacity-0"}`}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"

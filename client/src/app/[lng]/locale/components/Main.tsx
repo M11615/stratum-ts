@@ -1,8 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
-import Link from "next/link";
 import { cookieName } from "@/app/i18n/settings";
 import { languages } from "@/app/i18n/settings";
 import { useT } from "@/app/i18n/client";
@@ -11,13 +8,12 @@ import { setCookie } from "@/app/lib/cookies";
 import { ResponsiveContextValue, useResponsiveContext } from "@/app/[lng]/components/ResponsiveContext";
 
 export default function Main() {
-  const router: AppRouterInstance = useRouter();
   const { t }: I18nInstance = useT("locale", {});
   const { width, isTabletScreen, isMobileScreen }: ResponsiveContextValue = useResponsiveContext();
 
   const handleLanguageChange = (lang: string): void => {
     setCookie(cookieName, lang);
-    router.push(`/${lang}`);
+    window.location.href = `/${lang}`;
   };
 
   return (
@@ -32,17 +28,16 @@ export default function Main() {
             if (!item) return null;
 
             return (
-              <Link
+              <button
                 key={lang}
-                href={`/${lang}`}
                 onClick={(e: React.MouseEvent): void => {
                   e.preventDefault();
                   handleLanguageChange(lang);
                 }}
-                className="text-[var(--theme-primary-light)] underline"
+                className="cursor-pointer inline w-fit text-[var(--theme-primary-light)] text-left underline"
               >
                 {item.region} - {item.label}
-              </Link>
+              </button>
             );
           })}
         </nav>
