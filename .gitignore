@@ -15,5 +15,5 @@
 # dependencies
 /node_modules
 
-# TurboRepo
+# Turborepo
 .turbo
