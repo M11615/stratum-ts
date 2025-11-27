@@ -109,7 +109,7 @@ export const LANGUAGE_MAP: Record<string, { label: string; region: string }> = {
   "zh-HK": { label: "繁體中文", region: "香港特別行政区" }
 } as const;
 
-export const FALLBACK_LANGUAGE: string = "en-US" as const;
+export const FALLBACK_LANGUAGE: string = "en-UK" as const;
 
 export const THEME_KEYS: Record<string, string> = {
   LIGHT: "light",
