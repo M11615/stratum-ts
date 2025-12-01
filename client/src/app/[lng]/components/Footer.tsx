@@ -6,6 +6,7 @@ import { useT } from "@/app/i18n/client";
 import { I18nInstance, StateSetter, FALLBACK_MOBILE_M_SCREEN_WIDTH } from "@/app/lib/constants";
 import { modalManager } from "@/app/lib/modalManager";
 import { createSubscription } from "@/app/services/v1/subscription";
+import { userGenerate } from "@/app/services/v1/generate";
 import { ResponsiveContextValue, useResponsiveContext } from "./ResponsiveContext";
 import ConsentModal from "./ConsentModal";
 import CookieBanner from "./CookieBanner";
@@ -132,6 +133,10 @@ export default function Footer(): React.ReactNode {
     });
     if (response.ok) {
       setSubmitted(true);
+      const test: Response = await userGenerate({
+        input: `${subscriptionEmail.trim().toLowerCase()}是什么邮箱？`
+      });
+      if (test.ok) console.log(await test.json());
     }
   };
 

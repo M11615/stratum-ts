@@ -1,0 +1,7 @@
+{
+  "name": "core",
+  "private": true,
+  "scripts": {
+    "dev": "node ./python-runner.mjs -m fastapi dev ./src/main.py"
+  }
+}

@@ -5644,6 +5644,12 @@ __metadata:
   languageName: node
   linkType: hard
 
+"core@workspace:core":
+  version: 0.0.0-use.local
+  resolution: "core@workspace:core"
+  languageName: unknown
+  linkType: soft
+
 "cors@npm:2.8.5":
   version: 2.8.5
   resolution: "cors@npm:2.8.5"

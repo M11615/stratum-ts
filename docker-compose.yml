@@ -15,6 +15,17 @@ services:
       - nextjs-network
     restart: no
 
+  nextjs-core:
+    build:
+      context: .
+      dockerfile: ./core/Dockerfile
+    container_name: nextjs-core
+    ports:
+      - "8000:8000"
+    networks:
+      - nextjs-network
+    restart: no
+
   nextjs-server:
     build:
       context: .
@@ -26,6 +37,7 @@ services:
       - nextjs-network
     depends_on:
       - nextjs-mongo
+      - nextjs-core
     restart: no
 
   nextjs-client:

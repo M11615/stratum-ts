@@ -8,6 +8,8 @@ import { AppController } from './app.controller';
 import { Subscription, SubscriptionSchema } from './subscription/schemas/subscription.schema';
 import { SubscriptionService } from './subscription/subscription.service';
 import { SubscriptionController } from './subscription/subscription.controller';
+import { GenerateService } from './generate/generate.service';
+import { GenerateController } from './generate/generate.controller';
 
 @Module({
   imports: [
@@ -32,7 +34,7 @@ import { SubscriptionController } from './subscription/subscription.controller';
     MongooseModule.forRoot(process.env.MONGO_URL ?? 'mongodb://localhost:27017/nextjs'),
     MongooseModule.forFeature([{ name: Subscription.name, schema: SubscriptionSchema }])
   ],
-  providers: [AppService, SubscriptionService],
-  controllers: [AppController, SubscriptionController]
+  providers: [AppService, SubscriptionService, GenerateService],
+  controllers: [AppController, SubscriptionController, GenerateController]
 })
 export class AppModule { }

@@ -9,12 +9,12 @@ export class SubscriptionService {
   constructor(@InjectModel(Subscription.name) private readonly subscriptionModel: Model<SubscriptionDocument>) { }
 
   async createSubscription(requestBody: CreateSubscriptionRequest): Promise<void> {
-    const { email } = requestBody;
-    const existing = await this.subscriptionModel.findOne({ email }).exec();
+    const { email }: { email: string } = requestBody;
+    const existing: SubscriptionDocument | null = await this.subscriptionModel.findOne({ email }).exec();
     if (existing) {
       return;
     }
-    const created = new this.subscriptionModel(requestBody);
+    const created: SubscriptionDocument = new this.subscriptionModel(requestBody);
     await created.save();
   }
 }
