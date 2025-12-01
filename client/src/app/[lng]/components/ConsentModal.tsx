@@ -17,23 +17,23 @@ interface Category {
   description: string;
 }
 
-const buildCookieConsent = (value: boolean): Record<string, boolean> => {
+const buildCookieConsent: (value: boolean) => Record<string, boolean> = (value: boolean): Record<string, boolean> => {
   return Object.keys(FALLBACK_COOKIE_CONSENT).reduce((acc, key): Record<string, boolean> => {
     acc[key] = key === COOKIE_CATEGORIES.ESSENTIAL ? true : value;
     return acc;
   }, {} as Record<string, boolean>);
 };
 
-const saveCookieConsent = (newCookieConsent: Record<string, boolean>): void => {
+const saveCookieConsent: (newCookieConsent: Record<string, boolean>) => void = (newCookieConsent: Record<string, boolean>): void => {
   setCookie(COOKIE_KEYS.CONSENT, JSON.stringify(newCookieConsent));
 };
 
-export const handleDeny = (): void => {
+export const handleDeny: () => void = (): void => {
   const deniedCookieConsent: Record<string, boolean> = buildCookieConsent(false);
   saveCookieConsent(deniedCookieConsent);
 };
 
-export const handleAcceptAll = (): void => {
+export const handleAcceptAll: () => void = (): void => {
   const acceptedCookieConsent: Record<string, boolean> = buildCookieConsent(true);
   saveCookieConsent(acceptedCookieConsent);
 };
@@ -75,7 +75,7 @@ export default function ConsentModal({
     }
   }, [isConsentOpen]);
 
-  const onCategoryClick = (category: Category): void => {
+  const onCategoryClick: (category: Category) => void = (category: Category): void => {
     if (expandedIds.includes(category.id)) {
       setExpandedIds(expandedIds.filter((id): boolean => id !== category.id));
     } else {
@@ -84,14 +84,14 @@ export default function ConsentModal({
     setRenderKey(renderKey < 10 ? renderKey + 1 : 0);
   };
 
-  const toggle = (category: Category): void => {
+  const toggle: (category: Category) => void = (category: Category): void => {
     setCookieConsent((consent: Record<string, boolean>): Record<string, boolean> => ({
       ...consent,
       [category.id]: !consent[category.id]
     }));
   };
 
-  const handleSave = (newCookieConsent: Record<string, boolean>): void => {
+  const handleSave: (newCookieConsent: Record<string, boolean>) => void = (newCookieConsent: Record<string, boolean>): void => {
     saveCookieConsent(newCookieConsent);
   };
 

@@ -4,9 +4,8 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useT } from "@/app/i18n/client";
 import { I18nInstance, StateSetter, FALLBACK_MOBILE_M_SCREEN_WIDTH } from "@/app/lib/constants";
-import { modalManager } from "@/app/lib/modalManager";
+import { modalManager } from "@/app/lib/modal-manager";
 import { createSubscription } from "@/app/services/v1/subscription";
-import { userGenerate } from "@/app/services/v1/generate";
 import { ResponsiveContextValue, useResponsiveContext } from "./ResponsiveContext";
 import ConsentModal from "./ConsentModal";
 import CookieBanner from "./CookieBanner";
@@ -104,22 +103,22 @@ export default function Footer(): React.ReactNode {
     });
   }, []);
 
-  const handleConsentOpen = (): void => {
+  const handleConsentOpen: () => void = (): void => {
     document.body.style.overflow = "hidden";
     setIsConsentOpen(true);
   };
 
-  const handleConsentClose = (): void => {
+  const handleConsentClose: () => void = (): void => {
     document.body.style.overflow = "";
     setIsConsentOpen(false);
   };
 
-  const handleSubscriptionEmailChange = (e: React.ChangeEvent) => {
+  const handleSubscriptionEmailChange: (e: React.ChangeEvent) => void = (e: React.ChangeEvent): void => {
     const target: HTMLInputElement = e.target as HTMLInputElement;
     setSubscriptionEmail(target.value);
   };
 
-  const handleSubscriptionEmailSubmit = async (e: React.FormEvent): Promise<void> => {
+  const handleSubscriptionEmailSubmit: (e: React.FormEvent) => Promise<void> = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
     const form: HTMLFormElement = e.currentTarget as HTMLFormElement;
     if (!form.checkValidity()) {
@@ -133,10 +132,6 @@ export default function Footer(): React.ReactNode {
     });
     if (response.ok) {
       setSubmitted(true);
-      const test: Response = await userGenerate({
-        input: `${subscriptionEmail.trim().toLowerCase()}是什么邮箱？`
-      });
-      if (test.ok) console.log(await test.json());
     }
   };
 

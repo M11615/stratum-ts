@@ -5,7 +5,7 @@ from inference import inference
 
 app: FastAPI = FastAPI()
 
-@app.get("/", response_model=Dict[str, str])
+@app.get("/v1/read_root", response_model=Dict[str, str])
 async def read_root() -> Dict[str, str]:
   return {"Hello": "World"}
 
@@ -17,7 +17,4 @@ class UserGenerateResponse(BaseModel):
 
 @app.post("/v1/user_generate", response_model=UserGenerateResponse)
 async def user_generate(request: UserGenerateRequest) -> UserGenerateResponse:
-  input: str = request.input
-  output: str = inference(input)
-
-  return UserGenerateResponse(output=output)
+  return UserGenerateResponse(output=inference(request.input))

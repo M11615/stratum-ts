@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useT } from "@/app/i18n/client";
 import { I18nInstance, StateSetter, COOKIE_KEYS, FALLBACK_MOBILE_L_SCREEN_WIDTH } from "@/app/lib/constants";
-import { modalManager } from "@/app/lib/modalManager";
+import { modalManager } from "@/app/lib/modal-manager";
 import { getCookie } from "@/app/lib/cookies";
 import { ResponsiveContextValue, useResponsiveContext } from "./ResponsiveContext";
 import ConsentModal, { handleDeny, handleAcceptAll } from "./ConsentModal";
@@ -23,13 +23,13 @@ export default function CookieBanner(): React.ReactNode {
     });
   }, []);
 
-  const handleConsentOpen = (): void => {
+  const handleConsentOpen: () => void = (): void => {
     document.body.style.overflow = "hidden";
     setVisible(false);
     setIsConsentOpen(true);
   };
 
-  const handleConsentClose = (): void => {
+  const handleConsentClose: () => void = (): void => {
     document.body.style.overflow = "";
     setVisible(false);
     setIsConsentOpen(false);

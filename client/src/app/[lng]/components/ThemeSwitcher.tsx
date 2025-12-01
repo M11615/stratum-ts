@@ -51,7 +51,7 @@ export default function ThemeSwitcher(): React.ReactNode {
     handleThemeChange(mode);
   }, []);
 
-  const handleThemeChange = (mode: string): void => {
+  const handleThemeChange: (mode: string) => void = (mode: string): void => {
     setTheme(mode);
     setCookie(COOKIE_KEYS.THEME, mode);
     document.documentElement.className = mode;

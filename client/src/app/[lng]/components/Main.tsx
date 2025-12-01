@@ -33,15 +33,15 @@ export default function Main(): React.ReactNode {
     });
   }, []);
 
-  const handleMouseEnter = (): void => {
+  const handleMouseEnter: () => void = (): void => {
     setHovered(true);
   };
 
-  const handleMouseLeave = (): void => {
+  const handleMouseLeave: () => void = (): void => {
     setHovered(false);
   };
 
-  const handleCopy = (): void => {
+  const handleCopy: () => void = (): void => {
     try {
       navigator.clipboard.writeText(command)
         .then((): void => {
@@ -306,7 +306,7 @@ export default function Main(): React.ReactNode {
           </p>
           <div ref={linkRef} className={`inline-flex justify-center gap-4 ${isMobileScreen ? "w-full" : "px-[35px]"} ${width > FALLBACK_MOBILE_M_SCREEN_WIDTH ? "pt-[45px]" : "pt-[25px]"}`}>
             <Link
-              href="/"
+              href="/started"
               className={`whitespace-nowrap overflow-hidden text-ellipsis select-none cursor-pointer border border-[var(--theme-fg-base)] bg-[var(--theme-fg-base)] text-base text-[var(--theme-border-base)] font-medium px-5 py-3 rounded-lg hover:bg-[var(--theme-bg-base-hover)] hover:border-[var(--theme-bg-base-hover)] transition duration-200 ease-in-out`}
             >
               {t("main.started")}

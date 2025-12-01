@@ -35,7 +35,7 @@ export default function MobileHeader({
     { id: 9, href: "/", label: t("header.github"), isExternal: false }
   ];
 
-  const handleMenuOpenOrClose = (open: boolean): void => {
+  const handleMenuOpenOrClose: (open: boolean) => void = (open: boolean): void => {
     document.body.style.overflow = open ? "hidden" : "";
     setIsMenuOpen(open);
   };

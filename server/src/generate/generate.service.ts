@@ -14,8 +14,7 @@ export class GenerateService {
       headers: requestHeader,
       body: JSON.stringify(requestBody)
     });
-    const responseBody: UserGenerateResponse = await response.json();
 
-    return { output: responseBody.output };
+    return await response.json();
   }
 }

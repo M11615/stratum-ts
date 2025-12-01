@@ -11,7 +11,7 @@ export default function Main() {
   const { t }: I18nInstance = useT("locale", {});
   const { width, isTabletScreen, isMobileScreen }: ResponsiveContextValue = useResponsiveContext();
 
-  const handleLanguageChange = (lang: string): void => {
+  const handleLanguageChange: (lang: string) => void = (lang: string): void => {
     setCookie(cookieName, lang);
     window.location.href = `/${lang}`;
   };
