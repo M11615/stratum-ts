@@ -2,3 +2,4 @@ pip-tools
 transformers
 torch
 fastapi
+uvicorn
