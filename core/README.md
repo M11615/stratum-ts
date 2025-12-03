@@ -23,11 +23,6 @@ source ./.venv/bin/activate
 python -m pip install --upgrade pip
 ```
 
-## Install pip-tools (for dependency compilation)
-```bash
-pip install pip-tools
-```
-
 ## Compile requirements.txt from requirements.in
 ```bash
 pip-compile ./requirements.in --output-file=./requirements.txt
