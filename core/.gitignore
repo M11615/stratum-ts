@@ -1,5 +1,3 @@
-# Virtual Environment
 .venv
-
-# Cache
+.wheelhouse
 __pycache__

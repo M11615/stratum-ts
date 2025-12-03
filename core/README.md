@@ -33,6 +33,11 @@ pip install pip-tools
 pip-compile --output-file=./requirements.txt ./requirements.in
 ```
 
+## Pre-build Dependencies as Wheels (for faster installation in Docker or production environments)
+```bash
+pip wheel -w ./.wheelhouse -r ./requirements.txt
+```
+
 ## Install All Dependencies
 ```bash
 # Windows
