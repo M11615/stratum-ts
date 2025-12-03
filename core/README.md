@@ -20,12 +20,12 @@ source ./.venv/bin/activate
 
 ## Upgrade pip
 ```bash
-python -m pip install --upgrade --no-cache-dir pip
+python -m pip install --upgrade pip
 ```
 
 ## Install pip-tools (for dependency compilation)
 ```bash
-pip install --no-cache-dir pip-tools
+pip install pip-tools
 ```
 
 ## Compile requirements.txt from requirements.in
@@ -35,12 +35,16 @@ pip-compile --output-file=./requirements.txt ./requirements.in
 
 ## Install All Dependencies
 ```bash
-pip install --no-cache-dir -r ./requirements.txt
+# Windows
+pip install -r ./requirements.txt
+
+# Linux / macOS
+TMPDIR=~/tmp pip install -r ./requirements.txt
 ```
 
 ## Install a Specific Dependency
 ```bash
-pip install --no-cache-dir `<package-name>`
+pip install `<package-name>`
 ```
 
 ## Remove a Specific Dependency
@@ -68,7 +72,11 @@ pip list --outdated
 
 ## Install or Synchronize Dependencies
 ```bash
+# Windows
 pip-sync ./requirements.txt
+
+# Linux / macOS
+TMPDIR=~/tmp pip-sync ./requirements.txt
 ```
 
 ## Check the Latest Available Version of a Specific Package
@@ -79,12 +87,7 @@ pip show `<package-name>`
 
 ## Upgrade a Specific Package
 ```bash
-pip install --upgrade --no-cache-dir `<package-name>`
-```
-
-## Clear pip Cache
-```bash
-pip cache purge
+pip install --upgrade `<package-name>`
 ```
 
 ## Deactivate the Virtual Environment
