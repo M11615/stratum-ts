@@ -7,12 +7,9 @@ COPY ./core/requirements.txt .
 RUN mkdir src
 COPY ./core/src ./src
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
-    gcc \
-    g++ \
-    cargo \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends build-essential cargo && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN pip install --no-cache-dir -r requirements.txt
 
