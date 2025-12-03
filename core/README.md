@@ -20,27 +20,27 @@ source ./.venv/bin/activate
 
 ## Upgrade pip
 ```bash
-python -m pip install --upgrade pip
+python -m pip install --upgrade --no-cache-dir pip
 ```
 
 ## Install pip-tools (for dependency compilation)
 ```bash
-pip install pip-tools
+pip install --no-cache-dir pip-tools
 ```
 
 ## Compile requirements.txt from requirements.in
 ```bash
-pip-compile ./requirements.in --output-file=./requirements.txt
+pip-compile --output-file=./requirements.txt ./requirements.in
 ```
 
 ## Install All Dependencies
 ```bash
-pip install -r ./requirements.txt
+pip install --no-cache-dir -r ./requirements.txt
 ```
 
 ## Install a Specific Dependency
 ```bash
-pip install `<package-name>`
+pip install --no-cache-dir `<package-name>`
 ```
 
 ## Remove a Specific Dependency
@@ -51,7 +51,8 @@ pip uninstall `<package-name>`
 ## Refresh requirements.txt
 ```bash
 # pip-tools
-pip-compile ./requirements.in --output-file=./requirements.txt
+pip-compile --output-file=./requirements.txt ./requirements.in
+
 # pip
 pip freeze > ./requirements.txt
 ```
@@ -59,7 +60,8 @@ pip freeze > ./requirements.txt
 ## Check Which Packages Can Be Upgraded
 ```bash
 # pip-tools
-pip-compile --upgrade ./requirements.in --output-file=./requirements.txt
+pip-compile --upgrade --output-file=./requirements.txt ./requirements.in
+
 # pip
 pip list --outdated
 ```
@@ -71,12 +73,18 @@ pip-sync ./requirements.txt
 
 ## Check the Latest Available Version of a Specific Package
 ```bash
-pip install `<package-name>`==
+pip search `<package-name>`
+pip show `<package-name>`
 ```
 
 ## Upgrade a Specific Package
 ```bash
-pip install --upgrade `<package-name>`
+pip install --upgrade --no-cache-dir `<package-name>`
+```
+
+## Clear pip Cache
+```bash
+pip cache purge
 ```
 
 ## Deactivate the Virtual Environment
