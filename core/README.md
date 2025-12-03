@@ -1,6 +1,6 @@
 # Python Environment Setup Guide
 
-## 1. Create a Virtual Environment
+## Create a Virtual Environment
 ```bash
 # Windows
 python -m venv ./.venv
@@ -9,7 +9,7 @@ python -m venv ./.venv
 python3 -m venv ./.venv
 ```
 
-## 2. Activate the Virtual Environment
+## Activate the Virtual Environment
 ```bash
 # Windows
 ./.venv/Scripts/Activate.ps1
@@ -18,47 +18,60 @@ python3 -m venv ./.venv
 source ./.venv/bin/activate
 ```
 
-## 3. Deactivate the Virtual Environment
-```bash
-deactivate
-```
-
-## 4. Install All Dependencies
-```bash
-pip install -r ./requirements.txt
-```
-
-## 5. Install a Specific Dependency
-```bash
-pip install `<package-name>`
-```
-
-## 6. Remove a Specific Dependency
-```bash
-pip uninstall `<package-name>`
-```
-
-## 7. Refresh requirements.txt
-```bash
-pip freeze > ./requirements.txt
-```
-
-## 8. Upgrade pip
+## Upgrade pip
 ```bash
 python -m pip install --upgrade pip
 ```
 
-## 9. Check Which Packages Can Be Upgraded
+## Install pip-tools (for dependency compilation)
+```bash
+pip install pip-tools
+```
+
+## Compile requirements.txt from requirements.in
+```bash
+pip-compile ./requirements.in --output-file=./requirements.txt
+```
+
+## Install All Dependencies
+```bash
+pip install -r ./requirements.txt
+```
+
+## Install a Specific Dependency
+```bash
+pip install `<package-name>`
+```
+
+## Remove a Specific Dependency
+```bash
+pip uninstall `<package-name>`
+```
+
+## Refresh requirements.txt
+```bash
+# pip-compile
+pip-compile ./requirements.in --output-file=./requirements.txt
+# pip
+pip freeze > ./requirements.txt
+```
+
+## Check Which Packages Can Be Upgraded
 ```bash
 pip list --outdated
 ```
 
-## 10. Check the Latest Available Version of a Specific Package
+## Check the Latest Available Version of a Specific Package
 ```bash
 pip install `<package-name>`==
 ```
 
-## 11. Upgrade a Specific Package
+## Upgrade a Specific Package
 ```bash
 pip install --upgrade `<package-name>`
+```
+
+## Deactivate the Virtual Environment
+```bash
+deactivate
 ```
