@@ -1,4 +1,4 @@
+pip-tools
 transformers
 torch
 fastapi
-pip-tools
