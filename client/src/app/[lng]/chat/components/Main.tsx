@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { StateSetter, CHAT_MESSAGE_ROLE, CHAT_MESSAGE_STATUS, FALLBACK_MOBILE_L_SCREEN_WIDTH } from "@/app/lib/constants";
 import { userGenerate } from "@/app/services/v1/generate";
@@ -25,10 +25,6 @@ export default function Main({
   const controllerRef: React.RefObject<AbortController | null> = useRef<AbortController | null>(null);
   const readerRef: React.RefObject<ReadableStreamDefaultReader<Uint8Array> | null> = useRef<ReadableStreamDefaultReader<Uint8Array> | null>(null);
   const textareaRef: React.RefObject<HTMLTextAreaElement | null> = useRef<HTMLTextAreaElement | null>(null);
-
-  useEffect((): void => {
-    textareaRef.current?.focus();
-  }, []);
 
   const handleChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
     const value: string = e.target.value;
@@ -149,7 +145,10 @@ export default function Main({
         ref={textareaRef}
         value={input}
         onChange={handleChange}
-        onKeyDown={responsiveContext.isTabletScreen ? (): void => { } : handleKeyDown}
+        onKeyDown={(e: React.KeyboardEvent<HTMLTextAreaElement>): void => {
+          if (!responsiveContext.isTabletScreen) handleKeyDown(e);
+        }}
+        autoFocus
         rows={rows}
         placeholder="Ask anything"
         className="flex-1 w-full resize-none select-none outline-none text-[16px] text-[var(--theme-fg-base)] placeholder-[var(--theme-text-caption)] leading-[1.5] p-2 pl-4"
@@ -166,6 +165,7 @@ export default function Main({
       ) : (
         <button
           onClick={handleSubmit}
+          disabled={input.trim().length === 0}
           className={`select-none text-[var(--theme-border-base)] border ${input.trim().length === 0 ? "cursor-not-allowed border-[var(--theme-text-caption)] bg-[var(--theme-text-caption)]" : "cursor-pointer border-[var(--theme-fg-base)] bg-[var(--theme-fg-base)] hover:bg-[var(--theme-bg-base-hover)] hover:border-[var(--theme-bg-base-hover)]"} p-[8px] rounded-full transition duration-200 ease-in-out`}
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
