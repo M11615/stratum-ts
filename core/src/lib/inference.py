@@ -5,7 +5,7 @@ from transformers import AutoTokenizer, AutoModelForCausalLM, PreTrainedTokenize
 from torch import Tensor
 
 BASE_DIRECTORY: str = os.path.dirname(__file__)
-REPOSITORY_SNAPSHOT_DIRECTORY: str = os.path.join(BASE_DIRECTORY, "../.models/models--TinyLlama--TinyLlama-1.1B-Chat-v1.0/snapshots")
+REPOSITORY_SNAPSHOT_DIRECTORY: str = os.path.join(BASE_DIRECTORY, "./.models/models--TinyLlama--TinyLlama-1.1B-Chat-v1.0/snapshots")
 SNAPSHOT_HASHES: List[str] = os.listdir(REPOSITORY_SNAPSHOT_DIRECTORY)
 SNAPSHOT_PATHS: List[str] = [os.path.join(REPOSITORY_SNAPSHOT_DIRECTORY, snapshot_hash) for snapshot_hash in SNAPSHOT_HASHES]
 LATEST_SNAPSHOT_PATH: str = max(SNAPSHOT_PATHS, key=os.path.getmtime)

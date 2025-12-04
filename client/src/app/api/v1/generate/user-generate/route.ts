@@ -16,6 +16,6 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
   return new NextResponse(response.body, {
     status: response.status,
-    headers: response.headers,
+    headers: response.headers
   });
 }

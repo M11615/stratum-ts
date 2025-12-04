@@ -7,9 +7,6 @@ COPY ./core/requirements.txt .
 RUN mkdir .wheelhouse
 COPY ./core/.wheelhouse ./.wheelhouse
 
-RUN mkdir .models
-COPY ./core/.models ./.models
-
 RUN mkdir src
 COPY ./core/src ./src
 
