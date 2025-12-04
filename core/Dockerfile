@@ -2,6 +2,10 @@ FROM python:3.13-slim
 
 WORKDIR /opt/nextjs
 
+ENV HTTP_PROXY=http://server:20171
+ENV HTTPS_PROXY=http://server:20171
+ENV NO_PROXY=127.0.0.1,localhost
+
 COPY ./core/requirements.txt .
 
 RUN mkdir .wheelhouse
