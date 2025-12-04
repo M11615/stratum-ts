@@ -5,10 +5,9 @@ from transformers import AutoTokenizer, AutoModelForCausalLM, PreTrainedTokenize
 from torch import Tensor
 
 BASE_DIRECTORY: str = os.path.dirname(__file__)
-MODEL_ID: str = "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
-MODEL_PATH: str = os.path.join(BASE_DIRECTORY, "../.models")
-tokenizer: PreTrainedTokenizerBase = AutoTokenizer.from_pretrained(MODEL_ID, cache_dir=MODEL_PATH)
-model: PreTrainedModel = AutoModelForCausalLM.from_pretrained(MODEL_ID, cache_dir=MODEL_PATH)
+MODEL_PATH: str = os.path.join(BASE_DIRECTORY, "../models/models--TinyLlama--TinyLlama-1.1B-Chat-v1.0")
+tokenizer: PreTrainedTokenizerBase = AutoTokenizer.from_pretrained(MODEL_PATH, local_files_only=True)
+model: PreTrainedModel = AutoModelForCausalLM.from_pretrained(MODEL_PATH, local_files_only=True)
 
 def inference(input: str) -> str:
   messages: List[Dict[str, str]] = [
