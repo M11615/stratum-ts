@@ -3,13 +3,13 @@
 import os
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
-MODEL_ID: str = "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
-BASE_DIRECTORY: str = os.path.dirname(__file__)
-CACHE_DIRECTORY: str = os.path.join(BASE_DIRECTORY, "./src/lib/.models")
+model_id: str = "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
+base_directory: str = os.path.dirname(__file__)
+cache_directory: str = os.path.join(base_directory, "./src/lib/.models")
 
 def main() -> None:
-  AutoTokenizer.from_pretrained(MODEL_ID, cache_dir=CACHE_DIRECTORY)
-  AutoModelForCausalLM.from_pretrained(MODEL_ID, cache_dir=CACHE_DIRECTORY)
+  AutoTokenizer.from_pretrained(model_id, cache_dir=cache_directory)
+  AutoModelForCausalLM.from_pretrained(model_id, cache_dir=cache_directory)
 
 if __name__ == "__main__":
   main()

@@ -2,16 +2,17 @@
   "name": "core",
   "private": true,
   "scripts": {
-    "python:venv": "python -m venv ./.venv",
-    "python:pip-upgrade": "python ./python_runner.py -m pip install --upgrade pip",
-    "python:compile": "python ./python_runner.py -m piptools compile --output-file=./requirements.txt ./requirements.in",
-    "python:compile-update": "python ./python_runner.py -m piptools compile --upgrade --output-file=./requirements.txt ./requirements.in",
-    "python:install:windows": "python ./python_runner.py -m pip install -r ./requirements.txt",
-    "python:install:unix": "TMPDIR=~/tmp python ./python_runner.py -m pip install -r ./requirements.txt",
-    "python:sync:windows": "python ./python_runner.py -m piptools sync ./requirements.txt",
-    "python:sync:unix": "TMPDIR=~/tmp python ./python_runner.py -m piptools sync ./requirements.txt",
-    "dev": "python ./python_runner.py -m fastapi dev ./src/main.py",
-    "python:wheel:windows": "python ./python_runner.py -m pip wheel -w ./.wheelhouse -r ./requirements.txt",
-    "python:wheel:unix": "TMPDIR=~/tmp python ./python_runner.py -m pip wheel -w ./.wheelhouse -r ./requirements.txt"
+    "python:venv:windows": "python -m venv ./.venv",
+    "python:venv:unix": "python3 -m venv ./.venv",
+    "python:pip-upgrade": "node ./python-runner.mjs -m pip install --upgrade pip",
+    "python:compile": "node ./python-runner.mjs -m piptools compile --output-file=./requirements.txt ./requirements.in",
+    "python:compile-update": "node ./python-runner.mjs -m piptools compile --upgrade --output-file=./requirements.txt ./requirements.in",
+    "python:install:windows": "node ./python-runner.mjs -m pip install -r ./requirements.txt",
+    "python:install:unix": "TMPDIR=~/tmp node ./python-runner.mjs -m pip install -r ./requirements.txt",
+    "python:sync:windows": "node ./python-runner.mjs -m piptools sync ./requirements.txt",
+    "python:sync:unix": "TMPDIR=~/tmp node ./python-runner.mjs -m piptools sync ./requirements.txt",
+    "dev": "node ./python-runner.mjs -m fastapi dev ./src/main.py",
+    "python:wheel:windows": "node ./python-runner.mjs -m pip wheel -w ./.wheelhouse -r ./requirements.txt",
+    "python:wheel:unix": "TMPDIR=~/tmp node ./python-runner.mjs -m pip wheel -w ./.wheelhouse -r ./requirements.txt"
   }
 }
