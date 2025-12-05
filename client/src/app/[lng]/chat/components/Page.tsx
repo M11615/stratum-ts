@@ -35,8 +35,9 @@ export default function Page(): React.ReactNode {
   }, []);
 
   useEffect((): void => {
-    setCollapsed(responsiveContext.width < FALLBACK_MOBILE_L_SCREEN_WIDTH);
-    setShowContent(!(responsiveContext.width < FALLBACK_MOBILE_L_SCREEN_WIDTH));
+    const isMobile: boolean = responsiveContext.width < FALLBACK_MOBILE_L_SCREEN_WIDTH;
+    setCollapsed(isMobile);
+    setShowContent(!isMobile);
   }, [responsiveContext.width]);
 
   const toggleAside: () => void = (): void => {
