@@ -21,7 +21,7 @@ export default function Header(): React.ReactNode {
 
   useEffect((): () => void => {
     const handleKeyDown = (e: KeyboardEvent): void => {
-      if (e.ctrlKey && e.key === "k") {
+      if ((e.ctrlKey || e.metaKey) && e.key === "k") {
         e.preventDefault();
         modalManager.open(searchModalId);
       }
