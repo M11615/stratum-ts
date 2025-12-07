@@ -24,7 +24,6 @@ export default function Footer(): React.ReactNode {
   const [isSubmitting, setIsSubmitting]: StateSetter<boolean> = useState<boolean>(false);
   const [submitted, setSubmitted]: StateSetter<boolean> = useState<boolean>(false);
   const [subscriptionEmail, setSubscriptionEmail]: StateSetter<string> = useState<string>("");
-  const [renderKey, setRenderKey]: StateSetter<number> = useState<number>(0);
   const resourcesLinks: NavLink[] = [
     { id: 1, href: "/", label: t("footer.docs") },
     { id: 2, href: "/", label: t("footer.supportPolicy") },
@@ -90,11 +89,16 @@ export default function Footer(): React.ReactNode {
       return;
     }
     setIsSubmitting(true);
-    setRenderKey(renderKey < 10 ? renderKey + 1 : 0);
-    const response: Response = await createSubscription({
-      email: subscriptionEmail.trim().toLowerCase()
-    });
-    if (response.ok) setSubmitted(true);
+    try {
+      const response: Response = await createSubscription({
+        email: subscriptionEmail.trim().toLowerCase()
+      });
+      if (response.ok) setSubmitted(true);
+    } catch {
+      setSubmitted(false);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const SocialLinks: React.ReactNode = (
@@ -254,7 +258,6 @@ export default function Footer(): React.ReactNode {
                 ) : (
                   <form noValidate onSubmit={handleSubscriptionEmailSubmit} className="relative">
                     <input
-                      key={renderKey}
                       className="w-full border border-[var(--theme-bg-muted)] bg-[var(--theme-bg-muted)] text-[14px] text-[var(--theme-fg-base)] placeholder-[var(--theme-text-muted)]/80 px-[10px] pr-[90px] py-[5px] rounded-lg disabled:opacity-50"
                       type="email"
                       name="subscriptionEmail"
