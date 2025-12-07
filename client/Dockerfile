@@ -2,8 +2,9 @@ FROM node:24-alpine
 
 WORKDIR /opt/stratum-ts
 
-COPY ./client/package.json .
 COPY ./yarn.lock .
+COPY ./.yarnrc.yml .
+COPY ./client/package.json .
 COPY ./client/.env.production.local .
 
 RUN mkdir node_modules
