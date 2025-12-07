@@ -5,8 +5,6 @@ import { I18nModule, I18nJsonLoader, QueryResolver, HeaderResolver, CookieResolv
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppService } from './app.service';
 import { AppController } from './app.controller';
-import { GenerateService } from './generate/generate.service';
-import { GenerateController } from './generate/generate.controller';
 import { Subscription, SubscriptionSchema } from './subscription/schemas/subscription.schema';
 import { SubscriptionService } from './subscription/subscription.service';
 import { SubscriptionController } from './subscription/subscription.controller';
@@ -38,14 +36,12 @@ import { SubscriptionController } from './subscription/subscription.controller';
   ],
   providers: [
     AppService,
-    GenerateService,
     ...process.env.ENABLE_MONGO === 'true' ? [
       SubscriptionService
     ] : []
   ],
   controllers: [
     AppController,
-    GenerateController,
     ...process.env.ENABLE_MONGO === 'true' ? [
       SubscriptionController
     ] : []

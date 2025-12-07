@@ -165,16 +165,3 @@ export const FALLBACK_MOBILE_M_SCREEN_WIDTH: number = 375 + SCRSCREEN_WIDTH_OFFS
 export const FALLBACK_MOBILE_S_SCREEN_WIDTH: number = 320 + SCRSCREEN_WIDTH_OFFSET;
 
 export const MAIN_CONTENT_ID: string = "main-content" as const;
-
-export const CHAT_MESSAGE_ROLE: Record<string, string> = {
-  USER: "user",
-  ASSISTANT: "assistant"
-} as const;
-
-export const CHAT_MESSAGE_STATUS: Record<string, string> = {
-  PINDING: "pending",
-  SENT: "sent",
-  ERROR: "error"
-} as const;
-
-export const CHAT_MESSAGE_INPUT_LENGTH: number = 20480 as const;
