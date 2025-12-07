@@ -1,7 +1,7 @@
 services:
-  stratum-mongo:
+  stratum-ts-mongo:
     image: mongo:latest
-    container_name: stratum-mongo
+    container_name: stratum-ts-mongo
     ports:
       - "27017:27017"
     environment:
@@ -9,44 +9,44 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=m11615
       - MONGO_INITDB_DATABASE=stratum
     volumes:
-      - stratum-mongo-volume:/data/db
+      - stratum-ts-mongo-volume:/data/db
       - ./initialisation/mongo:/docker-entrypoint-initdb.d
     networks:
-      - stratum-network
+      - stratum-ts-network
     restart: no
 
-  stratum-server:
+  stratum-ts-server:
     build:
       context: .
       dockerfile: ./server/Dockerfile
-    container_name: stratum-server
+    container_name: stratum-ts-server
     ports:
       - "3000:3000"
     networks:
-      - stratum-network
+      - stratum-ts-network
     depends_on:
-      - stratum-mongo
+      - stratum-ts-mongo
     restart: no
 
-  stratum-client:
+  stratum-ts-client:
     build:
       context: .
       dockerfile: ./client/Dockerfile
-    container_name: stratum-client
+    container_name: stratum-ts-client
     ports:
       - "3001:3001"
     networks:
-      - stratum-network
+      - stratum-ts-network
     extra_hosts:
       - "server:host-gateway"
     depends_on:
-      - stratum-server
+      - stratum-ts-server
     restart: no
 
 volumes:
-  stratum-mongo-volume:
+  stratum-ts-mongo-volume:
     driver: local
 
 networks:
-  stratum-network:
+  stratum-ts-network:
     driver: bridge
