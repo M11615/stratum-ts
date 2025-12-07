@@ -33,6 +33,5 @@ export function useT(ns: string | string[], options: Options): I18nInstance {
     if (!lng || i18next.resolvedLanguage === lng) return;
     i18next.changeLanguage(lng);
   }, [lng]);
-
   return useTranslation(ns, options);
 }

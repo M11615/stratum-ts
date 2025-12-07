@@ -32,7 +32,6 @@ export default function ResponsiveProvider({
 }): React.ReactNode {
   const { width, isTabletScreen, isMobileScreen }: ResponsiveState = useResponsive();
   const { actualTheme, userPreferenceTheme }: ThemeState = useTheme();
-
   return (
     <ResponsiveContext.Provider
       value={{

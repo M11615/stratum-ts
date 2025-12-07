@@ -14,7 +14,6 @@ export default function Page(): React.ReactNode {
   }, []);
 
   if (!hydrated) return null;
-
   return (
     <div className="bg-[var(--theme-bg-base)] items-center font-[family-name:var(--font-geist-sans)]">
       <Header />

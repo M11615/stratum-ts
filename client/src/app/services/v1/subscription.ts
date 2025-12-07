@@ -11,6 +11,5 @@ export const createSubscription = async (requestBody: SubscriptionRequest): Prom
     body: JSON.stringify(requestBody)
   });
   if (!response.ok) throw new Error();
-
   return response;
 };

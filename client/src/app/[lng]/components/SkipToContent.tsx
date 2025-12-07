@@ -13,7 +13,6 @@ export default function SkipToContent(): React.ReactNode {
   }, []);
 
   if (!hydrated) return null;
-
   return (
     <button
       onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {

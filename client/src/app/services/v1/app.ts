@@ -13,6 +13,5 @@ export const getHello = async (i18n: i18n): Promise<Response> => {
     credentials: "include"
   });
   if (!response.ok) throw new Error();
-
   return response;
 };

@@ -13,7 +13,6 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     headers: requestHeader,
     body: JSON.stringify(requestBody)
   });
-
   return new NextResponse(null, {
     status: response.status,
     headers: response.headers

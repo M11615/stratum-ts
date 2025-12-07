@@ -9,7 +9,6 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     credentials: "include"
   });
   const responseBody: BodyInit = await response.text();
-
   return new NextResponse(responseBody, {
     status: response.status,
     headers: response.headers

@@ -27,13 +27,11 @@ export const useResponsive = (): ResponsiveState => {
     document.addEventListener("visibilitychange", (): void => {
       if (document.visibilityState === "visible") handleResize();
     });
-
     return (): void => {
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("orientationchange", handleResize);
       document.removeEventListener("visibilitychange", handleResize);
     };
   }, []);
-
   return state;
 };

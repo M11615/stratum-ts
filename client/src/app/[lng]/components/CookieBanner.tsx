@@ -36,7 +36,6 @@ export default function CookieBanner(): React.ReactNode {
   };
 
   if (!visible && !isConsentOpen) return null;
-
   return (
     <>
       <ConsentModal

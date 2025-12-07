@@ -4,7 +4,6 @@ import { I18nInstance } from "@/app/lib/constants";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { t }: I18nInstance = await getT("locale", [null, "locale"]);
-
   return {
     title: t("layout.title")
   };

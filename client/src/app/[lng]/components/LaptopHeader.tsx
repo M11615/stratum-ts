@@ -31,7 +31,6 @@ export default function LaptopHeader({
     { id: 4, href: "/", label: t("header.templates"), isExternal: true },
     { id: 5, href: "/", label: t("header.enterprise"), isExternal: true }
   ];
-
   return (
     <div className="flex items-center justify-between flex-1 gap-10">
       <nav className="flex space-x-6 text-[14px] flex-shrink-0">

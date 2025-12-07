@@ -35,7 +35,6 @@ export default function SearchModal({
     { id: 6, href: "/", label: t("header.search.apiReference") },
     { id: 7, href: "/", label: t("header.search.accessibility") }
   ];
-
   return (
     <>
       {isSearchOpen && (

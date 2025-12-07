@@ -85,7 +85,6 @@ export default function Footer(): React.ReactNode {
     const form: HTMLFormElement = e.currentTarget as HTMLFormElement;
     if (!form.checkValidity()) {
       form.reportValidity();
-
       return;
     }
     setIsSubmitting(true);
@@ -138,7 +137,6 @@ export default function Footer(): React.ReactNode {
       </Link>
     </div>
   );
-
   return (
     <>
       <ConsentModal

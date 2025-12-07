@@ -26,7 +26,6 @@ export default function Main() {
           {languages.map((lang: string): React.ReactNode => {
             const item = LANGUAGE_MAP[lang];
             if (!item) return null;
-
             return (
               <button
                 key={lang}

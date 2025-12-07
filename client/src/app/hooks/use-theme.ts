@@ -29,12 +29,10 @@ export const useTheme = (): ThemeState => {
       }));
     };
     mediaQuery.addEventListener("change", handleSystemChange);
-
     return (): void => {
       window.removeEventListener("theme-change", handleThemeChange as EventListener);
       mediaQuery.removeEventListener("change", handleSystemChange);
     };
   }, []);
-
   return state;
 };

@@ -20,7 +20,6 @@ const geistMono: NextFontWithVariable = localFont({
 
 export async function generateMetadata(): Promise<Metadata> {
   const { t }: I18nInstance = await getT("app", [null, "app"]);
-
   return {
     title: t("layout.title")
   };
@@ -34,7 +33,6 @@ export default async function RootLayout({
   const { i18n }: I18nInstance = await getT("", [null, ""]);
   const cookieStore: ReadonlyRequestCookies = await cookies();
   const theme: string = cookieStore.get(COOKIE_KEYS.THEME)?.value || FALLBACK_THEME;
-
   return (
     <html lang={i18n.language} className={theme}>
       <body
