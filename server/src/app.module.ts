@@ -30,7 +30,7 @@ import { SubscriptionController } from './subscription/subscription.controller';
       ]
     }),
     ...process.env.ENABLE_MONGO === 'true' ? [
-      MongooseModule.forRoot(process.env.MONGO_URL ?? 'mongodb://localhost:27017/nextjs'),
+      MongooseModule.forRoot(process.env.MONGO_URL ?? 'mongodb://localhost:27017/stratum'),
       MongooseModule.forFeature([{ name: Subscription.name, schema: SubscriptionSchema }])
     ] : []
   ],

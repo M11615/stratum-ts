@@ -1,6 +1,6 @@
 FROM node:24-alpine
 
-WORKDIR /opt/nextjs
+WORKDIR /opt/stratum-ts
 
 COPY ./client/package.json .
 COPY ./yarn.lock .
