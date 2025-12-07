@@ -1,5 +1,5 @@
 {
-  "name": "nextjs",
+  "name": "stratum-ts",
   "private": true,
   "packageManager": "yarn@4.12.0",
   "workspaces": [

@@ -1,1 +1,1 @@
-# nextjs
+# stratum-ts

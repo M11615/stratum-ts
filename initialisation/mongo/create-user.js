@@ -1,9 +1,9 @@
-db = db.getSiblingDB("nextjs");
+db = db.getSiblingDB("stratum");
 
 db.createUser({
-  user: "nextjs",
+  user: "stratum",
   pwd: "m11615",
   roles: [
-    { role: "readWrite", db: "nextjs" }
+    { role: "readWrite", db: "stratum" }
   ]
 });

@@ -1,52 +1,52 @@
 services:
-  nextjs-mongo:
+  stratum-mongo:
     image: mongo:latest
-    container_name: nextjs-mongo
+    container_name: stratum-mongo
     ports:
       - "27017:27017"
     environment:
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=m11615
-      - MONGO_INITDB_DATABASE=nextjs
+      - MONGO_INITDB_DATABASE=stratum
     volumes:
-      - nextjs-mongo-volume:/data/db
+      - stratum-mongo-volume:/data/db
       - ./initialisation/mongo:/docker-entrypoint-initdb.d
     networks:
-      - nextjs-network
+      - stratum-network
     restart: no
 
-  nextjs-server:
+  stratum-server:
     build:
       context: .
       dockerfile: ./server/Dockerfile
-    container_name: nextjs-server
+    container_name: stratum-server
     ports:
       - "3000:3000"
     networks:
-      - nextjs-network
+      - stratum-network
     depends_on:
-      - nextjs-mongo
+      - stratum-mongo
     restart: no
 
-  nextjs-client:
+  stratum-client:
     build:
       context: .
       dockerfile: ./client/Dockerfile
-    container_name: nextjs-client
+    container_name: stratum-client
     ports:
       - "3001:3001"
     networks:
-      - nextjs-network
+      - stratum-network
     extra_hosts:
       - "server:host-gateway"
     depends_on:
-      - nextjs-server
+      - stratum-server
     restart: no
 
 volumes:
-  nextjs-mongo-volume:
+  stratum-mongo-volume:
     driver: local
 
 networks:
-  nextjs-network:
+  stratum-network:
     driver: bridge

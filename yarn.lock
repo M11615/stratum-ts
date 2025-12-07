@@ -9911,14 +9911,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nextjs@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "nextjs@workspace:."
-  dependencies:
-    turbo: "npm:^2.6.2"
-  languageName: unknown
-  linkType: soft
-
 "node-abort-controller@npm:^3.0.1":
   version: 3.1.1
   resolution: "node-abort-controller@npm:3.1.1"
@@ -11614,6 +11606,14 @@ __metadata:
   checksum: 10c0/de4e45706bb4c0354a4b1122a2b8cc45a639e86206807ce0baf390ee9218d3ef181923fa4d2b67443367c491aa255c5fbaa64bb74648e3c5b48299928af86c09
   languageName: node
   linkType: hard
+
+"stratum-ts@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "stratum-ts@workspace:."
+  dependencies:
+    turbo: "npm:^2.6.2"
+  languageName: unknown
+  linkType: soft
 
 "streamsearch@npm:^1.1.0":
   version: 1.1.0
