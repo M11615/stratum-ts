@@ -43,11 +43,11 @@ export default function Main(): React.ReactNode {
 
   const handleCopy: () => Promise<void> = async (): Promise<void> => {
     try {
-      await navigator.clipboard.writeText(command)
-        setCopied(true);
-        setTimeout((): void => {
-          setCopied(false);
-        }, 1500);
+      await navigator.clipboard.writeText(command);
+      setCopied(true);
+      setTimeout((): void => {
+        setCopied(false);
+      }, 1500);
     } catch { }
   };
 
