@@ -3,7 +3,6 @@
   "private": true,
   "packageManager": "yarn@4.12.0",
   "workspaces": [
-    "core",
     "server",
     "client"
   ],
@@ -11,7 +10,7 @@
     "set-version": "yarn set version latest",
     "upgrade": "yarn upgrade-interactive",
     "build": "turbo run build --concurrency=3",
-    "dev": "turbo run dev --concurrency=4",
+    "dev": "turbo run dev --concurrency=3",
     "docker:pull": "docker compose pull",
     "docker:build-pull": "docker compose build --pull",
     "docker:build": "docker compose build",
