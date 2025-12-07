@@ -21,15 +21,15 @@ type Options<
 export function useT(ns: string | string[], options: Options): I18nInstance {
   const lng: string = useParams()?.lng as string;
   if (typeof lng !== "string") throw new Error("useT is only available inside /app/[lng]");
-  useEffect(() => {
+  useEffect((): void => {
     if (runsOnServerSide && i18next.resolvedLanguage !== lng) i18next.changeLanguage(lng);
   }, [lng]);
   const [activeLng, setActiveLng]: StateSetter<string | undefined> = useState<string | undefined>(i18next.resolvedLanguage);
-  useEffect(() => {
+  useEffect((): void => {
     if (activeLng === i18next.resolvedLanguage) return;
     setActiveLng(i18next.resolvedLanguage);
   }, [activeLng]);
-  useEffect(() => {
+  useEffect((): void => {
     if (!lng || i18next.resolvedLanguage === lng) return;
     i18next.changeLanguage(lng);
   }, [lng]);

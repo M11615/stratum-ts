@@ -6,16 +6,13 @@ import { AppModule } from '../src/app.module';
 
 describe('AppController (e2e)', (): void => {
   let app: INestApplication<App>;
-
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule]
     }).compile();
-
     app = moduleFixture.createNestApplication();
     await app.init();
   });
-
   it('/ (GET)', (): supertest.Test => {
     return request(app.getHttpServer())
       .get('/')
