@@ -81,14 +81,14 @@ export default function Footer(): React.ReactNode {
   };
 
   const handleSubscriptionEmailSubmit: (e: React.FormEvent) => Promise<void> = async (e: React.FormEvent): Promise<void> => {
-    e.preventDefault();
-    const form: HTMLFormElement = e.currentTarget as HTMLFormElement;
-    if (!form.checkValidity()) {
-      form.reportValidity();
-      return;
-    }
-    setIsSubmitting(true);
     try {
+      e.preventDefault();
+      const form: HTMLFormElement = e.currentTarget as HTMLFormElement;
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      setIsSubmitting(true);
       const response: Response = await createSubscription({
         email: subscriptionEmail.trim().toLowerCase()
       });

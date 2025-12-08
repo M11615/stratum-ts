@@ -29,7 +29,7 @@ export default function Main(): React.ReactNode {
       title: titleRef.current,
       description: descriptionRef.current,
       link: linkRef.current,
-      command: commandRef.current,
+      command: commandRef.current
     });
   }, []);
 
