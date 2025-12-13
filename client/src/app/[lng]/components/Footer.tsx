@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useT } from "@/app/i18n/client";
-import { I18nInstance, StateSetter, FALLBACK_MOBILE_M_SCREEN_WIDTH } from "@/app/lib/constants";
+import { I18nextInstance, StateSetter, FALLBACK_MOBILE_M_SCREEN_WIDTH } from "@/app/lib/constants";
 import { modalManager } from "@/app/lib/modal-manager";
 import { createSubscription } from "@/app/services/v1/subscription";
 import { ResponsiveContextValue, useResponsiveContext } from "./ResponsiveContext";
@@ -18,7 +18,7 @@ interface NavLink {
 }
 
 export default function Footer(): React.ReactNode {
-  const { t }: I18nInstance = useT("app", {});
+  const { t }: I18nextInstance = useT("app", {});
   const { width, isTabletScreen, isMobileScreen }: ResponsiveContextValue = useResponsiveContext();
   const [isConsentOpen, setIsConsentOpen]: StateSetter<boolean> = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting]: StateSetter<boolean> = useState<boolean>(false);

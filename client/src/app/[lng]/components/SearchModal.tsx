@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useT } from "@/app/i18n/client";
-import { I18nInstance, StateSetter, FALLBACK_MOBILE_L_SCREEN_WIDTH } from "@/app/lib/constants";
+import { I18nextInstance, StateSetter, FALLBACK_MOBILE_L_SCREEN_WIDTH } from "@/app/lib/constants";
 import { ResponsiveContextValue, useResponsiveContext } from "./ResponsiveContext";
 
 interface SearchModalProps {
@@ -22,7 +22,7 @@ interface SearchResult {
 export default function SearchModal({
   isSearchOpen, isSearchClosing, handleSearchClose
 }: SearchModalProps): React.ReactNode {
-  const { t }: I18nInstance = useT("app", {});
+  const { t }: I18nextInstance = useT("app", {});
   const { width }: ResponsiveContextValue = useResponsiveContext();
   const [searchActiveTab, setSearchActiveTab]: StateSetter<string> = useState<string>("app");
   const [selectedResultIndex, setSelectedResultIndex]: StateSetter<number> = useState<number>(0);

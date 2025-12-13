@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { useT } from "@/app/i18n/client";
-import { I18nInstance, StateSetter, MAIN_CONTENT_ID } from "@/app/lib/constants";
+import { I18nextInstance, StateSetter, MAIN_CONTENT_ID } from "@/app/lib/constants";
 
 export default function SkipToContent(): React.ReactNode {
-  const { t }: I18nInstance = useT("app", {});
+  const { t }: I18nextInstance = useT("app", {});
   const [hydrated, setHydrated]: StateSetter<boolean> = useState<boolean>(false);
 
   useEffect((): void => {

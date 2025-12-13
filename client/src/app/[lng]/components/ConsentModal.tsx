@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useT } from "@/app/i18n/client";
-import { I18nInstance, StateSetter, COOKIE_KEYS, COOKIE_CATEGORIES, FALLBACK_COOKIE_CONSENT } from "@/app/lib/constants";
+import { I18nextInstance, StateSetter, COOKIE_KEYS, COOKIE_CATEGORIES, FALLBACK_COOKIE_CONSENT } from "@/app/lib/constants";
 import { parseConsent, setCookie } from "@/app/lib/cookies";
 
 interface ConsentModalProps {
@@ -41,7 +41,7 @@ export const handleAcceptAll: () => void = (): void => {
 export default function ConsentModal({
   isConsentOpen, handleConsentClose
 }: ConsentModalProps): React.ReactNode {
-  const { t }: I18nInstance = useT("app", {});
+  const { t }: I18nextInstance = useT("app", {});
   const [cookieConsent, setCookieConsent]: StateSetter<Record<string, boolean>> = useState<Record<string, boolean>>(FALLBACK_COOKIE_CONSENT);
   const [expandedIds, setExpandedIds]: StateSetter<string[]> = useState<string[]>([]);
   const [renderKey, setRenderKey]: StateSetter<number> = useState<number>(0);

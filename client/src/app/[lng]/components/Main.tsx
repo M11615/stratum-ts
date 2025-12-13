@@ -4,11 +4,11 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useT } from "@/app/i18n/client";
-import { I18nInstance, StateSetter, THEME_KEYS, FALLBACK_MOBILE_L_SCREEN_WIDTH, FALLBACK_MOBILE_M_SCREEN_WIDTH, FALLBACK_MOBILE_S_SCREEN_WIDTH, MAIN_CONTENT_ID } from "@/app/lib/constants";
+import { I18nextInstance, StateSetter, THEME_KEYS, FALLBACK_MOBILE_L_SCREEN_WIDTH, FALLBACK_MOBILE_M_SCREEN_WIDTH, FALLBACK_MOBILE_S_SCREEN_WIDTH, MAIN_CONTENT_ID } from "@/app/lib/constants";
 import { ResponsiveContextValue, useResponsiveContext } from "./ResponsiveContext";
 
 export default function Main(): React.ReactNode {
-  const { t }: I18nInstance = useT("app", {});
+  const { t }: I18nextInstance = useT("app", {});
   const { width, isTabletScreen, isMobileScreen, actualTheme }: ResponsiveContextValue = useResponsiveContext();
   const [visibleMedia, setVisibleMedia]: StateSetter<boolean> = useState<boolean>(false);
   const [showVideo, setShowVideo]: StateSetter<boolean> = useState<boolean>(false);

@@ -1,6 +1,6 @@
 import { i18n, TFunction } from "i18next";
 
-export interface I18nInstance {
+export interface I18nextInstance {
   t: TFunction;
   i18n: i18n;
 };

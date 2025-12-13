@@ -3,12 +3,12 @@
 import { cookieName } from "@/app/i18n/settings";
 import { languages } from "@/app/i18n/settings";
 import { useT } from "@/app/i18n/client";
-import { I18nInstance, LANGUAGE_MAP, FALLBACK_MOBILE_M_SCREEN_WIDTH } from "@/app/lib/constants";
+import { I18nextInstance, LANGUAGE_MAP, FALLBACK_MOBILE_M_SCREEN_WIDTH } from "@/app/lib/constants";
 import { setCookie } from "@/app/lib/cookies";
 import { ResponsiveContextValue, useResponsiveContext } from "@/app/[lng]/components/ResponsiveContext";
 
 export default function Main() {
-  const { t }: I18nInstance = useT("locale", {});
+  const { t }: I18nextInstance = useT("locale", {});
   const { width, isTabletScreen, isMobileScreen }: ResponsiveContextValue = useResponsiveContext();
 
   const handleLanguageChange: (lang: string) => void = (lang: string): void => {

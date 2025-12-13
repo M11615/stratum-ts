@@ -2,14 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { useT } from "@/app/i18n/client";
-import { I18nInstance, StateSetter, COOKIE_KEYS, FALLBACK_MOBILE_L_SCREEN_WIDTH } from "@/app/lib/constants";
+import { I18nextInstance, StateSetter, COOKIE_KEYS, FALLBACK_MOBILE_L_SCREEN_WIDTH } from "@/app/lib/constants";
 import { modalManager } from "@/app/lib/modal-manager";
 import { getCookie } from "@/app/lib/cookies";
 import { ResponsiveContextValue, useResponsiveContext } from "./ResponsiveContext";
 import ConsentModal, { handleDeny, handleAcceptAll } from "./ConsentModal";
 
 export default function CookieBanner(): React.ReactNode {
-  const { t }: I18nInstance = useT("app", {});
+  const { t }: I18nextInstance = useT("app", {});
   const { width }: ResponsiveContextValue = useResponsiveContext();
   const [visible, setVisible]: StateSetter<boolean> = useState<boolean>(false);
   const [isConsentOpen, setIsConsentOpen]: StateSetter<boolean> = useState<boolean>(false);

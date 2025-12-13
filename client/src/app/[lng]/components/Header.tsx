@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useT } from "@/app/i18n/client";
-import { I18nInstance, StateSetter, FALLBACK_MOBILE_L_SCREEN_WIDTH } from "@/app/lib/constants";
+import { I18nextInstance, StateSetter, FALLBACK_MOBILE_L_SCREEN_WIDTH } from "@/app/lib/constants";
 import { modalManager } from "@/app/lib/modal-manager";
 import { ResponsiveContextValue, useResponsiveContext } from "./ResponsiveContext";
 import LaptopHeader from "./LaptopHeader";
@@ -12,7 +12,7 @@ import MobileHeader from "./MobileHeader";
 import SearchModal from "./SearchModal";
 
 export default function Header(): React.ReactNode {
-  const { t }: I18nInstance = useT("app", {});
+  const { t }: I18nextInstance = useT("app", {});
   const responsiveContext: ResponsiveContextValue = useResponsiveContext();
   const [showKeyDown, setShowKeyDown]: StateSetter<boolean> = useState<boolean>(false);
   const [isSearchOpen, setIsSearchOpen]: StateSetter<boolean> = useState<boolean>(false);
