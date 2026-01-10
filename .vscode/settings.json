@@ -1,4 +1,3 @@
 {
-  "css.lint.unknownAtRules": "ignore",
-  "python.terminal.activateEnvironment": false
+  "css.lint.unknownAtRules": "ignore"
 }

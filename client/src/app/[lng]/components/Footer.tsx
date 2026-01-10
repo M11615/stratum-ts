@@ -137,6 +137,7 @@ export default function Footer(): React.ReactNode {
       </Link>
     </div>
   );
+
   return (
     <>
       <ConsentModal
