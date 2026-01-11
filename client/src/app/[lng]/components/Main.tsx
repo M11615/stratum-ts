@@ -2,16 +2,13 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { useT } from "@/app/i18n/client";
-import { I18nextInstance, StateSetter, THEME_KEYS, FALLBACK_MOBILE_L_SCREEN_WIDTH, FALLBACK_MOBILE_M_SCREEN_WIDTH, FALLBACK_MOBILE_S_SCREEN_WIDTH, MAIN_CONTENT_ID } from "@/app/lib/constants";
+import { I18nextInstance, StateSetter, FALLBACK_MOBILE_L_SCREEN_WIDTH, FALLBACK_MOBILE_M_SCREEN_WIDTH, FALLBACK_MOBILE_S_SCREEN_WIDTH, MAIN_CONTENT_ID } from "@/app/lib/constants";
 import { ResponsiveContextValue, useResponsiveContext } from "./ResponsiveContext";
 
 export default function Main(): React.ReactNode {
   const { t }: I18nextInstance = useT("app", {});
-  const { width, isTabletScreen, isMobileScreen, actualTheme }: ResponsiveContextValue = useResponsiveContext();
-  const [visibleMedia, setVisibleMedia]: StateSetter<boolean> = useState<boolean>(false);
-  const [showVideo, setShowVideo]: StateSetter<boolean> = useState<boolean>(false);
+  const { width, isTabletScreen, isMobileScreen }: ResponsiveContextValue = useResponsiveContext();
   const [hovered, setHovered]: StateSetter<boolean> = useState<boolean>(false);
   const [copied, setCopied]: StateSetter<boolean> = useState<boolean>(false);
   const [elementsInfo, setElementsInfo]: StateSetter<Record<string, HTMLElement | null>> = useState<Record<string, HTMLElement | null>>({});
@@ -24,7 +21,6 @@ export default function Main(): React.ReactNode {
   const command: string = "npx create-next-app@latest";
 
   useEffect((): void => {
-    setVisibleMedia(true);
     setElementsInfo({
       title: titleRef.current,
       description: descriptionRef.current,
@@ -57,94 +53,7 @@ export default function Main(): React.ReactNode {
         id={MAIN_CONTENT_ID}
         className={`relative flex flex-col w-full items-center ${isMobileScreen ? "pt-[115px]" : "pt-[130px]"} bg-[var(--theme-bg-base)]`}
       >
-        <div
-          className={`${width > FALLBACK_MOBILE_L_SCREEN_WIDTH ? "w-[60%]" : "w-full"}`}
-          style={{
-            paddingBottom: `${isTabletScreen ? `${width * (576 / 1024) + 130}px` : "730px"}`
-          }}
-        >
-          <div className={`flex flex-wrap tracking-[-0.02em] items-center text-center justify-center gap-2 mx-auto min-w-[255px] ${width > FALLBACK_MOBILE_L_SCREEN_WIDTH ? "w-full" : "w-0"}`}>
-            <span className="text-[var(--theme-primary-light)] bg-[var(--theme-accent-blue-bg)] px-[12px] py-[2px] rounded-full font-medium text-[14px]">
-              {t("main.new")}
-            </span>
-            <span className="text-[var(--theme-fg-base)] text-[20px] leading-[1.3] font-semibold">
-              {t("main.confAnnouncement")}
-            </span>
-          </div>
-          <div className="inline-flex justify-center gap-[10px] mt-[15px] w-full">
-            <Link
-              href="/"
-              className={`whitespace-nowrap overflow-hidden text-ellipsis select-none cursor-pointer border border-[var(--theme-fg-base)] bg-[var(--theme-fg-base)] text-[14px] text-[var(--theme-border-base)] font-medium pl-[12px] pr-[18px] py-[5px] rounded-full hover:bg-[var(--theme-bg-base-hover)] hover:border-[var(--theme-bg-base-hover)] transition duration-200 ease-in-out`}
-            >
-              {t("main.findOutMore")}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="currentColor"
-                strokeLinejoin="round"
-                className="inline relative left-[10px]"
-              >
-                <path fillRule="evenodd" clipRule="evenodd" d="M6.74999 3.93933L7.28032 4.46966L10.1035 7.29288C10.4941 7.68341 10.4941 8.31657 10.1035 8.7071L7.28032 11.5303L6.74999 12.0607L5.68933 11L6.21966 10.4697L8.68933 7.99999L6.21966 5.53032L5.68933 4.99999L6.74999 3.93933Z" />
-              </svg>
-            </Link>
-            <Link
-              href="/"
-              className={`whitespace-nowrap overflow-hidden text-ellipsis select-none cursor-pointer border border-[var(--theme-border-base)] bg-[var(--theme-bg-base)] text-[14px] text-[var(--theme-fg-base)] font-medium pl-[12px] pr-[18px] py-[5px] rounded-full hover:bg-[var(--theme-bg-muted)] hover:border-[var(--theme-text-subtle)] transition duration-200 ease-in-out`}
-            >
-              {t("main.watchRecap")}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="currentColor"
-                strokeLinejoin="round"
-                className="inline relative left-[10px]"
-              >
-                <path fillRule="evenodd" clipRule="evenodd" d="M6.74999 3.93933L7.28032 4.46966L10.1035 7.29288C10.4941 7.68341 10.4941 8.31657 10.1035 8.7071L7.28032 11.5303L6.74999 12.0607L5.68933 11L6.21966 10.4697L8.68933 7.99999L6.21966 5.53032L5.68933 4.99999L6.74999 3.93933Z" />
-              </svg>
-            </Link>
-          </div>
-          {visibleMedia && (
-            <div
-              onClick={(): void => {
-                setShowVideo(true)
-              }}
-              className={`group absolute left-1/2 -translate-x-1/2 flex flex-col items-center justify-center w-full max-w-[1024px] mt-[40px] ${width > FALLBACK_MOBILE_L_SCREEN_WIDTH ? "px-0" : "px-[30px]"} select-none`}
-            >
-              {!showVideo ? (
-                actualTheme === THEME_KEYS.LIGHT || actualTheme === THEME_KEYS.DARK ? (
-                  <>
-                    <Image
-                      src={`/assets/livestream-poster-conf-2025-${actualTheme}.png`}
-                      alt="Next.js Conf 25 Livestream"
-                      width={1024}
-                      height={576}
-                      priority
-                      className="cursor-pointer"
-                    />
-                    <div className={`${isMobileScreen ? "scale-100" : "scale-135"} absolute flex items-center justify-center w-[72px] h-[72px] cursor-pointer border border-[var(--theme-border-base)] bg-transparent text-[var(--theme-fg-base)] rounded-full pl-[3px] group-hover:bg-[var(--theme-bg-muted)] group-hover:border-[var(--theme-text-subtle)] transition duration-200 ease-in-out`}>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" strokeLinejoin="round" className="scale-145">
-                        <path fillRule="evenodd" clipRule="evenodd" d="M14.5528 7.77638C14.737 7.86851 14.737 8.13147 14.5528 8.2236L1.3618 14.8191C1.19558 14.9022 1 14.7813 1 14.5955L1 1.4045C1 1.21865 1.19558 1.09778 1.3618 1.18089L14.5528 7.77638Z" />
-                      </svg>
-                    </div>
-                  </>
-                ) : null
-              ) : (
-                <div className="aspect-video w-full bg-[var(--theme-bg-muted)]">
-                  <video
-                    controls
-                    autoPlay
-                    className="w-full h-full"
-                  />
-                </div>
-              )}
-            </div>
-          )}
-        </div>
-        <div className={`w-full relative z-10 text-center ${isMobileScreen ? `${width < FALLBACK_MOBILE_S_SCREEN_WIDTH ? "px-[15px]" : "px-[30px]"}` : `${isTabletScreen ? "px-[80px]" : ""}`}`}>
+        <div className={`w-full relative z-10 text-center ${isMobileScreen ? `${width < FALLBACK_MOBILE_S_SCREEN_WIDTH ? "px-[15px]" : "px-[30px]"}` : `${isTabletScreen ? "px-[80px]" : ""} pt-[80px]`}`}>
           <div
             className="absolute main-width-top h-2 border-t border-dashed border-[#666666] opacity-0"
             style={{
