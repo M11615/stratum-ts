@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useT } from "@/app/i18n/client";
 import { I18nextInstance, StateSetter, FALLBACK_MOBILE_L_SCREEN_WIDTH, FALLBACK_MOBILE_M_SCREEN_WIDTH, FALLBACK_MOBILE_S_SCREEN_WIDTH, MAIN_CONTENT_ID } from "@/app/lib/constants";
@@ -11,6 +11,7 @@ export default function Main(): React.ReactNode {
   const { width, isTabletScreen, isMobileScreen }: ResponsiveContextValue = useResponsiveContext();
   const [hovered, setHovered]: StateSetter<boolean> = useState<boolean>(false);
   const [copied, setCopied]: StateSetter<boolean> = useState<boolean>(false);
+  const [responsiveKey, setResponsiveKey]: StateSetter<number> = useState<number>(0);
   const [elementsInfo, setElementsInfo]: StateSetter<Record<string, HTMLElement | null>> = useState<Record<string, HTMLElement | null>>({});
   const titleRef: React.RefObject<HTMLHeadingElement | null> = useRef<HTMLHeadingElement>(null);
   const descriptionRef: React.RefObject<HTMLParagraphElement | null> = useRef<HTMLParagraphElement>(null);
@@ -20,14 +21,20 @@ export default function Main(): React.ReactNode {
   const verticalOffset: number = 128;
   const command: string = "npx create-next-app@latest";
 
-  useEffect((): void => {
-    setElementsInfo({
-      title: titleRef.current,
-      description: descriptionRef.current,
-      link: linkRef.current,
-      command: commandRef.current
+  useEffect(() => {
+    setResponsiveKey(responsiveKey < 10 ? responsiveKey + 1 : 0);
+  }, [width]);
+
+  useLayoutEffect((): void => {
+    requestAnimationFrame((): void => {
+      setElementsInfo({
+        title: titleRef.current,
+        description: descriptionRef.current,
+        link: linkRef.current,
+        command: commandRef.current
+      });
     });
-  }, []);
+  }, [responsiveKey]);
 
   const handleMouseEnter: () => void = (): void => {
     setHovered(true);
@@ -50,6 +57,7 @@ export default function Main(): React.ReactNode {
   return (
     <>
       <main
+        key={responsiveKey}
         id={MAIN_CONTENT_ID}
         className={`relative flex flex-col w-full items-center ${isMobileScreen ? "pt-[115px]" : "pt-[130px]"} bg-[var(--theme-bg-base)]`}
       >

@@ -1,9 +1,9 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext } from "react";
 import { ResponsiveState, useResponsive } from "@/app/hooks/use-responsive";
 import { ThemeState, useTheme } from "@/app/hooks/use-theme";
-import { StateSetter, THEME_KEYS, FALLBACK_4K_SCREEN_WIDTH } from "@/app/lib/constants";
+import { THEME_KEYS, FALLBACK_4K_SCREEN_WIDTH } from "@/app/lib/constants";
 
 export interface ResponsiveContextValue {
   width: number;
@@ -32,18 +32,8 @@ export default function ResponsiveProvider({
 }): React.ReactNode {
   const { width, isTabletScreen, isMobileScreen }: ResponsiveState = useResponsive();
   const { actualTheme, userPreferenceTheme }: ThemeState = useTheme();
-  const [renderKey, setRenderKey]: StateSetter<number> = useState<number>(0);
-
-  useEffect((): () => void => {
-    const timeout: NodeJS.Timeout = setTimeout((): void => {
-      setRenderKey(renderKey < 10 ? renderKey + 1 : 0);
-    }, 120);
-    return (): void => clearTimeout(timeout);
-  }, [width]);
-
   return (
     <ResponsiveContext.Provider
-      key={renderKey}
       value={{
         width, isTabletScreen, isMobileScreen,
         actualTheme, userPreferenceTheme
