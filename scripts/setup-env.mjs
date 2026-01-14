@@ -6,7 +6,7 @@ import { fileURLToPath } from "url";
 
 const currentFilePath = fileURLToPath(import.meta.url);
 const currentDirectoryPath = path.dirname(currentFilePath);
-const workspaceDirectories = ["../client", "../server"];
+const workspaceDirectories = ["../server", "../client"];
 const environmentFiles = [
   { temporaryFileName: "temporary.env.development.local", environmentFileName: ".env.development.local" },
   { temporaryFileName: "temporary.env.production.local", environmentFileName: ".env.production.local" }
