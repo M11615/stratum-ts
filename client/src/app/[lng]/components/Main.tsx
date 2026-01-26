@@ -17,6 +17,7 @@ export default function Main(): React.ReactNode {
   const descriptionRef: React.RefObject<HTMLParagraphElement | null> = useRef<HTMLParagraphElement>(null);
   const linkRef: React.RefObject<HTMLDivElement | null> = useRef<HTMLDivElement>(null);
   const commandRef: React.RefObject<HTMLDivElement | null> = useRef<HTMLDivElement>(null);
+  const visibleTip: boolean = true;
   const horizontalOffset: number = isMobileScreen ? 64 : 128;
   const verticalOffset: number = 128;
   const command: string = "npx create-next-app@latest";
@@ -61,7 +62,55 @@ export default function Main(): React.ReactNode {
         id={MAIN_CONTENT_ID}
         className={`relative flex flex-col w-full items-center ${isMobileScreen ? "pt-[115px]" : "pt-[130px]"} bg-[var(--theme-bg-base)]`}
       >
-        <div className={`w-full relative z-10 text-center ${isMobileScreen ? `${width < FALLBACK_MOBILE_S_SCREEN_WIDTH ? "px-[15px]" : "px-[30px]"}` : `${isTabletScreen ? "px-[80px]" : ""} pt-[80px]`}`}>
+        {visibleTip && (
+          <div className={`${width > FALLBACK_MOBILE_L_SCREEN_WIDTH ? "w-[60%]" : "w-full"}`}>
+            <div className={`flex flex-wrap tracking-[-0.02em] items-center text-center justify-center gap-2 mx-auto min-w-[255px] ${width > FALLBACK_MOBILE_L_SCREEN_WIDTH ? "w-full" : "w-0"}`}>
+              <span className="text-[var(--theme-primary-light)] bg-[var(--theme-accent-blue-bg)] px-[12px] py-[2px] rounded-full font-medium text-[14px]">
+                {t("main.new")}
+              </span>
+              <span className="text-[var(--theme-fg-base)] text-[20px] leading-[1.3] font-semibold">
+                {t("main.confAnnouncement")}
+              </span>
+            </div>
+            <div className="inline-flex justify-center gap-[10px] mt-[15px] w-full">
+              <Link
+                href="/"
+                className={`whitespace-nowrap overflow-hidden text-ellipsis select-none cursor-pointer border border-[var(--theme-fg-base)] bg-[var(--theme-fg-base)] text-[14px] text-[var(--theme-border-base)] font-medium pl-[12px] pr-[18px] py-[5px] rounded-full hover:bg-[var(--theme-bg-base-hover)] hover:border-[var(--theme-bg-base-hover)] transition duration-200 ease-in-out`}
+              >
+                {t("main.findOutMore")}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                  strokeLinejoin="round"
+                  className="inline relative left-[10px]"
+                >
+                  <path fillRule="evenodd" clipRule="evenodd" d="M6.74999 3.93933L7.28032 4.46966L10.1035 7.29288C10.4941 7.68341 10.4941 8.31657 10.1035 8.7071L7.28032 11.5303L6.74999 12.0607L5.68933 11L6.21966 10.4697L8.68933 7.99999L6.21966 5.53032L5.68933 4.99999L6.74999 3.93933Z" />
+                </svg>
+              </Link>
+              <Link
+                href="/"
+                className={`whitespace-nowrap overflow-hidden text-ellipsis select-none cursor-pointer border border-[var(--theme-border-base)] bg-[var(--theme-bg-base)] text-[14px] text-[var(--theme-fg-base)] font-medium pl-[12px] pr-[18px] py-[5px] rounded-full hover:bg-[var(--theme-bg-muted)] hover:border-[var(--theme-text-subtle)] transition duration-200 ease-in-out`}
+              >
+                {t("main.watchRecap")}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                  strokeLinejoin="round"
+                  className="inline relative left-[10px]"
+                >
+                  <path fillRule="evenodd" clipRule="evenodd" d="M6.74999 3.93933L7.28032 4.46966L10.1035 7.29288C10.4941 7.68341 10.4941 8.31657 10.1035 8.7071L7.28032 11.5303L6.74999 12.0607L5.68933 11L6.21966 10.4697L8.68933 7.99999L6.21966 5.53032L5.68933 4.99999L6.74999 3.93933Z" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+        )}
+        <div className={`w-full relative z-10 text-center ${isMobileScreen ? `${width < FALLBACK_MOBILE_S_SCREEN_WIDTH ? "px-[15px]" : "px-[30px]"}` : `${isTabletScreen ? "px-[80px]" : ""}`} ${visibleTip ? "pt-[110px]" : `${isMobileScreen ? "" : "pt-[80px]"}`}`}>
           <div
             className="absolute main-width-top h-2 border-t border-dashed border-[#666666] opacity-0"
             style={{
