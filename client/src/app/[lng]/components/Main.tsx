@@ -63,7 +63,7 @@ export default function Main(): React.ReactNode {
         className={`relative flex flex-col w-full items-center ${isMobileScreen ? "pt-[115px]" : "pt-[130px]"} bg-[var(--theme-bg-base)]`}
       >
         {visibleTip && (
-          <div className={`${width > FALLBACK_MOBILE_L_SCREEN_WIDTH ? "w-[60%]" : "w-full"}`}>
+          <div className={`${width > FALLBACK_MOBILE_L_SCREEN_WIDTH ? "w-[60%]" : "w-[95%]"}`}>
             <div className={`flex flex-wrap tracking-[-0.02em] items-center text-center justify-center gap-2 mx-auto min-w-[255px] ${width > FALLBACK_MOBILE_L_SCREEN_WIDTH ? "w-full" : "w-0"}`}>
               <span className="text-[var(--theme-primary-light)] bg-[var(--theme-accent-blue-bg)] px-[12px] py-[2px] rounded-full font-medium text-[14px]">
                 {t("main.new")}
@@ -110,7 +110,7 @@ export default function Main(): React.ReactNode {
             </div>
           </div>
         )}
-        <div className={`w-full relative z-10 text-center ${isMobileScreen ? `${width < FALLBACK_MOBILE_S_SCREEN_WIDTH ? "px-[15px]" : "px-[30px]"}` : `${isTabletScreen ? "px-[80px]" : ""}`} ${visibleTip ? "pt-[110px]" : `${isMobileScreen ? "" : "pt-[80px]"}`}`}>
+        <div className={`w-full relative z-10 text-center ${isMobileScreen ? `${width < FALLBACK_MOBILE_S_SCREEN_WIDTH ? "px-[15px]" : "px-[30px]"}` : `${isTabletScreen ? "px-[80px]" : ""}`} ${visibleTip ? "pt-[110px]" : `${isMobileScreen ? "" : "pt-[80px]"}`} overflow-hidden`}>
           <div
             className="absolute main-width-top h-2 border-t border-dashed border-[#666666] opacity-0"
             style={{

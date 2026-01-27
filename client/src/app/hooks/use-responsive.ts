@@ -7,7 +7,7 @@ export interface ResponsiveState {
   isMobileScreen: boolean;
 }
 
-export const useResponsive = (): ResponsiveState => {
+export const useResponsive: () => ResponsiveState = (): ResponsiveState => {
   const [state, setState]: StateSetter<ResponsiveState> = useState<ResponsiveState>({
     width: FALLBACK_4K_SCREEN_WIDTH,
     isTabletScreen: false,

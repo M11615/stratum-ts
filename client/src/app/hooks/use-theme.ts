@@ -6,7 +6,7 @@ export interface ThemeState {
   userPreferenceTheme: string;
 }
 
-export const useTheme = (): ThemeState => {
+export const useTheme: () => ThemeState = (): ThemeState => {
   const [state, setState]: StateSetter<ThemeState> = useState<ThemeState>({
     actualTheme: THEME_KEYS.LIGHT,
     userPreferenceTheme: THEME_KEYS.SYSTEM
