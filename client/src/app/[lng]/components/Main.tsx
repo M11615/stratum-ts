@@ -17,9 +17,10 @@ export default function Main(): React.ReactNode {
   const descriptionRef: React.RefObject<HTMLParagraphElement | null> = useRef<HTMLParagraphElement>(null);
   const linkRef: React.RefObject<HTMLDivElement | null> = useRef<HTMLDivElement>(null);
   const commandRef: React.RefObject<HTMLDivElement | null> = useRef<HTMLDivElement>(null);
-  const visibleTip: boolean = true;
-  const horizontalOffset: number = isMobileScreen ? 64 : 128;
+  const visibleTip: boolean = false;
+  const horizontalOffset: number = 128;
   const verticalOffset: number = 128;
+  const verticalExtraOffset: number = 32;
   const command: string = "npx create-next-app@latest";
 
   useEffect(() => {
@@ -58,12 +59,11 @@ export default function Main(): React.ReactNode {
   return (
     <>
       <main
-        key={responsiveKey}
         id={MAIN_CONTENT_ID}
-        className={`relative flex flex-col w-full items-center ${isMobileScreen ? "pt-[115px]" : "pt-[130px]"} bg-[var(--theme-bg-base)]`}
+        className={`relative flex flex-col w-full items-center ${isMobileScreen ? "pt-[45px]" : "pt-[130px]"} bg-[var(--theme-bg-base)]`}
       >
         {visibleTip && (
-          <div className={`${width > FALLBACK_MOBILE_L_SCREEN_WIDTH ? "w-[60%]" : "w-[95%]"}`}>
+          <div className={`${width > FALLBACK_MOBILE_L_SCREEN_WIDTH ? "w-[60%]" : "w-[95%] pt-[75px]"}`}>
             <div className={`flex flex-wrap tracking-[-0.02em] items-center text-center justify-center gap-2 mx-auto min-w-[255px] ${width > FALLBACK_MOBILE_L_SCREEN_WIDTH ? "w-full" : "w-0"}`}>
               <span className="text-[var(--theme-primary-light)] bg-[var(--theme-accent-blue-bg)] px-[12px] py-[2px] rounded-full font-medium text-[14px]">
                 {t("main.new")}
@@ -110,7 +110,7 @@ export default function Main(): React.ReactNode {
             </div>
           </div>
         )}
-        <div className={`w-full relative z-10 text-center ${isMobileScreen ? `${width < FALLBACK_MOBILE_S_SCREEN_WIDTH ? "px-[15px]" : "px-[30px]"}` : `${isTabletScreen ? "px-[80px]" : ""}`} ${visibleTip ? "pt-[110px]" : `${isMobileScreen ? "" : "pt-[80px]"}`} overflow-hidden`}>
+        <div className={`w-full relative z-10 text-center ${isMobileScreen ? `${width < FALLBACK_MOBILE_S_SCREEN_WIDTH ? "px-[15px]" : "px-[30px]"}` : `${isTabletScreen ? "px-[80px]" : ""}`} ${visibleTip ? "py-[110px]" : "py-[80px]"} overflow-hidden`}>
           <div
             className="absolute main-width-top h-2 border-t border-dashed border-[#666666] opacity-0"
             style={{
@@ -164,9 +164,9 @@ export default function Main(): React.ReactNode {
               <div
                 className="absolute w-2 border-l border-dashed border-[#666666] main-height-short opacity-0"
                 style={{
-                  top: `${(elementsInfo.title?.offsetTop ?? 0) - verticalOffset / 2}px`,
+                  top: `${(elementsInfo.title?.offsetTop ?? 0) - (verticalOffset - verticalExtraOffset) / 2}px`,
                   left: `${elementsInfo.link?.offsetLeft}px`,
-                  height: `${verticalOffset / 2}px`,
+                  height: `${(verticalOffset - verticalExtraOffset) / 2}px`,
                   WebkitMaskImage: "linear-gradient(to top, #666666 0%, #666666 5%, #666666 95%, transparent 100%)",
                   maskImage: "linear-gradient(to top, #666666 0%, #666666 5%, #666666 95%, transparent 100%)"
                 }}
@@ -184,9 +184,9 @@ export default function Main(): React.ReactNode {
               <div
                 className="absolute w-2 border-l border-dashed border-[#666666] main-height-short opacity-0"
                 style={{
-                  top: `${(elementsInfo.title?.offsetTop ?? 0) - verticalOffset / 2}px`,
+                  top: `${(elementsInfo.title?.offsetTop ?? 0) - (verticalOffset - verticalExtraOffset) / 2}px`,
                   left: `${(elementsInfo.link?.offsetLeft ?? 0) + (elementsInfo.link?.offsetWidth ?? 0)}px`,
-                  height: `${verticalOffset / 2}px`,
+                  height: `${(verticalOffset - verticalExtraOffset) / 2}px`,
                   WebkitMaskImage: "linear-gradient(to top, #666666 0%, #666666 5%, #666666 95%, transparent 100%)",
                   maskImage: "linear-gradient(to top, #666666 0%, #666666 5%, #666666 95%, transparent 100%)"
                 }}
@@ -409,7 +409,7 @@ export default function Main(): React.ReactNode {
               opacity: 1;
             }
             to {
-              height: ${verticalOffset / 2};
+              height: ${(verticalOffset - verticalExtraOffset) / 2};
               opacity: 0.3;
             }
           }
