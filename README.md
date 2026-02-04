@@ -17,8 +17,8 @@
 stratum-ts
 ├─ client/          # Frontend (Next.js)
 ├─ server/          # Backend (Nest.js)
-├─ initialisation/  # Docker container initialisation script
-├─ scripts/         # Quick Configuration Script
+├─ initialisation/  # Container and environment bootstrap scripts
+├─ scripts/         # Project automation and maintenance utilities
 └─ README.md
 ```
 
