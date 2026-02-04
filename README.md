@@ -40,7 +40,7 @@ yarn install
 ### 3. Initialise the configuration environment
 
 ```bash
-node ./scripts/setup-env.mjs
+node ./scripts/workspace-env-sync/workspace-env-sync.mjs
 ```
 
 ### 4. Launch development environment
@@ -56,13 +56,6 @@ yarn dev
 - Nest.js
 - Yarn Berry
 - Docker
-
-## Roadmap
-
-- [ ] Plugin architecture
-- [ ] Multi-AI provider adaptation
-- [ ] Windows automation capabilities (planned)
-- [ ] Internationalisation support (i18n)
 
 ## Contributing
 
