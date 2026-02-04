@@ -57,10 +57,6 @@ yarn dev
 - Yarn Berry
 - Docker
 
-## Contributing
-
-Contributions are welcome via Issues or Pull Requests. Please review [CONTRIBUTING.md](./CONTRIBUTING.md) before submitting.
-
 ## Licence
 
 This project is open-sourced under the **Apache-2.0** licence. For details, see [LICENSE](./LICENSE).
