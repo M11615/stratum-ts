@@ -1,6 +1,6 @@
-# Stratum-ts
+# StratumTS
 
-Stratum-ts is a full-stack TypeScript monorepo that combines a modern web client with a structured backend service.  
+StratumTS is a full-stack TypeScript monorepo that combines a modern web client with a structured backend service.  
 The project is designed with modularity, internationalization, and containerized development in mind.
 
 This repository contains everything required to run the server and client either locally or via Docker.
