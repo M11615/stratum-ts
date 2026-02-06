@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: server
-          image: stratum-ts-server:latest
+          image: docker-stratum-ts-server:latest
           ports:
             - containerPort: 3000

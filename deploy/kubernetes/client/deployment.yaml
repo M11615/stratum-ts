@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: client
-          image: stratum-ts-client:latest
+          image: docker-stratum-ts-client:latest
           ports:
             - containerPort: 3001
