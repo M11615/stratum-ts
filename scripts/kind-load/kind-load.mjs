@@ -20,7 +20,7 @@ const appendLogMessage = (message) => {
 
 const main = async () => {
   let dockerComposePaths = [];
-  if (fs.existsSync(dockerComposePaths)) {
+  if (fs.existsSync(dockerComposeListFilePath)) {
     dockerComposePaths = fs
       .readFileSync(dockerComposeListFilePath, "utf-8")
       .split(/\r?\n/)
