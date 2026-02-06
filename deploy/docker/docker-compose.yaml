@@ -47,8 +47,10 @@ services:
 
 volumes:
   stratum-ts-mongo-volume:
+    name: stratum-ts-mongo-volume
     driver: local
 
 networks:
   stratum-ts-network:
+    name: stratum-ts-network
     driver: bridge
