@@ -3,9 +3,10 @@ kind: Service
 metadata:
   name: stratum-ts-mongo
 spec:
+  type: NodePort
   selector:
     app: stratum-ts-mongo
   ports:
     - port: 27017
       targetPort: 27017
-  type: ClusterIP
+      nodePort: 27017

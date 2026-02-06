@@ -3,9 +3,10 @@ kind: Service
 metadata:
   name: stratum-ts-server
 spec:
+  type: NodePort
   selector:
     app: stratum-ts-server
   ports:
     - port: 3000
       targetPort: 3000
-  type: ClusterIP
+      nodePort: 3000
