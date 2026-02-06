@@ -35,7 +35,7 @@ const copyFileWithBackup = (sourceFilePath, destinationFilePath) => {
   } catch (error) {
     appendLogMessage(`ERROR copying file: ${sourceFilePath} -> ${destinationFilePath} - ${error.message}`);
   }
-}
+};
 
 const processWorkspaceDirectory = (workspaceDirectory) => {
   const absoluteWorkspaceDirectory = resolve(currentDirectoryPath, workspaceDirectory);

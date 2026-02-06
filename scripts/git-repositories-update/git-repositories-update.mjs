@@ -15,7 +15,7 @@ const logFileAbsolutePath = join(currentDirectoryPath, "./git-repositories-updat
 const appendLogMessage = (message) => {
   const timestamp = new Date().toISOString().replace("T", " ").split(".")[0];
   fs.appendFileSync(logFileAbsolutePath, `[${timestamp}] ${message}\n`);
-}
+};
 
 const delay = (milliseconds) => new Promise(resolve => setTimeout(resolve, milliseconds));
 
@@ -87,6 +87,6 @@ const main = async () => {
   }
   appendLogMessage("=====================================================================");
   console.log(`All repositories processed. Log saved to: ${logFileAbsolutePath}`);
-}
+};
 
 await main();
