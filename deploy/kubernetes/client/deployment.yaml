@@ -17,5 +17,6 @@ spec:
       containers:
         - name: client
           image: docker-stratum-ts-client:latest
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3001
