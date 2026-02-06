@@ -1,9 +1,9 @@
 # StratumTS
 
-StratumTS is a full-stack TypeScript monorepo that combines a modern web client with a structured backend service.  
-The project is designed with modularity, internationalization, and containerized development in mind.
+StratumTS is a full-stack TypeScript monorepo that combines a modern web client with a structured backend service.
+The project is designed with modularity, internationalization, containerized development, and Kubernetes deployment in mind.
 
-This repository contains everything required to run the server and client either locally or via Docker.
+This repository contains everything required to run the server and client either locally, via Docker, or in a Kubernetes cluster.
 
 ---
 
@@ -14,6 +14,7 @@ This repository contains everything required to run the server and client either
 - **Client-side application** built with Next.js
 - **Internationalization (i18n)** support for multiple locales
 - **Docker & Docker Compose** support for local development
+- **Kubernetes** manifests for container orchestration
 - **Yarn & TurboRepo** for dependency and task management
 
 ---
@@ -25,6 +26,7 @@ To work with this project locally, you will need:
 - **Node.js** (LTS recommended)
 - **Yarn**
 - **Docker** (optional, recommended for consistent environments)
+- **kubectl** and **Kubernetes cluster** (optional, required for Kubernetes deployment)
 
 ---
 
@@ -45,10 +47,22 @@ yarn install
 The easiest way to run the full stack is via Docker Compose:
 
 ```bash
-docker-compose up
+yarn docker:build
+yarn docker:up
 ```
 
-This will start all required services defined in `docker-compose.yml`.
+This will start all required services defined in `./deploy/docker/docker-compose.yaml`.
+
+### Running with Kubernetes
+
+You can deploy StratumTS to a Kubernetes cluster using Kustomize:
+
+```bash
+yarn kubernetes:configmap
+yarn kubernetes:apply
+```
+
+This will apply all resources defined in `./deploy/kubernetes/base/kustomization.yaml` and `./deploy/kubernetes/pv/kustomization.yaml`.
 
 ### Local Development (Without Docker)
 
