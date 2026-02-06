@@ -17,6 +17,6 @@ spec:
       containers:
         - name: server
           image: stratum-ts-server:latest
-          imagePullPolicy: Never
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3000

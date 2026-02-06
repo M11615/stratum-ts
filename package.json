@@ -21,8 +21,8 @@
     "docker:restart": "docker compose -f ./deploy/docker/docker-compose.yaml restart",
     "docker:rm": "docker compose -f ./deploy/docker/docker-compose.yaml rm",
     "kubernetes:configmap": "kubectl create configmap mongo-init --from-file=./deploy/initialisation/mongo",
-    "kubernetes:apply": "kubectl apply -k ./deploy/kubernetes",
-    "kubernetes:delete": "kubectl delete -k ./deploy/kubernetes"
+    "kubernetes:apply": "kubectl apply -k ./deploy/kubernetes/pv && kubectl apply -k ./deploy/kubernetes/base",
+    "kubernetes:delete": "kubectl delete -k ./deploy/kubernetes/base"
   },
   "devDependencies": {
     "turbo": "^2.8.3"
