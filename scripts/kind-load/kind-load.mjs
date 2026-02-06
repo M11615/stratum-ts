@@ -27,20 +27,9 @@ const imageExistsLocally = async (image) => {
   }
 };
 
-const resolveImageDigest = async (image) => {
-  const { stdout } = await executeCommandAsync(
-    `docker image inspect --format='{{index .RepoDigests 0}}' ${image}`
-  );
-  const digest = stdout.trim();
-  if (!digest) {
-    throw new Error(`Failed to resolve digest for image ${image}`);
-  }
-  return digest;
-};
-
-const loadImageIntoKind = async (digestImage) => {
-  const cmd = `docker save ${digestImage} | kind load image-archive /dev/stdin`;
-  await executeCommandAsync(cmd, { maxBuffer: 1024 * 1024 * 50 });
+const loadImageIntoKind = async (image) => {
+  const command = `kind load docker-image ${image}`;
+  await executeCommandAsync(command);
 };
 
 const main = async () => {
@@ -61,7 +50,7 @@ const main = async () => {
   appendLogMessage(`Kind Docker Image Load Started at ${new Date().toLocaleString()}`);
   appendLogMessage(`Docker Compose file list: ${dockerComposeListFilePath}`);
   appendLogMessage("=====================================================================");
-  const loadedDigests = new Set();
+  const loadedImages = new Set();
   let loadedImagesCount = 0;
   for (const dockerComposePath of dockerComposePaths) {
     appendLogMessage("");
@@ -86,19 +75,18 @@ const main = async () => {
       const image = service.image;
       appendLogMessage(`Resolving image for service "${serviceName}": ${image}`);
       try {
+        if (loadedImages.has(image)) {
+          appendLogMessage(`Already loaded: ${image}, skipping`);
+          continue;
+        }
         const exists = await imageExistsLocally(image);
         if (!exists) {
           appendLogMessage(`WARNING: Image not found locally, skipping: ${image}`);
           continue;
         }
-        const digestImage = await resolveImageDigest(image);
-        if (loadedDigests.has(digestImage)) {
-          appendLogMessage(`Already loaded: ${digestImage}, skipping`);
-          continue;
-        }
-        appendLogMessage(`Loading image into kind: ${digestImage}`);
-        await loadImageIntoKind(digestImage);
-        loadedDigests.add(digestImage);
+        appendLogMessage(`Loading image into kind: ${image}`);
+        await loadImageIntoKind(image);
+        loadedImages.add(image);
         loadedImagesCount++;
       } catch (err) {
         appendLogMessage(`FATAL: Failed to load image "${image}"`);
