@@ -36,6 +36,5 @@ spec:
           persistentVolumeClaim:
             claimName: stratum-ts-mongo-pvc
         - name: mongo-init
-          hostPath:
-            path: ../../initialisation/mongo
-            type: Directory
+          configMap:
+            name: mongo-init
