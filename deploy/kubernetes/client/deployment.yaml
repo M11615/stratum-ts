@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stratum-ts-client
+  labels:
+    app: stratum-ts-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stratum-ts-client
+  template:
+    metadata:
+      labels:
+        app: stratum-ts-client
+    spec:
+      containers:
+        - name: client
+          image: stratum-ts-client:latest
+          ports:
+            - containerPort: 3001

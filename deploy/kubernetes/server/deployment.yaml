@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stratum-ts-server
+  labels:
+    app: stratum-ts-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stratum-ts-server
+  template:
+    metadata:
+      labels:
+        app: stratum-ts-server
+    spec:
+      containers:
+        - name: server
+          image: stratum-ts-server:latest
+          ports:
+            - containerPort: 3000

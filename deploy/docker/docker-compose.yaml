@@ -10,14 +10,14 @@ services:
       - MONGO_INITDB_DATABASE=stratum
     volumes:
       - stratum-ts-mongo-volume:/data/db
-      - ./initialisation/mongo:/docker-entrypoint-initdb.d
+      - ../initialisation/mongo:/docker-entrypoint-initdb.d
     networks:
       - stratum-ts-network
     restart: no
 
   stratum-ts-server:
     build:
-      context: .
+      context: ../..
       dockerfile: ./server/Dockerfile
     container_name: stratum-ts-server
     ports:
@@ -30,7 +30,7 @@ services:
 
   stratum-ts-client:
     build:
-      context: .
+      context: ../..
       dockerfile: ./client/Dockerfile
     container_name: stratum-ts-client
     ports:

@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stratum-ts-mongo
+  labels:
+    app: stratum-ts-mongo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stratum-ts-mongo
+  template:
+    metadata:
+      labels:
+        app: stratum-ts-mongo
+    spec:
+      containers:
+        - name: mongo
+          image: mongo:latest
+          ports:
+            - containerPort: 27017
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: "admin"
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: "m11615"
+            - name: MONGO_INITDB_DATABASE
+              value: "stratum"
+          volumeMounts:
+            - name: mongo-data
+              mountPath: /data/db
+            - name: mongo-init
+              mountPath: /docker-entrypoint-initdb.d
+      volumes:
+        - name: mongo-data
+          persistentVolumeClaim:
+            claimName: stratum-ts-mongo-pvc
+        - name: mongo-init
+          hostPath:
+            path: ../../initialisation/mongo
+            type: Directory
