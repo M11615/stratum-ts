@@ -16,6 +16,7 @@ services:
     restart: no
 
   stratum-ts-server:
+    image: stratum-ts-server:latest
     build:
       context: ../..
       dockerfile: ./deploy/docker/server/Dockerfile
@@ -29,6 +30,7 @@ services:
     restart: no
 
   stratum-ts-client:
+    image: stratum-ts-client:latest
     build:
       context: ../..
       dockerfile: ./deploy/docker/client/Dockerfile

@@ -16,6 +16,7 @@ const appendLogMessage = (message) => {
 };
 
 const isLogRelated = (name) => /log/i.test(name);
+
 const isLogFile = (fileName) => [".log", ".txt"].includes(extname(fileName).toLowerCase());
 
 const formatSizeKB = (sizeBytes) => (sizeBytes / 1024).toFixed(3);
@@ -70,20 +71,18 @@ const main = () => {
   appendLogMessage(`Log-Related Files Scan Started at ${new Date().toLocaleString()}`);
   appendLogMessage(`Scan paths file: ${scanPathsFilePath}`);
   appendLogMessage("=====================================================================");
-  if (!fs.existsSync(scanPathsFilePath)) {
-    appendLogMessage(`ERROR: Scan paths file not found: ${scanPathsFilePath}`);
-    console.error(`Scan paths file not found: ${scanPathsFilePath}`);
-    process.exit(1);
+  let scanPaths = [];
+  if (fs.existsSync(scanPathsFilePath)) {
+    scanPaths = fs
+      .readFileSync(scanPathsFilePath, "utf-8")
+      .split(/\r?\n/)
+      .map(line => line.trim())
+      .filter(line => line && !line.startsWith("#"));
   }
-  const scanPaths = fs
-    .readFileSync(scanPathsFilePath, "utf-8")
-    .split(/\r?\n/)
-    .map(line => line.trim())
-    .filter(line => line && !line.startsWith("#"));
   if (scanPaths.length === 0) {
-    appendLogMessage("ERROR: No valid scan paths found.");
-    console.error("No valid scan paths found.");
-    process.exit(1);
+    appendLogMessage(`WARNING: No valid scan paths found in ${scanPathsFilePath}, using . as default`);
+    console.warn(`No valid scan paths found in ${scanPathsFilePath}, using . as default`);
+    scanPaths = ["."];
   }
   const results = { directories: [], files: [] };
   for (const scanPath of scanPaths) {

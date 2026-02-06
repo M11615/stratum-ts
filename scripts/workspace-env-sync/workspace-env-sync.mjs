@@ -27,13 +27,11 @@ const copyFileWithBackup = (sourceFilePath, destinationFilePath) => {
     if (fs.existsSync(destinationFilePath)) {
       const backupFileName = `backup.${Date.now()}.${basename(destinationFilePath)}`;
       const backupFilePath = join(dirname(destinationFilePath), backupFileName);
-
       fs.renameSync(destinationFilePath, backupFilePath);
       appendLogMessage(`BACKUP CREATED: ${backupFilePath}`);
     }
     fs.copyFileSync(sourceFilePath, destinationFilePath);
     appendLogMessage(`COPIED: ${sourceFilePath} -> ${destinationFilePath}`);
-
   } catch (error) {
     appendLogMessage(`ERROR copying file: ${sourceFilePath} -> ${destinationFilePath} - ${error.message}`);
   }
@@ -61,20 +59,18 @@ const main = () => {
   appendLogMessage(`Workspace Environment Sync Started at ${new Date().toLocaleString()}`);
   appendLogMessage(`Workspace paths file: ${workspacePathsFilePath}`);
   appendLogMessage("=====================================================================");
-  if (!fs.existsSync(workspacePathsFilePath)) {
-    appendLogMessage(`ERROR: Workspace paths file not found: ${workspacePathsFilePath}`);
-    console.error(`Workspace paths file not found: ${workspacePathsFilePath}`);
-    process.exit(1);
+  let workspacePaths = [];
+  if (fs.existsSync(workspacePathsFilePath)) {
+    workspacePaths = fs
+      .readFileSync(workspacePathsFilePath, "utf-8")
+      .split(/\r?\n/)
+      .map(line => line.trim())
+      .filter(line => line && !line.startsWith("#"));
   }
-  const workspacePaths = fs
-    .readFileSync(workspacePathsFilePath, "utf-8")
-    .split(/\r?\n/)
-    .map(line => line.trim())
-    .filter(line => line && !line.startsWith("#"));
   if (workspacePaths.length === 0) {
-    appendLogMessage("ERROR: No valid workspace paths found.");
-    console.error("No valid workspace paths found.");
-    process.exit(1);
+    appendLogMessage(`WARNING: No valid workspace paths found in ${workspacePathsFilePath}, using ../../server and ../../client as default`);
+    console.warn(`No valid workspace paths found in ${workspacePathsFilePath}, using ../../server and ../../client as default`);
+    workspacePaths = ["../../server", "../../client"];
   }
   for (const workspacePath of workspacePaths) {
     processWorkspaceDirectory(workspacePath);

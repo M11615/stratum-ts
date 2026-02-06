@@ -20,20 +20,18 @@ const appendLogMessage = (message) => {
 const delay = (milliseconds) => new Promise(resolve => setTimeout(resolve, milliseconds));
 
 const main = async () => {
-  if (!fs.existsSync(repositoryListFilePath)) {
-    appendLogMessage(`ERROR: Repository list file not found: ${repositoryListFilePath}`);
-    console.error(`Repository list file not found: ${repositoryListFilePath}`);
-    process.exit(1);
+  let repositoryPaths = [];
+  if (fs.existsSync(repositoryListFilePath)) {
+    repositoryPaths = fs
+      .readFileSync(repositoryListFilePath, "utf-8")
+      .split(/\r?\n/)
+      .map(line => line.trim())
+      .filter(line => line && !line.startsWith("#"));
   }
-  const repositoryPaths = fs
-    .readFileSync(repositoryListFilePath, "utf-8")
-    .split(/\r?\n/)
-    .map(line => line.trim())
-    .filter(line => line && !line.startsWith("#"));
   if (repositoryPaths.length === 0) {
-    appendLogMessage(`ERROR: No valid repository paths found in ${repositoryListFilePath}`);
-    console.error(`No valid repository paths found in ${repositoryListFilePath}`);
-    process.exit(1);
+    appendLogMessage(`WARNING: No valid repository paths found in ${repositoryListFilePath}, using . as default`);
+    console.warn(`No valid repository paths found in ${repositoryListFilePath}, using . as default`);
+    repositoryPaths = ["."];
   }
   const totalRepositoryCount = repositoryPaths.length;
   let successfulRepositoryCount = 0;
