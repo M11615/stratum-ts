@@ -11,15 +11,15 @@
     "upgrade": "yarn upgrade-interactive",
     "build": "turbo run build --concurrency=3",
     "dev": "turbo run dev --concurrency=3",
-    "docker:pull": "docker compose pull",
-    "docker:build-pull": "docker compose build --pull",
-    "docker:build": "docker compose build",
-    "docker:up": "docker compose up -d",
-    "docker:down": "docker compose down",
-    "docker:start": "docker compose start",
-    "docker:stop": "docker compose stop",
-    "docker:restart": "docker compose restart",
-    "docker:rm": "docker compose rm"
+    "docker:pull": "docker compose -f ./deploy/docker/docker-compose.yaml pull",
+    "docker:build-pull": "docker compose -f ./deploy/docker/docker-compose.yaml build --pull",
+    "docker:build": "docker compose -f ./deploy/docker/docker-compose.yaml build",
+    "docker:up": "docker compose -f ./deploy/docker/docker-compose.yaml up -d",
+    "docker:down": "docker compose -f ./deploy/docker/docker-compose.yaml down",
+    "docker:start": "docker compose -f ./deploy/docker/docker-compose.yaml start",
+    "docker:stop": "docker compose -f ./deploy/docker/docker-compose.yaml stop",
+    "docker:restart": "docker compose -f ./deploy/docker/docker-compose.yaml restart",
+    "docker:rm": "docker compose -f ./deploy/docker/docker-compose.yaml rm"
   },
   "devDependencies": {
     "turbo": "^2.8.3"
