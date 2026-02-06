@@ -17,6 +17,5 @@ spec:
       containers:
         - name: client
           image: m11615/stratum-ts-client:latest
-          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3001
