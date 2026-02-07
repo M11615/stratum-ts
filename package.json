@@ -19,8 +19,8 @@
     "docker:start": "docker compose -f ./deploy/docker/docker-compose.yaml start",
     "docker:stop": "docker compose -f ./deploy/docker/docker-compose.yaml stop",
     "docker:restart": "docker compose -f ./deploy/docker/docker-compose.yaml restart",
-    "docker:rm": "docker compose -f ./deploy/docker/docker-compose.yaml rm",
     "docker:push": "docker compose -f ./deploy/docker/docker-compose.yaml push",
+    "docker:rm": "docker compose -f ./deploy/docker/docker-compose.yaml rm",
     "kubernetes:configmap": "kubectl create configmap mongo-init --from-file=./deploy/initialisation/mongo",
     "kubernetes:apply": "kubectl apply -k ./deploy/kubernetes/pv && kubectl apply -k ./deploy/kubernetes/base",
     "kubernetes:delete": "kubectl delete -k ./deploy/kubernetes/base"
