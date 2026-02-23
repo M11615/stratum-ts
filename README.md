@@ -64,21 +64,27 @@ yarn kubernetes:apply
 
 This will apply all resources defined in `./deploy/kubernetes/base/kustomization.yaml` and `./deploy/kubernetes/pv/kustomization.yaml`.
 
-### Local Development (Without Docker)
+### Local Development (Without Docker and Kubernetes)
 
 You may also run the server and client independently.
 
 #### Server
 
 ```bash
-cd server
+cd ./server
 yarn start:dev
 ```
 
 #### Client
 
 ```bash
-cd client
+cd ./client
+yarn dev
+```
+
+#### All
+
+```bash
 yarn dev
 ```
 
@@ -91,8 +97,8 @@ Refer to each subproject's configuration files for environment variables and run
 Both the client and server include structured internationalization support.
 
 - Locale resources are stored under:
-  - `server/src/i18n/`
-  - `client/src/i18n/locales/`
+  - `./server/src/i18n/`
+  - `./client/src/i18n/locales/`
 - i18n configuration is centralized and extensible for additional languages.
 
 ---
