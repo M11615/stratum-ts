@@ -15,7 +15,7 @@ This repository contains everything required to run the server and client either
 - **Internationalization (i18n)** support for multiple locales
 - **Docker & Docker Compose** support for local development
 - **Kubernetes** manifests for container orchestration
-- **Yarn & TurboRepo** for dependency and task management
+- **Yarn & Turborepo** for dependency and task management
 
 ---
 

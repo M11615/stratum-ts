@@ -264,7 +264,7 @@ export default function Main(): React.ReactNode {
           <h1 ref={titleRef} className={`font-semibold text-[var(--theme-fg-base)] max-w-[1165px] mx-auto py-[5px] ${isTabletScreen ? `${isMobileScreen ? `text-[48px] tracking-[-0.04em] leading-[1.1] ${width > FALLBACK_MOBILE_L_SCREEN_WIDTH ? "px-[90px]" : `${width < FALLBACK_MOBILE_S_SCREEN_WIDTH ? "px-[15px]" : "px-[30px]"}`} py-[20px]` : "text-[50px] tracking-[-0.06em]"}` : "text-[76px] tracking-[-0.05em]"}`}>
             {t("main.title")}
           </h1>
-          <p ref={descriptionRef} className={`text-[var(--theme-text-muted)] max-w-3xl mx-auto py-[30px] ${isTabletScreen ? `${isMobileScreen ? `text-[16px] tracking-[-0.02em] leading-[1.6] ${width < FALLBACK_MOBILE_S_SCREEN_WIDTH ? "px-[5px]" : "px-[30px]"}` : "text-[20px] tracking-[-0.02em] leading-[1.8]"}` : "text-xl tracking-[-0.01em] leading-[1.8]"}`}>
+          <p ref={descriptionRef} className={`text-[var(--theme-text-muted)] max-w-3xl mx-auto ${isTabletScreen ? `${isMobileScreen ? `text-[16px] tracking-[-0.02em] leading-[1.6] ${width < FALLBACK_MOBILE_S_SCREEN_WIDTH ? "px-[5px]" : "px-[25px]"} py-[25px]` : "text-[20px] tracking-[-0.02em] leading-[1.8] py-[45px]"}` : "text-xl tracking-[-0.01em] leading-[1.8] py-[35px]"}`}>
             {t("main.descriptionStart")}{" "}
             <span className="text-[var(--theme-fg-base)] font-medium">{t("main.descriptionHighlight")}</span>{" "}
             {t("main.descriptionEnd")}
