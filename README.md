@@ -12,7 +12,7 @@ This repository contains everything required to run the server and client either
 - **Full-stack TypeScript** using a single monorepo
 - **Backend service** built with Nest.js
 - **Client-side application** built with Next.js
-- **Internationalization (i18n)** support for multiple locales
+- **Internationalization (i18next)** support for multiple locales
 - **Docker & Docker Compose** support for local development
 - **Kubernetes** manifests for container orchestration
 - **Yarn & Turborepo** for dependency and task management
