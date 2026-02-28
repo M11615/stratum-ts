@@ -92,14 +92,14 @@ Refer to each subproject's configuration files for environment variables and run
 
 ---
 
-## Internationalization (i18n)
+## Internationalization (i18next)
 
 Both the client and server include structured internationalization support.
 
 - Locale resources are stored under:
   - `./server/src/i18n/`
   - `./client/src/i18n/locales/`
-- i18n configuration is centralized and extensible for additional languages.
+- i18next configuration is centralized and extensible for additional languages.
 
 ---
 
