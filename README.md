@@ -103,15 +103,6 @@ Both the client and server include structured internationalization support.
 
 ---
 
-## Docker
-
-Each major component includes its own `Dockerfile`.  
-The root `docker-compose.yml` coordinates service startup and networking.
-
-Docker is recommended for development parity and simplified setup.
-
----
-
 ## Project Status
 
 This project is actively maintained as a general-purpose codebase and technical foundation.  
