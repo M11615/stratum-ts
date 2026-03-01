@@ -9,7 +9,7 @@ class ModalManager {
 
   register(id: string, callbacks: ModalCallbacks) {
     this.modals.set(id, callbacks);
-  }
+  };
 
   open(id: string) {
     if (this.activeId && this.activeId !== id) {
@@ -21,7 +21,7 @@ class ModalManager {
       this.activeId = id;
       current.open();
     }
-  }
+  };
 
   close(id: string) {
     const current: ModalCallbacks | undefined = this.modals.get(id);
@@ -29,7 +29,7 @@ class ModalManager {
       this.activeId = null;
       current.close();
     }
-  }
+  };
 }
 
 export const modalManager: ModalManager = new ModalManager();

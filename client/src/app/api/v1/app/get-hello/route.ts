@@ -5,12 +5,11 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   const requestHeader: Headers = request.headers;
   const response: Response = await fetch(requestUrl.toString(), {
     method: "GET",
-    headers: requestHeader,
-    credentials: "include"
+    headers: requestHeader
   });
   const responseBody: BodyInit = await response.text();
   return new NextResponse(responseBody, {
     status: response.status,
     headers: response.headers
   });
-}
+};

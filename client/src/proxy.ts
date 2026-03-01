@@ -7,7 +7,7 @@ acceptLanguage.languages(languages);
 export const config: Record<string, string[]> = {
   // Avoid matching for static files, API routes, etc.
   matcher: ["/((?!api|_next/static|_next/image|assets|favicon.ico|sw.js|site.webmanifest).*)"]
-}
+};
 
 export function proxy(req: NextRequest): NextResponse {
   // Ignore paths with "icon" or "chrome"
@@ -34,4 +34,4 @@ export function proxy(req: NextRequest): NextResponse {
     return response;
   }
   return NextResponse.next({ headers });
-}
+};

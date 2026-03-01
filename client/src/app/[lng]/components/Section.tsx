@@ -5,4 +5,4 @@ export default function Section(): React.ReactNode {
     <section className="flex flex-col w-full items-center justify-center bg-[var(--theme-bg-base)]">
     </section>
   );
-}
+};

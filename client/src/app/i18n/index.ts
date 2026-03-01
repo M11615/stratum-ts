@@ -19,5 +19,5 @@ export async function getT(ns: string | string[], options: Options): Promise<I18
   return {
     t: i18next.getFixedT(lng ?? i18next.resolvedLanguage, Array.isArray(ns) ? ns[0] : ns, options?.[2]),
     i18n: i18next
-  }
-}
+  };
+};

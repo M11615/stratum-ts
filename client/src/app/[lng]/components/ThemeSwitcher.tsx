@@ -7,7 +7,7 @@ import { setCookie, getCookie } from "@/app/lib/cookies";
 interface Option {
   value: string;
   icon: React.ReactNode;
-}
+};
 
 export default function ThemeSwitcher(): React.ReactNode {
   const [theme, setTheme]: StateSetter<string> = useState<string>(FALLBACK_THEME);

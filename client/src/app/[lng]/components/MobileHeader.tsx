@@ -9,14 +9,14 @@ import { StateSetter } from "@/app/lib/constants";
 interface MobileHeaderProps {
   t: TFunction;
   handleSearchOpen: () => void;
-}
+};
 
 interface NavLink {
   id: number;
   href: string;
   label: string;
   isExternal: boolean;
-}
+};
 
 export default function MobileHeader({
   t, handleSearchOpen
@@ -95,4 +95,4 @@ export default function MobileHeader({
       )}
     </>
   );
-}
+};

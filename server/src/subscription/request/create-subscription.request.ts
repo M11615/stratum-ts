@@ -5,4 +5,4 @@ export class CreateSubscriptionRequest {
   @IsEmail()
   @Transform(({ value }: TransformFnParams) => value.trim().toLowerCase())
   email: string;
-}
+};

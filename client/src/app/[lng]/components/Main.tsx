@@ -437,4 +437,4 @@ export default function Main(): React.ReactNode {
       </style>
     </>
   );
-}
+};

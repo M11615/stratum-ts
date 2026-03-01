@@ -34,4 +34,4 @@ export function useT(ns: string | string[], options: Options): I18nextInstance {
     i18next.changeLanguage(lng);
   }, [lng]);
   return useTranslation(ns, options);
-}
+};

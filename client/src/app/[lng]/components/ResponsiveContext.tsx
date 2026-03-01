@@ -11,7 +11,7 @@ export interface ResponsiveContextValue {
   isMobileScreen: boolean;
   actualTheme: string;
   userPreferenceTheme: string
-}
+};
 
 const defaultValue: ResponsiveContextValue = {
   width: FALLBACK_4K_SCREEN_WIDTH,

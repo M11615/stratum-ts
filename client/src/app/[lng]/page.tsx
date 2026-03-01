@@ -4,4 +4,4 @@ export default async function Home(): Promise<React.ReactNode> {
   return (
     <Page />
   );
-}
+};

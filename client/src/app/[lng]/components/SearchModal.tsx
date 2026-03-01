@@ -11,13 +11,13 @@ interface SearchModalProps {
   isSearchOpen: boolean;
   isSearchClosing: boolean;
   handleSearchClose: () => void;
-}
+};
 
 interface SearchResult {
   id: number;
   href: string;
   label: string;
-}
+};
 
 export default function SearchModal({
   isSearchOpen, isSearchClosing, handleSearchClose
@@ -175,4 +175,4 @@ export default function SearchModal({
       </style>
     </>
   );
-}
+};

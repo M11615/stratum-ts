@@ -5,7 +5,7 @@ export interface ResponsiveState {
   width: number;
   isTabletScreen: boolean;
   isMobileScreen: boolean;
-}
+};
 
 export const useResponsive: () => ResponsiveState = (): ResponsiveState => {
   const [state, setState]: StateSetter<ResponsiveState> = useState<ResponsiveState>({

@@ -4,7 +4,7 @@ import { StateSetter, THEME_KEYS } from "@/app/lib/constants";
 export interface ThemeState {
   actualTheme: string;
   userPreferenceTheme: string;
-}
+};
 
 export const useTheme: () => ThemeState = (): ThemeState => {
   const [state, setState]: StateSetter<ThemeState> = useState<ThemeState>({

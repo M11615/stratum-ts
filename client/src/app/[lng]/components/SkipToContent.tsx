@@ -19,7 +19,7 @@ export default function SkipToContent(): React.ReactNode {
       element.focus();
       element.scrollIntoView();
     }
-  }
+  };
 
   if (!hydrated) return null;
   return (
@@ -30,4 +30,4 @@ export default function SkipToContent(): React.ReactNode {
       {t("skipToContent")}
     </button>
   );
-}
+};

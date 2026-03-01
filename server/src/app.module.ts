@@ -47,4 +47,4 @@ import { SubscriptionController } from './subscription/subscription.controller';
     ] : []
   ]
 })
-export class AppModule { }
+export class AppModule { };

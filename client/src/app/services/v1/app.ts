@@ -8,8 +8,7 @@ export const getHello = async (i18n: i18n): Promise<Response> => {
   });
   const response: Response = await fetch("api/v1/app/get-hello", {
     method: "GET",
-    headers: requestHeader,
-    credentials: "include"
+    headers: requestHeader
   });
   if (!response.ok) throw new Error();
   return response;

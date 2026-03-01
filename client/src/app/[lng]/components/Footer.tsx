@@ -15,7 +15,7 @@ interface NavLink {
   id: number;
   href: string;
   label: string;
-}
+};
 
 export default function Footer(): React.ReactNode {
   const { t }: I18nextInstance = useT("app", {});
@@ -80,7 +80,7 @@ export default function Footer(): React.ReactNode {
     setSubscriptionEmail(target.value);
   };
 
-  const handleSubscriptionEmailSubmit: (e: React.FormEvent) => Promise<void> = async (e: React.FormEvent): Promise<void> => {
+  const handleSubscriptionEmailSubmit: (e: React.SubmitEvent) => Promise<void> = async (e: React.SubmitEvent): Promise<void> => {
     try {
       e.preventDefault();
       const form: HTMLFormElement = e.currentTarget as HTMLFormElement;
@@ -92,7 +92,10 @@ export default function Footer(): React.ReactNode {
       const response: Response = await createSubscription({
         email: subscriptionEmail.trim().toLowerCase()
       });
-      if (response.ok) setSubmitted(true);
+      if (response.ok) {
+        const responseBody: Record<string, unknown> = await response.json();
+        if (responseBody.acknowledged) setSubmitted(true);
+      }
     } catch {
       setSubmitted(false);
     } finally {
@@ -291,4 +294,4 @@ export default function Footer(): React.ReactNode {
       </footer>
     </>
   );
-}
+};

@@ -15,4 +15,4 @@ export default async function Layout({
   children: React.ReactNode;
 }>): Promise<React.ReactNode> {
   return children;
-}
+};

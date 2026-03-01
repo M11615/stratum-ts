@@ -11,14 +11,14 @@ interface LaptopHeaderProps {
   responsiveContext: ResponsiveContextValue;
   showKeyDown: boolean;
   handleSearchOpen: () => void;
-}
+};
 
 interface NavLink {
   id: number;
   href: string;
   label: string;
   isExternal: boolean;
-}
+};
 
 export default function LaptopHeader({
   t, responsiveContext, showKeyDown, handleSearchOpen
@@ -103,4 +103,4 @@ export default function LaptopHeader({
       </div>
     </div>
   );
-}
+};

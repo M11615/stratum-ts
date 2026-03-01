@@ -9,13 +9,13 @@ import { parseConsent, setCookie } from "@/app/lib/cookies";
 interface ConsentModalProps {
   isConsentOpen: boolean;
   handleConsentClose: () => void;
-}
+};
 
 interface Category {
   id: string;
   name: string;
   description: string;
-}
+};
 
 const buildCookieConsent: (value: boolean) => Record<string, boolean> = (value: boolean): Record<string, boolean> => {
   return Object.keys(FALLBACK_COOKIE_CONSENT).reduce((acc: Record<string, boolean>, key: string): Record<string, boolean> => {
@@ -201,4 +201,4 @@ export default function ConsentModal({
       </style>
     </>
   );
-}
+};
