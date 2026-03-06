@@ -60,9 +60,21 @@ const deleteNestedValue = (object, keyPath) => {
   }
   if (current[keys[keys.length - 1]] !== undefined) {
     delete current[keys[keys.length - 1]];
+    cleanupEmptyObjects(object);
     return true;
   }
   return false;
+};
+
+const cleanupEmptyObjects = (object) => {
+  for (const key of Object.keys(object)) {
+    if (typeof object[key] === "object" && object[key] !== null) {
+      cleanupEmptyObjects(object[key]);
+      if (Object.keys(object[key]).length === 0) {
+        delete object[key];
+      }
+    }
+  }
 };
 
 const processAdd = async (basePath, fileName, keys, rl) => {
