@@ -1,4 +1,4 @@
-{ 
+{
   "layout": {
     "title": "Next.js by Vercel - React 框架"
   },
@@ -30,10 +30,6 @@
     }
   },
   "main": {
-    "new": "新功能",
-    "confAnnouncement": "回顧我們在 Next.js Conf 25 發佈的內容",
-    "findOutMore": "了解更多",
-    "watchRecap": "觀看回顧",
     "title": "為網頁而生的 React 框架",
     "descriptionStart": "被全球眾多大型公司採用，Next.js 讓你能夠創建",
     "descriptionHighlight": "高品質的網頁應用程式",
