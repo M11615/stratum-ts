@@ -32,7 +32,6 @@ export default function Header(): React.ReactNode {
     };
     window.addEventListener("keydown", handleKeyDown);
     setShowKeyDown(true);
-
     return (): void => {
       window.removeEventListener("keydown", handleKeyDown)
     };

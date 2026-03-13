@@ -15,11 +15,17 @@ const appendLogMessage = (message) => {
   fs.appendFileSync(logFileAbsolutePath, `[${timestamp}] ${message}\n`);
 };
 
-const isLogRelated = (name) => /log/i.test(name);
+const isLogRelated = (name) => {
+  return /log/i.test(name);
+};
 
-const isLogFile = (fileName) => [".log", ".txt"].includes(extname(fileName).toLowerCase());
+const isLogFile = (fileName) => {
+  return [".log", ".txt"].includes(extname(fileName).toLowerCase());
+};
 
-const formatSizeKB = (sizeBytes) => (sizeBytes / 1024).toFixed(3);
+const formatSizeKB = (sizeBytes) => {
+  return (sizeBytes / 1024).toFixed(3);
+};
 
 const getDirectorySize = (dirPath) => {
   let totalSize = 0;

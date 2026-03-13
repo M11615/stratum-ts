@@ -32,7 +32,9 @@ const readJsonFile = (filePath) => {
   }
 };
 
-const writeJsonFile = (filePath, json) => fs.writeFileSync(filePath, JSON.stringify(json, null, 2) + "\n");
+const writeJsonFile = (filePath, json) => {
+  fs.writeFileSync(filePath, JSON.stringify(json, null, 2) + "\n");
+};
 
 const setNestedValue = (object, keyPath, value) => {
   const keys = keyPath.split(".");
@@ -115,7 +117,9 @@ const processRemove = (basePath, fileName, keys) => {
   }
 };
 
-const askQuestion = (rl, question) => new Promise(resolve => rl.question(question, resolve));
+const askQuestion = (rl, question) => {
+  return new Promise(resolve => rl.question(question, resolve));
+};
 
 const main = async () => {
   appendLogMessage("=====================================================================");

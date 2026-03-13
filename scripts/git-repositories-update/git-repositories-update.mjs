@@ -17,7 +17,9 @@ const appendLogMessage = (message) => {
   fs.appendFileSync(logFileAbsolutePath, `[${timestamp}] ${message}\n`);
 };
 
-const delay = (milliseconds) => new Promise(resolve => setTimeout(resolve, milliseconds));
+const delay = (milliseconds) => {
+  new Promise(resolve => setTimeout(resolve, milliseconds));
+};
 
 const main = async () => {
   let repositoryPaths = [];

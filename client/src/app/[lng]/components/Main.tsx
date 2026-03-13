@@ -22,7 +22,7 @@ export default function Main(): React.ReactNode {
   const verticalExtraOffset: number = 32;
   const command: string = "npx create-next-app@latest";
 
-  useEffect(() => {
+  useEffect((): void => {
     setResponsiveKey(responsiveKey < 10 ? responsiveKey + 1 : 0);
   }, [width]);
 
