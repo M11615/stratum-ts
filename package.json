@@ -25,6 +25,6 @@
     "kubernetes:delete": "kubectl delete -k ./deploy/kubernetes/base"
   },
   "devDependencies": {
-    "turbo": "^2.8.13"
+    "turbo": "^2.8.17"
   }
 }
