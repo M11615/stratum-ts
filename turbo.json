@@ -1,5 +1,5 @@
 {
-  "$schema": "https://turborepo.com/schema.json",
+  "$schema": "https://turborepo.dev/schema.json",
   "ui": "tui",
   "tasks": {
     "build": {
@@ -7,8 +7,8 @@
       "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
     },
     "dev": {
-      "cache": false,
-      "persistent": true
+      "persistent": true,
+      "cache": false
     }
   }
 }

@@ -6,7 +6,7 @@ export type SubscriptionDocument = Subscription & Document;
 @Schema({ timestamps: true })
 export class Subscription {
   @Prop({ required: true, unique: true, lowercase: true, trim: true })
-  email: string;
+  email?: string;
 };
 
 export const SubscriptionSchema: MongooseSchema<Subscription> = SchemaFactory.createForClass(Subscription);
