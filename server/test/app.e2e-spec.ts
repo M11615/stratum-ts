@@ -1,7 +1,9 @@
-import { Test, TestingModule } from '@nestjs/testing';
+/// <reference types="jest" />
 import { INestApplication } from '@nestjs/common';
-import supertest, * as request from 'supertest';
+import { Test, TestingModule } from '@nestjs/testing';
 import { App } from 'supertest/types';
+import type { Test as SuperTest } from 'supertest';
+import request from 'supertest';
 import { AppModule } from '../src/app.module';
 
 describe('AppController (e2e)', (): void => {
@@ -13,7 +15,7 @@ describe('AppController (e2e)', (): void => {
     app = moduleFixture.createNestApplication();
     await app.init();
   });
-  it('/ (GET)', (): supertest.Test => {
+  it('/ (GET)', (): SuperTest => {
     return request(app.getHttpServer())
       .get('/')
       .expect(200)
