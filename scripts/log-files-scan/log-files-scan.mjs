@@ -104,6 +104,7 @@ const main = () => {
   }
   appendLogMessage("");
   appendLogMessage("=====================================================================");
+  appendLogMessage("NOTICE: If log files or directories are too large, [CLEANUP IF LOG] will be displayed.");
   appendLogMessage(`Scan Completed at ${new Date().toLocaleString()}`);
   appendLogMessage(`Log-Related Directories Found: ${results.directories.length}`);
   appendLogMessage(`Log-Related Files Found: ${results.files.length}`);
