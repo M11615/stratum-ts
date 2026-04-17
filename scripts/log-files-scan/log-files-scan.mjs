@@ -86,9 +86,9 @@ const main = () => {
       .filter(line => line && !line.startsWith("#"));
   }
   if (scanPaths.length === 0) {
-    appendLogMessage(`WARNING: No valid scan paths found in ${scanPathsFilePath}, using . as default`);
-    console.warn(`No valid scan paths found in ${scanPathsFilePath}, using . as default`);
-    scanPaths = ["."];
+    appendLogMessage(`WARNING: No valid scan paths found in ${scanPathsFilePath}, using ../.. as default`);
+    console.warn(`No valid scan paths found in ${scanPathsFilePath}, using ../.. as default`);
+    scanPaths = ["../.."];
   }
   const results = { directories: [], files: [] };
   for (const scanPath of scanPaths) {

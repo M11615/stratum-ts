@@ -31,9 +31,9 @@ const main = async () => {
       .filter(line => line && !line.startsWith("#"));
   }
   if (repositoryPaths.length === 0) {
-    appendLogMessage(`WARNING: No valid repository paths found in ${repositoryListFilePath}, using . as default`);
-    console.warn(`No valid repository paths found in ${repositoryListFilePath}, using . as default`);
-    repositoryPaths = ["."];
+    appendLogMessage(`WARNING: No valid repository paths found in ${repositoryListFilePath}, using ../.. as default`);
+    console.warn(`No valid repository paths found in ${repositoryListFilePath}, using ../.. as default`);
+    repositoryPaths = ["../.."];
   }
   const totalRepositoryCount = repositoryPaths.length;
   let successfulRepositoryCount = 0;
