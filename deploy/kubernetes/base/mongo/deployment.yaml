@@ -29,12 +29,12 @@ spec:
           volumeMounts:
             - name: mongo-data
               mountPath: /data/db
-            - name: mongo-init
+            - name: mongo-initdb
               mountPath: /docker-entrypoint-initdb.d
       volumes:
         - name: mongo-data
           persistentVolumeClaim:
             claimName: stratum-ts-mongo-pvc
-        - name: mongo-init
+        - name: mongo-initdb
           configMap:
-            name: mongo-init
+            name: mongo-initdb
