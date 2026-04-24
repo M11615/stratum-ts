@@ -56,8 +56,6 @@ This script is responsible for:
 - Ensuring all packages and services use consistent environment variables
 - Preparing workspace environment files such as `.env.development.local` and `.env.production.local`
 
----
-
 ### 2. Generate Deployment Initialisation Script
 
 ```bash
@@ -70,9 +68,7 @@ This script is responsible for:
 - Generating deployment initialisation scripts
 - Preparing runtime initialisation logic for Docker / Kubernetes deployment
 
----
-
-## Why this is required
+### Why this is required
 
 These steps ensure:
 
