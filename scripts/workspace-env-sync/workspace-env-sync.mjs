@@ -8,7 +8,7 @@ const currentFilePath = fileURLToPath(import.meta.url);
 const currentDirectoryPath = dirname(currentFilePath);
 const workspacePathsFilePath = join(currentDirectoryPath, "./workspace-paths.txt");
 const logFileAbsolutePath = join(currentDirectoryPath, "./workspace-env-sync.log");
-const environmentFiles = [
+const ENVIRONMENT_FILES = [
   { temporaryFileName: "temporary.env.development.local", environmentFileName: ".env.development.local" },
   { temporaryFileName: "temporary.env.production.local", environmentFileName: ".env.production.local" }
 ];
@@ -47,7 +47,7 @@ const processWorkspaceDirectory = (workspaceDirectory) => {
     appendLogMessage(`WARNING: Workspace directory does not exist: ${absoluteWorkspaceDirectory}`);
     return;
   }
-  for (const { temporaryFileName, environmentFileName } of environmentFiles) {
+  for (const { temporaryFileName, environmentFileName } of ENVIRONMENT_FILES) {
     const absoluteSourceFilePath = join(absoluteWorkspaceDirectory, temporaryFileName);
     const absoluteDestinationFilePath = join(absoluteWorkspaceDirectory, environmentFileName);
     copyFileWithBackup(absoluteSourceFilePath, absoluteDestinationFilePath);
@@ -56,7 +56,7 @@ const processWorkspaceDirectory = (workspaceDirectory) => {
 
 const main = () => {
   appendLogMessage("=====================================================================");
-  appendLogMessage(`Workspace Environment Sync Started at ${new Date().toLocaleString()}`);
+  appendLogMessage(`Workspace Environment Synchronize Started at ${new Date().toLocaleString()}`);
   appendLogMessage(`Workspace paths file: ${workspacePathsFilePath}`);
   appendLogMessage("=====================================================================");
   let workspacePaths = [];
@@ -77,7 +77,7 @@ const main = () => {
   }
   appendLogMessage("");
   appendLogMessage("=====================================================================");
-  appendLogMessage(`Workspace Environment Sync Completed at ${new Date().toLocaleString()}`);
+  appendLogMessage(`Workspace Environment Synchronize Completed at ${new Date().toLocaleString()}`);
   appendLogMessage(`Processed Workspace Count: ${workspacePaths.length}`);
   appendLogMessage("=====================================================================");
   console.log(`Log saved to: ${logFileAbsolutePath}`);

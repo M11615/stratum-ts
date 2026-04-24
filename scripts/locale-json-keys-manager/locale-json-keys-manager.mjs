@@ -175,4 +175,4 @@ const main = async () => {
   console.log(`Log saved to: ${logFileAbsolutePath}`);
 };
 
-main();
+await main();
