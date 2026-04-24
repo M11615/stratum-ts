@@ -11,7 +11,7 @@ const environmentPathsFilePath = join(currentDirectoryPath, "./env-paths.txt");
 const deployInitialisationPathsFilePath = join(currentDirectoryPath, "./deploy-init-paths.txt");
 const logFileAbsolutePath = join(currentDirectoryPath, "./deploy-init-script-generator.log");
 const SCRIPT_TEMPLATES = {
-  "mongo/create-user.js": async (environment) => {
+  "mongo/create-user.js": (environment) => {
     return `
 db = db.getSiblingDB("${environment.MONGO_DATABASE}");
 
@@ -105,7 +105,7 @@ const processDeployDirectory = async (deployDirectory, environments) => {
   }
   for (const environment of environments) {
     for (const [scriptPath, templateFunction] of Object.entries(SCRIPT_TEMPLATES)) {
-      const rawScriptContent = await templateFunction(environment);
+      const rawScriptContent = templateFunction(environment);
       const scriptContent = await ensureTrailingNewlineAndMinify(rawScriptContent);
       writeScript(absoluteDeployDirectory, scriptPath, scriptContent);
     }
