@@ -40,6 +40,55 @@ yarn install
 
 ---
 
+## Initialization (Important)
+
+After installing dependencies (`yarn install`) and **before running any development or deployment commands**, you must run the following scripts in order to properly prepare the environment.
+
+### 1. Synchronize Workspace Environment
+
+```bash
+node scripts/workspace-env-sync/workspace-env-sync.mjs
+```
+
+This script is responsible for:
+
+- Copying and synchronizing environment configuration across the workspace
+- Ensuring all packages and services use consistent environment variables
+- Preparing workspace environment files such as `.env.development.local` and `.env.production.local`
+
+---
+
+### 2. Generate Deployment Initialisation Script
+
+```bash
+node scripts/deploy-init-script-generator/deploy-init-script-generator.mjs
+```
+
+This script is responsible for:
+
+- Reading the synchronized environment configuration
+- Generating deployment initialisation scripts
+- Preparing runtime initialisation logic for Docker / Kubernetes deployment
+
+---
+
+## Why this is required
+
+These steps ensure:
+
+- Consistent environment configuration across services
+- Correct generation of deployment initialization scripts
+- Stable Docker and Kubernetes behavior
+- Prevention of missing or incorrect environment setup
+
+Skipping these steps may result in:
+
+- Service startup failures
+- Incorrect configuration loading
+- Deployment inconsistencies
+
+---
+
 ## Development
 
 ### Running with Docker
@@ -58,7 +107,8 @@ This will start all required services defined in `./deploy/docker/docker-compose
 You can deploy StratumTS to a Kubernetes cluster using Kustomize:
 
 ```bash
-yarn kubernetes:configmap
+yarn kubernetes:mongo-configdb
+yarn kubernetes:mongo-initdb
 yarn kubernetes:apply
 ```
 
