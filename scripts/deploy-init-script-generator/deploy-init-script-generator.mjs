@@ -12,7 +12,7 @@ const deployInitialisationPathsFilePath = join(currentDirectoryPath, "./deploy-i
 const logFileAbsolutePath = join(currentDirectoryPath, "./deploy-init-script-generator.log");
 const SCRIPT_TEMPLATES = {
   "mongo/create-user.js": async (environment) => {
-    const raw = `
+    return `
 db = db.getSiblingDB("${environment.MONGO_DATABASE}");
 
 db.createUser({
@@ -23,11 +23,6 @@ db.createUser({
   ]
 });
     `;
-    const result = await minify(raw, {
-      compress: true,
-      mangle: false
-    });
-    return result.code;
   }
 };
 
@@ -91,6 +86,13 @@ const writeScript = (baseDir, relativePath, content) => {
   appendLogMessage(`GENERATED: ${outputPath}`);
 };
 
+const ensureTrailingNewlineAndMinify = async (raw) => {
+  const result = await minify(raw);
+  return (result.code ?? "").endsWith("\n")
+    ? (result.code ?? "")
+    : (result.code ?? "") + "\n";
+};
+
 const processDeployDirectory = async (deployDirectory, environments) => {
   const absoluteDeployDirectory = resolve(currentDirectoryPath, deployDirectory);
   appendLogMessage("");
@@ -103,7 +105,8 @@ const processDeployDirectory = async (deployDirectory, environments) => {
   }
   for (const environment of environments) {
     for (const [scriptPath, templateFunction] of Object.entries(SCRIPT_TEMPLATES)) {
-      const scriptContent = await templateFunction(environment);
+      const rawScriptContent = await templateFunction(environment);
+      const scriptContent = await ensureTrailingNewlineAndMinify(rawScriptContent);
       writeScript(absoluteDeployDirectory, scriptPath, scriptContent);
     }
   }
