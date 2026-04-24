@@ -30,7 +30,7 @@ import { SubscriptionController } from './subscription/subscription.controller';
       ]
     }),
     ...process.env.ENABLE_MONGO === 'true' ? [
-      MongooseModule.forRoot(process.env.MONGO_URL ?? 'mongodb://localhost:27017/stratum'),
+      MongooseModule.forRoot(`mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_HOST}:${process.env.MONGO_PORT}/${process.env.MONGO_DATABASE}`),
       MongooseModule.forFeature([{ name: Subscription.name, schema: SubscriptionSchema }])
     ] : []
   ],

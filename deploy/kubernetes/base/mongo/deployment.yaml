@@ -23,9 +23,15 @@ spec:
             - name: MONGO_INITDB_ROOT_USERNAME
               value: "admin"
             - name: MONGO_INITDB_ROOT_PASSWORD
-              value: "m11615"
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-configdb
+                  key: MONGO_PASSWORD
             - name: MONGO_INITDB_DATABASE
-              value: "stratum"
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-configdb
+                  key: MONGO_DATABASE
           volumeMounts:
             - name: mongo-data
               mountPath: /data/db
