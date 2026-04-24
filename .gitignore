@@ -17,3 +17,7 @@
 
 # turborepo
 .turbo
+
+# deploy initialisation
+deploy/initialisation/*
+!deploy/initialisation/.gitkeep
