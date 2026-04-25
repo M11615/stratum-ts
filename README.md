@@ -26,7 +26,7 @@ To work with this project locally, you will need:
 - **Node.js** (LTS recommended)
 - **Yarn**
 - **Docker** (optional, recommended for consistent environments)
-- **kubectl** and **Kubernetes cluster** (optional, required for Kubernetes deployment)
+- **Kubectl** and **Kubernetes cluster** (optional, required for Kubernetes deployment)
 
 ---
 
