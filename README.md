@@ -92,6 +92,7 @@ Skipping these steps may result in:
 The easiest way to run the full stack is via Docker Compose:
 
 ```bash
+yarn docker:pull
 yarn docker:build
 yarn docker:up
 ```
@@ -103,8 +104,8 @@ This will start all required services defined in `./deploy/docker/docker-compose
 You can deploy StratumTS to a Kubernetes cluster using Kustomize:
 
 ```bash
-yarn kubernetes:mongo-configdb
-yarn kubernetes:mongo-initdb
+yarn kubernetes:mongo-secret
+yarn kubernetes:mongo-configmap
 yarn kubernetes:apply
 ```
 

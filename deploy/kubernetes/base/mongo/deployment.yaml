@@ -23,27 +23,27 @@ spec:
             - name: MONGO_INITDB_ROOT_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: mongo-configdb
+                  name: mongo-configuration
                   key: MONGO_ROOT_USERNAME
             - name: MONGO_INITDB_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: mongo-configdb
+                  name: mongo-configuration
                   key: MONGO_ROOT_PASSWORD
             - name: MONGO_INITDB_DATABASE
               valueFrom:
                 secretKeyRef:
-                  name: mongo-configdb
+                  name: mongo-configuration
                   key: MONGO_DATABASE
           volumeMounts:
             - name: mongo-data
               mountPath: /data/db
-            - name: mongo-initdb
+            - name: mongo-initialisation
               mountPath: /docker-entrypoint-initdb.d
       volumes:
         - name: mongo-data
           persistentVolumeClaim:
             claimName: stratum-ts-mongo-pvc
-        - name: mongo-initdb
+        - name: mongo-initialisation
           configMap:
-            name: mongo-initdb
+            name: mongo-initialisation
