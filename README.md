@@ -104,6 +104,7 @@ This will start all required services defined in `./deploy/docker/docker-compose
 You can deploy StratumTS to a Kubernetes cluster using Kustomize:
 
 ```bash
+yarn docker:push
 yarn kubernetes:mongo-secret
 yarn kubernetes:mongo-configmap
 yarn kubernetes:apply
